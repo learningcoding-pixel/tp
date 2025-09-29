@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -332,6 +332,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The command interface should allow coaches to perform common tasks while standing or in outdoor environments without requiring precise mouse movements.
+5. The application should efficiently handle peak usage during competition seasons when coaches need to manage multiple teams and training sessions simultaneously.
+6. New athlete attributes or team management features should be easily addable without major architectural changes.
+7. The system should provide clear, actionable error messages when coaches input invalid team compositions or conflicting athlete assignments.
+8. The system should validate critical data formats (dates, indexes, required fields) before executing commands.
+9. The application should be able to run on standard laptops and tablets commonly used by coaches without requiring high-end hardware.
+10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
+11. Command syntax should follow consistent patterns across all features (e.g., n/ for name, index/ for indexes).
+
 
 *{More to be added}*
 
