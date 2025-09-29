@@ -300,32 +300,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RelayCoach` and the **Actor** is the `Coach`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Assign Training Plan**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Coach chooses to assign a training plan to an athlete
+2.  RelayCoach requests for athlete details
+3.  Coach selects athlete and enters training plan details
+4.  RelayCoach requests for confirmation
+5.  Coach confirms
+6. RelayCoach assigns training plan to athlete and shows success message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. RelayCoach detects missing or invalid details.
 
-  Use case ends.
+    * 3a1. RelayCoach requests correction of details.
+    * 3a2. Coach updates information.
 
-* 3a. The given index is invalid.
+      Use case resumes from Step 4.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: Tag Athlete**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  Coach chooses to tag an athlete
+2.  RelayCoach requests tag information
+3.  Coach enters the tag (e.g., "sprinter", "injured", "U18", etc.)
+4.  RelayCoach requests for confirmation
+5.  Coach confirms
+6. RelayCoach assigns tag and updates athlete profile and shows success message
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Tag already exists.
+
+    * 3a1. RelayCoach suggests reusing the existing tag.
+    * 3a2. Coach confirms or creates a new tag.
+
+      Use case resumes from Step 4.
+
+**Use case: View Team Dashboard**
+
+**MSS**
+
+1.  Coach chooses to view team dashboard
+2.  RelayCoach requests which team to display
+3.  Coach selects a team
+4.  RelayCoach retrieves athlete profiles, training progress, and tags
+5.  RelayCoach Displays the dashboard summary with filters (e.g., by tag, training status, etc.)
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Coach has no teams created yet.
+
+    * 2a1. RelayCoach prompts to create a team first.
+
+      Use case resumes from Step 3.
+
 
 ### Non-Functional Requirements
 
