@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. New athlete attributes or team management features should be easily addable without major architectural changes.
 7. The system should provide clear, actionable error messages when coaches input invalid team compositions or conflicting athlete assignments.
 8. The system should validate critical data formats (dates, indexes, required fields) before executing commands.
-9. The application should be able to run on standard laptops and tablets commonly used by coaches without requiring high-end hardware.
+9. The application should be able to run on standard laptops commonly used by coaches without requiring high-end hardware.
 10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
 11. Command syntax should follow consistent patterns across all features (e.g., n/ for name, index/ for indexes).
 
