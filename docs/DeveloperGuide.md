@@ -302,70 +302,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `RelayCoach` and the **Actor** is the `Coach`, unless specified otherwise)
 
-**Use case: Assign Training Plan**
+**Use case: Add Athlete (Basic Info)**
 
 **MSS**
 
-1.  Coach chooses to assign a training plan to an athlete
-2.  RelayCoach requests for athlete details
-3.  Coach selects athlete and enters training plan details
-4.  RelayCoach requests for confirmation
-5.  Coach confirms
-6. RelayCoach assigns training plan to athlete and shows success message
-
+    1.	Coach chooses to add a new athlete.
+    2.  RelayCoach requests the athlete’s basic details.
+    3.  Coach provides the requested details.
+    4.	RelayCoach validates the details.
+    5.	RelayCoach saves the athlete’s record.
+    6.	RelayCoach confirms the addition and displays the stored information.
     Use case ends.
 
 **Extensions**
 
-* 3a. RelayCoach detects missing or invalid details.
+    3a. RelayCoach detects missing or invalid details.
+        3a1. RelayCoach requests correction of details.
+        3a2. Coach updates information.
+        Use case resumes from Step 4.
 
-    * 3a1. RelayCoach requests correction of details.
-    * 3a2. Coach updates information.
-
-      Use case resumes from Step 4.
-
-**Use case: Tag Athlete**
+**Use case: Add Athlete (Additional Info)**
 
 **MSS**
 
-1.  Coach chooses to tag an athlete
-2.  RelayCoach requests tag information
-3.  Coach enters the tag (e.g., "sprinter", "injured", "U18", etc.)
-4.  RelayCoach requests for confirmation
-5.  Coach confirms
-6. RelayCoach assigns tag and updates athlete profile and shows success message
-
-   Use case ends.
+    1.	Coach selects an athlete from the list.
+    2.	RelayCoach requests additional information (Role, Tags, Height, Weight).
+    3.	Coach provides the information.
+    4.	RelayCoach validates the information.
+    5.	RelayCoach updates the athlete’s record.
+    6.	RelayCoach confirms the update and displays the new information.
+    Use case ends.
 
 **Extensions**
 
-* 3a. Tag already exists.
+    2a. Athlete Index not found.
+        2a1. RelayCoach displays an error message.
+        Use case ends.
 
-    * 3a1. RelayCoach suggests reusing the existing tag.
-    * 3a2. Coach confirms or creates a new tag.
+    4a. Invalid data.
+        4a1. RelayCoach requests correction of information.
+        Use case resumes from Step 3.
 
-      Use case resumes from Step 4.
-
-**Use case: View Team Dashboard**
+**Use case: List Athletes**
 
 **MSS**
 
-1.  Coach chooses to view team dashboard
-2.  RelayCoach requests which team to display
-3.  Coach selects a team
-4.  RelayCoach retrieves athlete profiles, training progress, and tags
-5.  RelayCoach Displays the dashboard summary with filters (e.g., by tag, training status, etc.)
-
-   Use case ends.
+	1.	Coach requests to view all athletes.
+	2.	RelayCoach retrieves all stored athletes.
+	3.	RelayCoach displays the list with details (Name, School, Role, Tags, etc.).
+    Use case ends.
 
 **Extensions**
 
-* 2a. Coach has no teams created yet.
+    2a. No athletes found.
+        2a1. RelayCoach informs the coach that no athletes are stored.
+        Use case ends.
 
-    * 2a1. RelayCoach prompts to create a team first.
+**Use case: Find Athletes by Filter**
 
-      Use case resumes from Step 3.
+**MSS**
 
+	1.	Coach chooses to find athletes by specifying one or more filters (Name, School, Role, Tag).
+	2.	RelayCoach validates the filter input.
+	3.	RelayCoach searches the database.
+	4.	RelayCoach displays the matching athletes with details.
+    Use case ends.
+
+**Extensions**
+
+    2a. Filter missing or invalid.
+        2a1. RelayCoach prompts for correction.
+        Use case ends.
+
+    3a. No athletes found.
+        3a1. RelayCoach informs the coach that no matching athletes were found.
+        Use case ends.
+
+**Use case: Delete Athlete**
+
+**MSS**
+
+	1.	Coach selects an athlete to delete.
+	2.	RelayCoach verifies the selection.
+	3.	RelayCoach removes the athlete’s record.
+	4.	RelayCoach confirms the deletion.
+    Use case ends.
+
+**Extensions**
+
+    2a. Selection invalid (e.g., index out of bounds).
+        2a1. RelayCoach prompts for correction.
+        Use case ends.
 
 ### Non-Functional Requirements
 
