@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **standard laptops**: laptops that run on Mid-range CPU(Intel Core i5 or AMD Ryzen 5) with maximum of 8GB Ram
 * **CLI**: Command-Line Interface
 * **GUI**: Graphical User Interface
-* *MSS**: Main Success Scenario
+* **MSS**: Main Success Scenario
 
 --------------------------------------------------------------------------------------------------------------------
 
