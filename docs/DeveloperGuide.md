@@ -317,12 +317,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-    1.	Coach chooses to add a new athlete.
-    2.  RelayCoach requests the athlete’s basic details.
-    3.  Coach provides the requested details.
-    4.	RelayCoach validates the details.
-    5.	RelayCoach saves the athlete’s record.
-    6.	RelayCoach confirms the addition and displays the stored information.
+    1. Coach chooses to add a new athlete.
+    2. RelayCoach requests the athlete’s basic details.
+    3. Coach provides the requested details.
+    4. RelayCoach validates the details.
+    5. RelayCoach saves the athlete’s record.
+    6. RelayCoach confirms the addition and displays the stored information.
     Use case ends.
 
 **Extensions**
@@ -336,12 +336,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-    1.	Coach selects an athlete from the list.
-    2.	RelayCoach requests additional information (Role, Tags, Height, Weight).
-    3.	Coach provides the information.
-    4.	RelayCoach validates the information.
-    5.	RelayCoach updates the athlete’s record.
-    6.	RelayCoach confirms the update and displays the new information.
+    1. Coach selects an athlete from the list.
+    2. RelayCoach requests additional information (Role, Tags, Height, Weight).
+    3. Coach provides the information.
+    4. RelayCoach validates the information.
+    5. RelayCoach updates the athlete’s record.
+    6. RelayCoach confirms the update and displays the new information.
     Use case ends.
 
 **Extensions**
@@ -358,9 +358,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-	1.	Coach requests to view all athletes.
-	2.	RelayCoach retrieves all stored athletes.
-	3.	RelayCoach displays the list with details (Name, School, Role, Tags, etc.).
+	1. Coach requests to view all athletes.
+	2. RelayCoach retrieves all stored athletes.
+	3. RelayCoach displays the list with details (Name, School, Role, Tags, etc.).
     Use case ends.
 
 **Extensions**
@@ -373,10 +373,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-	1.	Coach chooses to find athletes by specifying one or more filters (Name, School, Role, Tag).
-	2.	RelayCoach validates the filter input.
-	3.	RelayCoach searches the database.
-	4.	RelayCoach displays the matching athletes with details.
+	1. Coach chooses to find athletes by specifying one or more filters (Name, School, Role, Tag).
+	2. RelayCoach validates the filter input.
+	3. RelayCoach searches the database.
+	4. RelayCoach displays the matching athletes with details.
     Use case ends.
 
 **Extensions**
@@ -393,16 +393,161 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-	1.	Coach selects an athlete to delete.
-	2.	RelayCoach verifies the selection.
-	3.	RelayCoach removes the athlete’s record.
-	4.	RelayCoach confirms the deletion.
+	1. Coach selects an athlete to delete.
+	2. RelayCoach verifies the selection.
+	3. RelayCoach removes the athlete’s record.
+	4. RelayCoach confirms the deletion.
     Use case ends.
 
 **Extensions**
 
     2a. Selection invalid (e.g., index out of bounds).
         2a1. RelayCoach prompts for correction.
+        Use case ends.
+
+**Use case: Group Athletes by Teams**
+
+**MSS**
+
+    1. Coach chooses to form a new relay team.
+    2. RelayCoach requests the team name and athlete indexes.
+    3. Coach provides the team name and 4 valid athlete indexes.
+    4. RelayCoach validates the details.
+    5. RelayCoach creates the new team with the specified athletes.
+    6. RelayCoach confirms the team creation and displays the team details.
+    Use case ends.
+
+**Extensions**
+    
+    3a. Missing or invalid details provided.
+        3a1. RelayCoach requests correction of team name or indexes.
+        3a2. Coach updates information. 
+        Use case resumes from Step 4.
+
+    4a. Fewer/more than 4 indexes provided.
+        4a1. RelayCoach rejects team creation and informs coach.
+        Use case ends.
+
+    4b. Invalid athlete index provided.
+        4b1. RelayCoach notifies coach that the index does not match any athlete.
+        Use case ends.
+
+    4c. Duplicate athlete index detected. 
+        4c1. RelayCoach rejects team creation due to duplicate members.
+        Use case ends.
+
+    4d. Athlete already belongs to another team.
+        4d1. RelayCoach informs coach that the athlete is already in <existing_team>.
+        Use case ends.
+
+    4e. No athletes exist in the database.
+        4e1. RelayCoach prompts coach to add athletes first.
+        Use case ends.
+
+**Use case: View Team Information**
+
+**MSS**
+
+    1. Coach chooses to view teams.
+    2. RelayCoach requests an optional team name filter.
+    3. Coach provides either no team name or a specific team name.
+    4. RelayCoach retrieves the relevant team(s) and displays details.
+    5. Use case ends.
+
+**Extensions**
+
+    3a. Invalid team name provided (non-alphabet characters).
+        3a1. RelayCoach notifies coach of invalid team name.
+        Use case ends.
+
+    4a. No teams exist in the database.
+        4a1. RelayCoach informs coach: “No teams found!”.
+        Use case ends.
+
+    4b. No teams match the provided team name.
+        4b1. RelayCoach informs coach: “No teams found!”.
+        Use case ends.
+
+**Use case: Add Session to Team**
+
+**MSS**
+
+    1. Coach chooses to add a training session for a team.
+    2. RelayCoach requests the team index, session date/time, and location.
+    3. Coach provides the requested details.
+    4. RelayCoach validates the input.
+    5. RelayCoach adds the session to the specified team.
+    6. RelayCoach confirms the addition and displays the updated team schedule.
+    Use case ends.
+
+**Extensions**
+
+    3a. Missing team index.
+        3a1. RelayCoach notifies coach of missing team index.
+        Use case ends.
+    
+    3b. Invalid date/time format provided.
+        3b1. RelayCoach requests correction using required format yyyy-MM-dd HHmm.
+        Use case ends.
+    
+    3c. Missing location.
+        3c1. RelayCoach notifies coach that location must be provided.
+        Use case ends.
+    
+    4a. Invalid team index.
+        4a1. RelayCoach informs coach the team does not exist.
+        Use case ends.
+    
+    4b. Duplicate session detected (same team, same date/time).
+        4b1. RelayCoach rejects scheduling and notifies coach.
+        Use case ends.
+
+**Use case: Delete Team**
+
+**MSS**
+
+	1. Coach chooses to delete a team.
+    2. RelayCoach requests the team index.
+    3. Coach provides the team index.
+    4. RelayCoach validates the team index.
+    5. RelayCoach deletes the team from the database.
+    6. RelayCoach confirms deletion with a success message.
+    Use case ends.
+
+**Extensions**
+
+    2a. Selection invalid (e.g., index out of bounds).
+        2a1. RelayCoach prompts for correction.
+        Use case ends.
+
+**Use case: Add Students to Session**
+
+**MSS**
+
+    1. Coach chooses to add students to a session.
+    2. RelayCoach requests session datetime, location, and student indexes.
+    3. Coach provides the requested details.
+    4. RelayCoach validates the input.
+    5. RelayCoach adds the students to the specified session.
+    6. RelayCoach confirms the addition and displays updated session details.
+    Use case ends.
+
+**Extensions**
+
+    3a. Missing student index.
+        3a1. RelayCoach notifies coach that at least one student index must be provided.
+        Use case ends.
+    
+    3b. Invalid date/time format.
+        3b1. RelayCoach requests correction using required format yyyy-MM-dd HHmm.
+        Use case ends.
+
+    3c. Missing location.
+        3c1. RelayCoach notifies coach that location is required.
+        Use case ends.
+    
+    4a. Invalid student index provided.
+        4a1. RelayCoach informs coach that the student does not exist.
         Use case ends.
 
 ### Non-Functional Requirements
