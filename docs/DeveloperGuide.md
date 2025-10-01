@@ -273,28 +273,39 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+School coaches that coach relay teams in different schools. They:
+* have a need to manage a significant number of athletes and teams
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+Given that coaches generally have many athletes to keep track of, our product aims to help 
+coaches manage athletes and teams from different schools faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                        |
+|----------|-----------------------------------------------------|--------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                                | add a new athlete                    |                                                                        |
+| `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                   |
+| `* * *`  | user                                                | find a person by name                | locate details of persons without having to go through the entire list |
+| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means         |
+| `* *`    | user managing multiple teams                        | group athletes by their teams        | keep track of who is in which team                                     |
+| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list   |
+| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                 |
+| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                     |
+| `*`      | user with many persons in the address book          | sort persons by name                 | locate a person easily                                                 |
+| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                 |
+| `*`      | user                                                | add a new session                    | record down all sessions date time and location                        |
+| `*`      | user                                                | assign athletes to a session         | track down which athlete is supposed to attend a particular session    |
+| `*`      | user                                                | list down all upcoming sessions      | keep track of which sessions are upcoming and who is attending         |
+| `*`      | user                                                | delete a session                     | remove unwanted sessions                                               |
 
 *{More to be added}*
 
