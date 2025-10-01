@@ -311,32 +311,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RelayCoach` and the **Actor** is the `Coach`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add Athlete (Basic Info)**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+    1.	Coach chooses to add a new athlete.
+    2.  RelayCoach requests the athlete’s basic details.
+    3.  Coach provides the requested details.
+    4.	RelayCoach validates the details.
+    5.	RelayCoach saves the athlete’s record.
+    6.	RelayCoach confirms the addition and displays the stored information.
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+    3a. RelayCoach detects missing or invalid details.
+        3a1. RelayCoach requests correction of details.
+        3a2. Coach updates information.
+        Use case resumes from Step 4.
 
-  Use case ends.
+**Use case: Add Athlete (Additional Info)**
 
-* 3a. The given index is invalid.
+**MSS**
 
-    * 3a1. AddressBook shows an error message.
+    1.	Coach selects an athlete from the list.
+    2.	RelayCoach requests additional information (Role, Tags, Height, Weight).
+    3.	Coach provides the information.
+    4.	RelayCoach validates the information.
+    5.	RelayCoach updates the athlete’s record.
+    6.	RelayCoach confirms the update and displays the new information.
+    Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
 
-*{More to be added}*
+    2a. Athlete Index not found.
+        2a1. RelayCoach displays an error message.
+        Use case ends.
+
+    4a. Invalid data.
+        4a1. RelayCoach requests correction of information.
+        Use case resumes from Step 3.
+
+**Use case: List Athletes**
+
+**MSS**
+
+	1.	Coach requests to view all athletes.
+	2.	RelayCoach retrieves all stored athletes.
+	3.	RelayCoach displays the list with details (Name, School, Role, Tags, etc.).
+    Use case ends.
+
+**Extensions**
+
+    2a. No athletes found.
+        2a1. RelayCoach informs the coach that no athletes are stored.
+        Use case ends.
+
+**Use case: Find Athletes by Filter**
+
+**MSS**
+
+	1.	Coach chooses to find athletes by specifying one or more filters (Name, School, Role, Tag).
+	2.	RelayCoach validates the filter input.
+	3.	RelayCoach searches the database.
+	4.	RelayCoach displays the matching athletes with details.
+    Use case ends.
+
+**Extensions**
+
+    2a. Filter missing or invalid.
+        2a1. RelayCoach prompts for correction.
+        Use case ends.
+
+    3a. No athletes found.
+        3a1. RelayCoach informs the coach that no matching athletes were found.
+        Use case ends.
+
+**Use case: Delete Athlete**
+
+**MSS**
+
+	1.	Coach selects an athlete to delete.
+	2.	RelayCoach verifies the selection.
+	3.	RelayCoach removes the athlete’s record.
+	4.	RelayCoach confirms the deletion.
+    Use case ends.
+
+**Extensions**
+
+    2a. Selection invalid (e.g., index out of bounds).
+        2a1. RelayCoach prompts for correction.
+        Use case ends.
 
 ### Non-Functional Requirements
 
