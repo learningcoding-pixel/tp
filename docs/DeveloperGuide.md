@@ -425,7 +425,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **standard laptops**: laptops that run on Mid-range CPU(Intel Core i5 or AMD Ryzen 5) with maximum of 8GB Ram
+* **CLI**: Command-Line Interface
+* **GUI**: Graphical User Interface
+* *MSS**: Main Success Scenario
 
 --------------------------------------------------------------------------------------------------------------------
 
