@@ -429,6 +429,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command-Line Interface
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
+* **Athletes**: Secondary school relay race Athletes
+* **teams**: Teams are used to group Athletes. Each team only have 4 Athletes.
+* **sessions**: Sessions are used to track a Team's training time and location.
 
 --------------------------------------------------------------------------------------------------------------------
 
