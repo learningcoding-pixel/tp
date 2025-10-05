@@ -57,8 +57,8 @@ public class FindCommandParserTest {
         // TODO: to implement once Person is updated with School
 
         // Predicate logic tests
-        assertTrue(command.getPredicate().test(alice));      // matches name
-        assertTrue(command.getPredicate().test(bob));        // matches name
+        assertTrue(command.getPredicate().test(alice)); // matches name
+        assertTrue(command.getPredicate().test(bob)); // matches name
         assertTrue(command.getPredicate().test(testSchool)); // matches school
         // assertFalse(command.getPredicate().test(unrelated)); // matches neither
     }

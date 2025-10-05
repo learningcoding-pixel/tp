@@ -92,6 +92,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code School} of the {@code Person} that we are building.
+     */
     public PersonBuilder withSchool(String school) {
         this.school = school;
         return this;
