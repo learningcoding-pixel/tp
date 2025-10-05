@@ -28,6 +28,10 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
+    public Predicate<Person> getPredicate() {
+        return predicate;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
