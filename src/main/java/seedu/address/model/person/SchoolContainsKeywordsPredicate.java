@@ -29,7 +29,7 @@ public class SchoolContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof SchoolContainsKeywordsPredicate)) {
             return false;
         }
 
