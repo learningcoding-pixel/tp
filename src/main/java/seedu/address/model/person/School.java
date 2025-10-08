@@ -6,10 +6,10 @@ package seedu.address.model.person;
  */
 public class School {
     public static final String MESSAGE_CONSTRAINTS = "test";
-    private final String school;
+    public final String value;
 
     public School(String school) {
-        this.school = school;
+        this.value = school;
     }
 
     public static boolean isValidSchool(String test) {
@@ -18,6 +18,27 @@ public class School {
 
     @Override
     public String toString() {
-        return this.school;
+        return this.value;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof School)) {
+            return false;
+        }
+
+        School otherSchool = (School) other;
+        return value.equals(otherSchool.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
 }

@@ -6,10 +6,10 @@ package seedu.address.model.person;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS = "test";
-    private final String role;
+    public final String value;
 
     public Role(String role) {
-        this.role = role;
+        this.value = role;
     }
 
     public static boolean isValidRole(String test) {
@@ -17,7 +17,23 @@ public class Role {
     }
 
     @Override
-    public String toString() {
-        return this.role;
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Role)) {
+            return false;
+        }
+
+        Role otherRole = (Role) other;
+        return value.equals(otherRole.value);
     }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
 }
