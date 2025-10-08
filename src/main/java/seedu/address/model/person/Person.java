@@ -20,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final String school;
 
     // Data fields
     private final Address address;
@@ -60,6 +61,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getSchool() {
+        return school;
     }
 
     /**

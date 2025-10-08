@@ -38,6 +38,7 @@ public class PersonBuilder {
     private Height height;
     private Weight weight;
     private Set<Tag> tags;
+    private String school;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -52,6 +53,7 @@ public class PersonBuilder {
         height = new Height(DEFAULT_HEIGHT);
         weight = new Weight(DEFAULT_WEIGHT);
         tags = new HashSet<>();
+        school = DEFAULT_SCHOOL;
     }
 
     /**
