@@ -20,12 +20,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SCHOOL = "Hougang Secondary School";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private String school;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        school = DEFAULT_SCHOOL;
     }
 
     /**
@@ -86,6 +89,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code School} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchool(String school) {
+        this.school = school;
         return this;
     }
 
