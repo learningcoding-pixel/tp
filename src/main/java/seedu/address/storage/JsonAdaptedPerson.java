@@ -19,6 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.Dob;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String role;
     private final String height;
     private final String weight;
+    private final String dob;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -50,6 +52,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("role") String role,
                              @JsonProperty("height") String height,
                              @JsonProperty("weight") String weight,
+                             @JsonProperty("dob") String dob,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -59,6 +62,7 @@ class JsonAdaptedPerson {
         this.role = role;
         this.height = height;
         this.weight = weight;
+        this.dob = dob;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -76,6 +80,7 @@ class JsonAdaptedPerson {
         role = source.getRole().value;
         height = source.getHeight().value;
         weight = source.getWeight().value;
+        dob = String.valueOf(source.getDob());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -90,6 +95,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        // dob
+        if (dob == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "dob"));
         }
 
         // Name
@@ -169,6 +179,6 @@ class JsonAdaptedPerson {
 
         // Return the final Person model
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelSchool, modelRole, modelHeight, modelWeight, modelTags);
+                modelSchool, modelRole, modelHeight, modelWeight, modelTags, new Dob(dob));
     }
 }

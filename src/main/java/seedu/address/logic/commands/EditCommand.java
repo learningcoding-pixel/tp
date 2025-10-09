@@ -34,6 +34,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.Dob;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -116,9 +117,10 @@ public class EditCommand extends Command {
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Dob updatedDob = editPersonDescriptor.getDob().orElse(personToEdit.getDob());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchool,
-                updatedRole, updatedHeight, updatedWeight, updatedTags);
+                updatedRole, updatedHeight, updatedWeight, updatedTags, updatedDob);
     }
 
     @Override
@@ -160,6 +162,8 @@ public class EditCommand extends Command {
         private Weight weight;
         private Set<Tag> tags;
 
+        private Dob dob;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -176,6 +180,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setWeight(toCopy.weight);
             setTags(toCopy.tags);
+            setDob(toCopy.dob);
         }
 
         /**
@@ -183,8 +188,15 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, school, role, height, weight, tags
+                    name, phone, email, address, school, role, height, weight, tags, dob
             );
+        }
+        public void setDob(Dob dob) {
+            this.dob = dob;
+        }
+
+        public Optional<Dob> getDob() {
+            return Optional.ofNullable(dob);
         }
 
         public void setName(Name name) {
@@ -288,7 +300,8 @@ public class EditCommand extends Command {
                     && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
                     && Objects.equals(weight, otherEditPersonDescriptor.weight)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(dob, otherEditPersonDescriptor.dob);
         }
 
         @Override
@@ -303,6 +316,7 @@ public class EditCommand extends Command {
                     .add("height", height)
                     .add("weight", weight)
                     .add("tags", tags)
+                    .add("dob", dob)
                     .toString();
         }
     }

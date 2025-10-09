@@ -20,7 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final String school;
+    private final Dob dob;
 
     // Data fields
     private final Address address;
@@ -34,12 +34,13 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, School school,
-                  Role role, Height height, Weight weight, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags, role, school, height, weight);
+                  Role role, Height height, Weight weight, Set<Tag> tags, Dob dob) {
+        requireAllNonNull(name, phone, email, address, tags, role, school, height, weight, dob);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.dob = dob;
         this.tags.addAll(tags);
         this.role = role;
         this.school = school;
@@ -63,8 +64,8 @@ public class Person {
         return address;
     }
 
-    public String getSchool() {
-        return school;
+    public Dob getDob() {
+        return dob;
     }
 
     /**
@@ -149,6 +150,7 @@ public class Person {
                 .add("height", height)
                 .add("weight", weight)
                 .add("tags", tags)
+                .add("dob", dob)
                 .toString();
     }
 
