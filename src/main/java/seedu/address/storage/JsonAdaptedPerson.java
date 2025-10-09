@@ -12,9 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.School;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,19 +32,33 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String school;
+    private final String role;
+    private final String height;
+    private final String weight;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("school") String school,
+                             @JsonProperty("role") String role,
+                             @JsonProperty("height") String height,
+                             @JsonProperty("weight") String weight,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.school = school;
+        this.role = role;
+        this.height = height;
+        this.weight = weight;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +72,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        school = source.getSchool().value;
+        role = source.getRole().value;
+        height = source.getHeight().value;
+        weight = source.getWeight().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,6 +92,7 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        // Name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -78,6 +101,7 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        // Phone
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -86,6 +110,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        // Email
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,6 +119,7 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        // Address
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -102,8 +128,47 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        // School
+        if (school == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
+        }
+        if (!School.isValidSchool(school)) {
+            throw new IllegalValueException(School.MESSAGE_CONSTRAINTS);
+        }
+        final School modelSchool = new School(school);
 
+        // Role
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
+        // Height
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
+        }
+        if (!Height.isValidHeight(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+        }
+        final Height modelHeight = new Height(height);
+
+        // Weight
+        if (weight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
+        }
+        if (!Weight.isValidWeight(weight)) {
+            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+        }
+        final Weight modelWeight = new Weight(weight);
+
+        // Tags
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        // Return the final Person model
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelSchool, modelRole, modelHeight, modelWeight, modelTags);
+    }
 }
