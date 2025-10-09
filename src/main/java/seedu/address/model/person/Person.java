@@ -25,18 +25,26 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Role role;
+    private final Height height;
+    private final Weight weight;
+    private final School school;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, School school,
+                  Role role, Height height, Weight weight, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags, role, school, height, weight);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.school = "test";
+        this.role = role;
+        this.school = school;
+        this.height = height;
+        this.weight = weight;
     }
 
     public Name getName() {
@@ -65,6 +73,22 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Height getHeight() {
+        return height;
+    }
+
+    public Weight getWeight() {
+        return weight;
+    }
+
+    public School getSchool() {
+        return school;
     }
 
     /**
@@ -100,6 +124,10 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && school.equals(otherPerson.school)
+                && role.equals(otherPerson.role)
+                && height.equals(otherPerson.height)
+                && weight.equals(otherPerson.weight)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -116,6 +144,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("school", school)
+                .add("role", role)
+                .add("height", height)
+                .add("weight", weight)
                 .add("tags", tags)
                 .toString();
     }
