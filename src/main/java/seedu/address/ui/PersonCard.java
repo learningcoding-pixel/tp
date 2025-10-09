@@ -44,6 +44,10 @@ public class PersonCard extends UiPart<Region> {
     private Label school;
     @FXML
     private Label role;
+    @FXML
+    private Label height;
+    @FXML
+    private Label weight;
 
 
     /**
@@ -56,6 +60,8 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         school.setText(person.getSchool().value);
         role.setText(person.getRole().value);
+        height.setText(person.getHeight().value);
+        weight.setText(person.getWeight().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
