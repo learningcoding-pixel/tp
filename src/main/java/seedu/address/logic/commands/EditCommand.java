@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Dob;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
@@ -34,7 +35,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
-import seedu.address.model.person.Dob;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,6 +109,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Dob updatedDob = editPersonDescriptor.getDob().orElse(personToEdit.getDob());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -117,10 +118,9 @@ public class EditCommand extends Command {
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Dob updatedDob = editPersonDescriptor.getDob().orElse(personToEdit.getDob());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchool,
-                updatedRole, updatedHeight, updatedWeight, updatedTags, updatedDob);
+        return new Person(updatedName, updatedDob, updatedPhone, updatedEmail, updatedAddress, updatedSchool,
+                updatedRole, updatedHeight, updatedWeight, updatedTags);
     }
 
     @Override
@@ -153,6 +153,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Dob dob;
         private Phone phone;
         private Email email;
         private Address address;
@@ -162,8 +163,6 @@ public class EditCommand extends Command {
         private Weight weight;
         private Set<Tag> tags;
 
-        private Dob dob;
-
         public EditPersonDescriptor() {}
 
         /**
@@ -172,6 +171,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setDob(toCopy.dob);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -180,7 +180,6 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setWeight(toCopy.weight);
             setTags(toCopy.tags);
-            setDob(toCopy.dob);
         }
 
         /**
@@ -188,23 +187,23 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, school, role, height, weight, tags, dob
+                    name, dob, phone, email, address, school, role, height, weight, tags
             );
         }
-        public void setDob(Dob dob) {
-            this.dob = dob;
-        }
-
-        public Optional<Dob> getDob() {
-            return Optional.ofNullable(dob);
-        }
-
         public void setName(Name name) {
             this.name = name;
         }
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setDob(Dob dob) {
+            this.dob = dob;
+        }
+
+        public Optional<Dob> getDob() {
+            return Optional.ofNullable(dob);
         }
 
         public void setPhone(Phone phone) {
@@ -294,20 +293,21 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(dob, otherEditPersonDescriptor.dob)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(school, otherEditPersonDescriptor.school)
                     && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
                     && Objects.equals(weight, otherEditPersonDescriptor.weight)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(dob, otherEditPersonDescriptor.dob);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("dob", dob)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
@@ -316,7 +316,6 @@ public class EditCommand extends Command {
                     .add("height", height)
                     .add("weight", weight)
                     .add("tags", tags)
-                    .add("dob", dob)
                     .toString();
         }
     }
