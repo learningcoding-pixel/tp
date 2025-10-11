@@ -6,20 +6,17 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
-/**
- * Tests that a {@code Person}'s {@code School} matches any of the keywords given.
- */
-public class SchoolContainsKeywordsPredicate implements Predicate<Person> {
+public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public SchoolContainsKeywordsPredicate(List<String> keywords) {
+    public RoleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getSchool().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getRole().value, keyword));
     }
 
     @Override
@@ -29,12 +26,12 @@ public class SchoolContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SchoolContainsKeywordsPredicate)) {
+        if (!(other instanceof RoleContainsKeywordsPredicate)) {
             return false;
         }
 
-        SchoolContainsKeywordsPredicate otherSchoolContainsKeywordsPredicate = (SchoolContainsKeywordsPredicate) other;
-        return keywords.equals(otherSchoolContainsKeywordsPredicate.keywords);
+        RoleContainsKeywordsPredicate otherRoleContainsKeywordsPredicate = (RoleContainsKeywordsPredicate) other;
+        return keywords.equals(otherRoleContainsKeywordsPredicate.keywords);
     }
 
     @Override
@@ -42,3 +39,4 @@ public class SchoolContainsKeywordsPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
+
