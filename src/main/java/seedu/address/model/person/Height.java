@@ -19,7 +19,8 @@ public class Height {
      * - Can have at most one decimal place
      * The regex allows either an integer or a decimal with one decimal digit.
      */
-    public static final String VALIDATION_REGEX = "^(?:[5-9]\\d(?:\\.\\d)?|1\\d{2}(?:\\.\\d)?|2\\d{2}(?:\\.\\d)?|300(?:\\.0)?)$";
+    public static final String VALIDATION_REGEX =
+            "^(?:[5-9]\\d(?:\\.\\d)?|1\\d{2}(?:\\.\\d)?|2\\d{2}(?:\\.\\d)?|300(?:\\.0)?)$";
 
     public final String value;
 

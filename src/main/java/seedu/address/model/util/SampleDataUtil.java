@@ -57,8 +57,8 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Dob("2000-01-01"), new Phone("92624417"),
                     new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new School("Anglo-Chinese School (Independent)"), new Role("Captain"), new Height("172"), new Weight("65"),
-                    getTagSet("motivated", "leadership"))
+                    new School("Anglo-Chinese School (Independent)"), new Role("Captain"), new Height("172"),
+                    new Weight("65"), getTagSet("motivated", "leadership"))
 
         };
     }
