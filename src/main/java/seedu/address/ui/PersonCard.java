@@ -8,6 +8,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -30,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private Label dob;
     @FXML
     private Label id;
     @FXML
@@ -58,6 +63,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        String rawDob = person.getDob().value;
+        String formattedDob = formatDateOfBirth(rawDob);
+        dob.setText(formattedDob);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         address.setText(person.getAddress().value);
@@ -68,5 +76,18 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Formats date from "2003-10-10" to "10 October 2003"
+     */
+    private String formatDateOfBirth(String rawDate) {
+        try {
+            LocalDate date = LocalDate.parse(rawDate);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+            return date.format(formatter);
+        } catch (Exception e) {
+            return rawDate;
+        }
     }
 }
