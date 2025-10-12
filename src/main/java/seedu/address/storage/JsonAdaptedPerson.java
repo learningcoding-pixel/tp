@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Dob;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
@@ -19,7 +20,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
-import seedu.address.model.person.Dob;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,11 +97,6 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        // dob
-        if (dob == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "dob"));
-        }
-
         // Name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -110,6 +105,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        // Dob
+        if (dob == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Dob.class.getSimpleName()));
+        }
+        if (!Dob.isValidDob(dob)) {
+            throw new IllegalValueException(Dob.MESSAGE_CONSTRAINTS);
+        }
+        final Dob modelDob = new Dob(dob);
 
         // Phone
         if (phone == null) {
@@ -178,7 +182,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // Return the final Person model
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelSchool, modelRole, modelHeight, modelWeight, modelTags, new Dob(dob));
+        return new Person(modelName, modelDob, modelPhone, modelEmail, modelAddress,
+                modelSchool, modelRole, modelHeight, modelWeight, modelTags);
     }
 }
