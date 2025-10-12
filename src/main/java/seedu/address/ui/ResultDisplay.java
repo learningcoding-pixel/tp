@@ -20,6 +20,11 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    //Get method for testing purposes
+    public TextArea getTextArea() {
+        return resultDisplay;
+    }
+
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);

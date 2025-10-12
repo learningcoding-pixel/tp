@@ -78,6 +78,19 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    // Getters for testing
+    public Label getId() { return id; }
+    public Label getName() { return name; }
+    public Label getDob() { return dob; }
+    public Label getPhone() { return phone; }
+    public Label getEmail() { return email; }
+    public Label getAddress() { return address; }
+    public Label getSchool() { return school; }
+    public Label getRole() { return role; }
+    public Label getHeight() { return height; }
+    public Label getWeight() { return weight; }
+    public FlowPane getTags() { return tags; }
+
     /**
      * Formats date from "2003-10-10" to "10 October 2003"
      */
