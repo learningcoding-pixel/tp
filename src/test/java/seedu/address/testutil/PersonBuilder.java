@@ -3,15 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Height;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
-import seedu.address.model.person.School;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,6 +20,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ROLE = "member";
     public static final String DEFAULT_HEIGHT = "165";
     public static final String DEFAULT_WEIGHT = "55";
+    public static final String DEFAULT_DOB = "2003-10-10";
+
 
     private Name name;
     private Phone phone;
@@ -38,7 +32,7 @@ public class PersonBuilder {
     private Height height;
     private Weight weight;
     private Set<Tag> tags;
-    private String school;
+    private Dob dob;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,7 +47,7 @@ public class PersonBuilder {
         height = new Height(DEFAULT_HEIGHT);
         weight = new Weight(DEFAULT_WEIGHT);
         tags = new HashSet<>();
-        school = DEFAULT_SCHOOL;
+        dob = new Dob(DEFAULT_DOB);
     }
 
     /**
@@ -69,6 +63,7 @@ public class PersonBuilder {
         height = personToCopy.getHeight();
         weight = personToCopy.getWeight();
         tags = new HashSet<>(personToCopy.getTags());
+        dob = personToCopy.getDob();
     }
 
     /**
@@ -144,6 +139,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, school, role, height, weight, tags);
+        return new Person(name, phone, email, address, school, role, height, weight, tags, dob); // added by WH
     }
 }
