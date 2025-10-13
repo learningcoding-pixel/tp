@@ -129,13 +129,14 @@ public class Person {
                 && role.equals(otherPerson.role)
                 && height.equals(otherPerson.height)
                 && weight.equals(otherPerson.weight)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && dob.equals(otherPerson.dob);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, dob, phone, email, address, tags);
     }
 
     @Override
