@@ -12,12 +12,20 @@ public class Weight {
             "Weight must be a non-negative number and cannot be blank.";
     public final String value;
 
+    /**
+     * Constructs a {@code Weight}.
+     *
+     * @param weight A valid weight.
+     */
     public Weight(String weight) {
         requireNonNull(weight);
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
         this.value = weight;
     }
 
+    /**
+     * Returns true if a given string is a valid weight.
+     */
     public static boolean isValidWeight(String test) {
         if (test == null || test.isBlank()) {
             return false;

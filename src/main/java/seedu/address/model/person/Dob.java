@@ -1,10 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.AppUtil;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+
+import seedu.address.commons.util.AppUtil;
 
 /**
  * Represents a Person's Date of Birth (DOB).
@@ -13,7 +14,8 @@ import java.time.format.ResolverStyle;
 public class Dob {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date of Birth must be a valid calendar date in the format YYYY-MM-DD, must not be blank, and must not be a future date.";
+            "Date of Birth must be a valid calendar date in the format YYYY-MM-DD, "
+                    + "must not be blank, and must not be a future date.";
 
     private static final DateTimeFormatter DOB_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd")
             .withResolverStyle(ResolverStyle.STRICT);
