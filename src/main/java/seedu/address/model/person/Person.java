@@ -142,6 +142,7 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("dob", dob)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
@@ -150,7 +151,6 @@ public class Person {
                 .add("height", height)
                 .add("weight", weight)
                 .add("tags", tags)
-                .add("dob", dob)
                 .toString();
     }
 
