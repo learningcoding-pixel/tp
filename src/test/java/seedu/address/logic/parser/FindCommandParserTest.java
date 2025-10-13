@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -50,17 +51,23 @@ public class FindCommandParserTest {
         FindCommand command = parser.parse("find n/Alice Bob s/test");
 
         // Persons to test
-        Person alice = new PersonBuilder().withName("Alice").withSchool("CS").build();
-        Person bob = new PersonBuilder().withName("Bob").withSchool("Math").build();
-        Person testSchool = new PersonBuilder().withName("Charlie").withSchool("test").build();
-        // Person unrelated = new PersonBuilder().withName("X").build();
+        Person alicetest = new PersonBuilder().withName("Alice").withSchool("test").build();
+        Person bobtest = new PersonBuilder().withName("Bob").withSchool("test").build();
+        Person aliceCS = new PersonBuilder().withName("Alice").withSchool("CS").build();
+        Person bobMath = new PersonBuilder().withName("Bob").withSchool("Math").build();
+        Person charlietest = new PersonBuilder().withName("Charlie").withSchool("test").build();
+        Person jamesScience = new PersonBuilder().withName("James").withSchool("Science").build();
         // TODO: to implement once Person is updated with School
 
         // Predicate logic tests
-        assertTrue(command.getPredicate().test(alice)); // matches name
-        assertTrue(command.getPredicate().test(bob)); // matches name
-        assertTrue(command.getPredicate().test(testSchool)); // matches school
-        // assertFalse(command.getPredicate().test(unrelated)); // matches neither
+        assertTrue(command.getPredicate().test(alicetest)); // matches name and school
+        assertTrue(command.getPredicate().test(bobtest)); // matches name and school
+
+        assertFalse(command.getPredicate().test(aliceCS)); // matches name
+        assertFalse(command.getPredicate().test(bobMath)); // matches name
+        assertFalse(command.getPredicate().test(charlietest)); // matches school
+        assertFalse(command.getPredicate().test(jamesScience)); // no matches
+
     }
 
     // to add tests for parsing multiple args at once i.e. school and name
