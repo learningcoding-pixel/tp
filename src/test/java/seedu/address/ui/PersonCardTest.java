@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.scene.control.Label;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -57,7 +56,7 @@ public class PersonCardTest {
                 .withPhone("98765432")
                 .withEmail("john@example.com")
                 .withAddress("123 Street")
-                .withDob("2003-10-10")  // YYYY-MM-DD format
+                .withDob("2003-10-10")
                 .withSchool("Test School")
                 .withRole("Member")
                 .withHeight("180")
@@ -157,8 +156,8 @@ public class PersonCardTest {
 
         // Verify name has bold styling (check if style contains bold)
         String nameStyle = personCard.getName().getStyle();
-        assertTrue(nameStyle.contains("-fx-font-weight: bold") ||
-                nameStyle.contains("bold"));
+        assertTrue(nameStyle.contains("-fx-font-weight: bold")
+                || nameStyle.contains("bold"));
     }
 
     @Test

@@ -59,10 +59,10 @@ public class ResultDisplayTest {
 
     @Test
     public void setFeedbackToUser_withLongText_wrapsCorrectly() {
-        String longText = "This is a very long text that should wrap to multiple lines " +
-                "instead of requiring horizontal scrolling in the UI. " +
-                "The text wrapping feature should ensure that users only need " +
-                "to scroll vertically, not horizontally.";
+        String longText = "This is a very long text that should wrap to multiple lines "
+                + "instead of requiring horizontal scrolling in the UI. "
+                + "The text wrapping feature should ensure that users only need "
+                + "to scroll vertically, not horizontally.";
 
         resultDisplay.setFeedbackToUser(longText);
 

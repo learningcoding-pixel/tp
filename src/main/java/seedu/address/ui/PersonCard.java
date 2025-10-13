@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -8,9 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -79,17 +79,39 @@ public class PersonCard extends UiPart<Region> {
     }
 
     // Getters for testing
-    public Label getId() { return id; }
-    public Label getName() { return name; }
-    public Label getDob() { return dob; }
-    public Label getPhone() { return phone; }
-    public Label getEmail() { return email; }
-    public Label getAddress() { return address; }
-    public Label getSchool() { return school; }
-    public Label getRole() { return role; }
-    public Label getHeight() { return height; }
-    public Label getWeight() { return weight; }
-    public FlowPane getTags() { return tags; }
+    public Label getId() {
+        return id;
+    }
+    public Label getName() {
+        return name;
+    }
+    public Label getDob() {
+        return dob;
+    }
+    public Label getPhone() {
+        return phone;
+    }
+    public Label getEmail() {
+        return email;
+    }
+    public Label getAddress() {
+        return address;
+    }
+    public Label getSchool() {
+        return school;
+    }
+    public Label getRole() {
+        return role;
+    }
+    public Label getHeight() {
+        return height;
+    }
+    public Label getWeight() {
+        return weight;
+    }
+    public FlowPane getTags() {
+        return tags;
+    }
 
     /**
      * Formats date from "2003-10-10" to "10 October 2003"
