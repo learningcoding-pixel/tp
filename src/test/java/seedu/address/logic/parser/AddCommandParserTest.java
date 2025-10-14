@@ -74,8 +74,9 @@ public class AddCommandParserTest {
 
         // whitespace preamble
         assertParseSuccess(parser,
-                PREAMBLE_WHITESPACE + NAME_DESC_BOB + DOB_DESC_BOB +PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + SCHOOL_DESC_BOB + ROLE_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + TAG_DESC_FRIEND,
+                PREAMBLE_WHITESPACE + NAME_DESC_BOB + DOB_DESC_BOB +PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ROLE_DESC_BOB
+                        + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // multiple tags
@@ -83,8 +84,9 @@ public class AddCommandParserTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ROLE_DESC_BOB
-                        + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ROLE_DESC_BOB + HEIGHT_DESC_BOB
+                        + WEIGHT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedMultipleTags));
     }
 
