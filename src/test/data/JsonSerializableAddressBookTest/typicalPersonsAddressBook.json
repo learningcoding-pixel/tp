@@ -3,6 +3,7 @@
   "persons": [
     {
       "name": "Alice Pauline",
+      "dob": "2003-10-10",
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
@@ -14,6 +15,7 @@
     },
     {
       "name": "Benson Meier",
+      "dob": "2003-10-10",
       "phone": "98765432",
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
@@ -25,6 +27,7 @@
     },
     {
       "name": "Carl Kurz",
+      "dob": "2003-10-10",
       "phone": "95352563",
       "email": "heinz@example.com",
       "address": "wall street",
@@ -36,6 +39,7 @@
     },
     {
       "name": "Daniel Meier",
+      "dob": "2003-10-10",
       "phone": "87652533",
       "email": "cornelia@example.com",
       "address": "10th street",
@@ -47,6 +51,7 @@
     },
     {
       "name": "Elle Meyer",
+      "dob": "2003-10-10",
       "phone": "9482224",
       "email": "werner@example.com",
       "address": "michegan ave",
@@ -58,6 +63,7 @@
     },
     {
       "name": "Fiona Kunz",
+      "dob": "2003-10-10",
       "phone": "9482427",
       "email": "lydia@example.com",
       "address": "little tokyo",
@@ -69,6 +75,7 @@
     },
     {
       "name": "George Best",
+      "dob": "2003-10-10",
       "phone": "9482442",
       "email": "anna@example.com",
       "address": "4th street",
