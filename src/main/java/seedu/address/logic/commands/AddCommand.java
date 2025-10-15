@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             + PREFIX_HEIGHT + "175 "
             + PREFIX_WEIGHT + "65 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "KneePain";
 
     public static final String MESSAGE_SUCCESS = "New athlete added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
