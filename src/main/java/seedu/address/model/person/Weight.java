@@ -40,7 +40,7 @@ public class Weight {
 
     @Override
     public String toString() {
-        return this.value;
+        return this.value + " kg";
     }
 
     @Override
