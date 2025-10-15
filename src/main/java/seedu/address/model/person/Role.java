@@ -17,6 +17,11 @@ public class Role {
     }
 
     @Override
+    public String toString() {
+        return this.value;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -35,5 +40,4 @@ public class Role {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
