@@ -47,7 +47,7 @@ public class AddCommand extends Command {
             + PREFIX_ROLE + "Captain "
             + PREFIX_HEIGHT + "175 "
             + PREFIX_WEIGHT + "65 "
-            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "overseas"
             + PREFIX_TAG + "KneePain";
 
     public static final String MESSAGE_SUCCESS = "New athlete added: %1$s";
