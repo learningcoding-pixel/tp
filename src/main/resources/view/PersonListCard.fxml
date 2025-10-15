@@ -12,29 +12,75 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="350" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="130" spacing="8" GridPane.columnIndex="0">
       <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets top="8" right="12" bottom="8" left="12" />
       </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+
+      <!-- Name and ID -->
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="id" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" style="-fx-font-weight: bold;" />
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="school" styleClass="cell_small_label" text="$school" />
-      <Label fx:id="role" styleClass="cell_small_label" text="$role" />
-      <Label fx:id="height" styleClass="cell_small_label" text="$height" />
-      <Label fx:id="weight" styleClass="cell_small_label" text="$weight" />
+
+      <!-- Tags -->
+      <FlowPane fx:id="tags" hgap="5" vgap="3" />
+
+      <!-- Personal Information -->
+      <VBox spacing="6">
+        <!-- Date of Birth -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="📅 Date of Birth:" />
+          <Label fx:id="dob" styleClass="cell_small_label" />
+        </HBox>
+
+        <!-- Phone -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="📞 Phone:" />
+          <Label fx:id="phone" styleClass="cell_small_label" />
+        </HBox>
+
+        <!-- Address -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="🏠 Address:" />
+          <Label fx:id="address" styleClass="cell_small_label" wrapText="true" />
+        </HBox>
+
+        <!-- Email -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="✉️  Email:" />
+          <Label fx:id="email" styleClass="cell_small_label" wrapText="true" />
+        </HBox>
+
+        <!-- School -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="🏫 School:" />
+          <Label fx:id="school" styleClass="cell_small_label" />
+        </HBox>
+
+        <!-- Role -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+          <Label styleClass="cell_small_label" text="🎯 Role:" />
+          <Label fx:id="role" styleClass="cell_small_label" />
+        </HBox>
+
+        <!-- Height and Weight -->
+        <HBox spacing="20" alignment="CENTER_LEFT">
+          <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label styleClass="cell_small_label" text="📏 Height (in cm):" />
+            <Label fx:id="height" styleClass="cell_small_label" />
+          </HBox>
+          <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label styleClass="cell_small_label" text="⚖️ Weight (in kg):" />
+            <Label fx:id="weight" styleClass="cell_small_label" />
+          </HBox>
+        </HBox>
+      </VBox>
     </VBox>
   </GridPane>
 </HBox>
+
+
+

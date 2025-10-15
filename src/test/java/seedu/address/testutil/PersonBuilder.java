@@ -154,6 +154,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Dob} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDob(String dob) {
+        this.dob = new Dob(dob);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, dob, phone, email, address, school, role, height, weight, tags);
     }
