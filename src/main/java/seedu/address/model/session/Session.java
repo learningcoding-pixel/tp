@@ -1,7 +1,7 @@
 package seedu.address.model.session;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,10 +13,14 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Session {
 
-    private final String session;
     protected LocalDateTime date;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+    private final String session;
 
+    /**
+     * Represents a Session in the address book.
+     * Guarantees: details are present and not null, field values are validated, immutable.
+     */
     public Session(String session, LocalDateTime date) {
         this.session = session;
         this.date = date;
