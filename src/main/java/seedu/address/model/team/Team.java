@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.model.person.Person;
 import seedu.address.model.session.Session;
 
+/**
+ * Represents a Team in the RelayCoach app.
+ * Guarantees: members size is always 4, details are present and not null, field values are validated, immutable.
+ */
 public class Team {
 
     public static final int TEAM_SIZE = 4;
@@ -17,6 +21,12 @@ public class Team {
     private final Set<Person> members = new HashSet<>();
     private final Set<Session> sessions = new HashSet<>();
 
+    /**
+     * Constructs a {@code Team}.
+     *
+     * @param name Name of the team
+     * @param members Set of team members (must have 4 distinct members)
+     */
     public Team(String name, Set<Person> members) {
         requireNonNull(name);
         requireNonNull(members);
