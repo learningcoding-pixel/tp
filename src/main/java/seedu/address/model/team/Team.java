@@ -73,6 +73,18 @@ public class Team {
                 && sessions.equals(otherTeam.sessions);
     }
 
+    /**
+     * Returns true if both teams have the same name.
+     * This defines a weaker notion of equality between two teams.
+     */
+    public boolean isSameTeam(Team otherTeam) {
+        if (otherTeam == this) {
+            return true;
+        }
+        return otherTeam != null
+                && otherTeam.getName().equals(getName());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, members, sessions);
