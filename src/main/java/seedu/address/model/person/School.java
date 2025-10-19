@@ -5,15 +5,16 @@ package seedu.address.model.person;
  * Guarantees: immutable}
  */
 public class School {
-    public static final String MESSAGE_CONSTRAINTS = "test";
+    public static final String MESSAGE_CONSTRAINTS = "School must be a valid school name";
     public final String value;
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public School(String school) {
         this.value = school;
     }
 
     public static boolean isValidSchool(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

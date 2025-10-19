@@ -5,15 +5,16 @@ package seedu.address.model.person;
  * Guarantees: immutable}
  */
 public class Role {
-    public static final String MESSAGE_CONSTRAINTS = "test";
+    public static final String MESSAGE_CONSTRAINTS = "Role must be a valid role";
     public final String value;
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public Role(String role) {
         this.value = role;
     }
 
     public static boolean isValidRole(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
