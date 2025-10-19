@@ -6,8 +6,14 @@ package seedu.address.model.person;
  */
 public class School {
     public static final String MESSAGE_CONSTRAINTS = "School must be a valid school name";
+
+    /*
+     * The first character of the school must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} .'’]*";
+
     public final String value;
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public School(String school) {
         this.value = school;

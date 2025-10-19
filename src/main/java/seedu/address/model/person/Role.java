@@ -6,8 +6,14 @@ package seedu.address.model.person;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS = "Role must be a valid role";
-    public final String value;
+
+    /*
+     * The first character of the role must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    public final String value;
 
     public Role(String role) {
         this.value = role;
