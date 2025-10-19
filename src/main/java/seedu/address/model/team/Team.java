@@ -17,7 +17,7 @@ public class Team {
 
     public static final int TEAM_SIZE = 4;
 
-    private final String name; // TODO: Create a TeamName class
+    private final TeamName name;
     private final Set<Person> members = new HashSet<>();
     private final Set<Session> sessions = new HashSet<>();
 
