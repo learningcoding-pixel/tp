@@ -27,7 +27,7 @@ public class Team {
      * @param name Name of the team
      * @param members Set of team members (must have 4 distinct members)
      */
-    public Team(String name, Set<Person> members) {
+    public Team(TeamName name, Set<Person> members) {
         requireNonNull(name);
         requireNonNull(members);
 
@@ -39,7 +39,7 @@ public class Team {
         this.members.addAll(members);
     }
 
-    public String getName() {
+    public TeamName getName() {
         return name;
     }
 
