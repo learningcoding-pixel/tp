@@ -57,7 +57,6 @@ public class AddTeamCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         Set<Person> members = new HashSet<>();
 
-        // Convert indexes to actual Person objects
         for (Index index : memberIndexes) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
@@ -65,14 +64,12 @@ public class AddTeamCommand extends Command {
             members.add(lastShownList.get(index.getZeroBased()));
         }
 
-        // Validate team size
         if (members.size() != Team.TEAM_SIZE) {
             throw new CommandException(MESSAGE_INVALID_TEAM_SIZE);
         }
 
         Team newTeam = new Team(teamName, members);
 
-        // Prevent duplicates
         if (model.hasTeam(newTeam)) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }
