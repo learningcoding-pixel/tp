@@ -14,7 +14,6 @@ import seedu.address.model.person.Dob;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
@@ -226,7 +225,13 @@ public class ParserUtil {
         requireNonNull(indexes);
         final Set<Index> indexSet = new HashSet<>();
         for (String index : indexes) {
-            indexSet.add(parseIndex(index));
+            String[] parts = index.trim().split("\\s+");
+            for (String part : parts) {
+                if (!StringUtil.isNonZeroUnsignedInteger(part)) {
+                    throw new ParseException(MESSAGE_INVALID_INDEX);
+                }
+                indexSet.add(Index.fromOneBased(Integer.parseInt(part)));
+            }
         }
         return indexSet;
     }
