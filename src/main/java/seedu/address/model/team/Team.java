@@ -39,6 +39,27 @@ public class Team {
         this.members.addAll(members);
     }
 
+    /**
+     * Constructs a {@code Team}.
+     *
+     * @param name Name of the team
+     * @param members Set of team members (must have 4 distinct members)
+     * @param sessions Set of sessions associated with the team
+     */
+    public Team(TeamName name, Set<Person> members, Set<Session> sessions) {
+        requireNonNull(name);
+        requireNonNull(members);
+        requireNonNull(sessions);
+
+        if (members.size() != TEAM_SIZE) {
+            throw new IllegalArgumentException("A team must have exactly 4 members.");
+        }
+
+        this.name = name;
+        this.members.addAll(members);
+        this.sessions.addAll(sessions);
+    }
+
     public TeamName getName() {
         return name;
     }
@@ -92,7 +113,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return String.format("Team %s: %s", name, members); // TODO: Configure toString format
+        return String.format("Team %s: %s", name, members, sessions); // TODO: Configure toString format
     }
 }
 
