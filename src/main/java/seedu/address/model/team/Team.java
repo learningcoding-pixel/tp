@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.session.Session;
 
 /**
  * Represents a Team in the RelayCoach app.
@@ -17,7 +16,7 @@ public class Team {
 
     public static final int TEAM_SIZE = 4;
 
-    private final String name; // TODO: Create a TeamName class
+    private final TeamName name;
     private final Set<Person> members = new HashSet<>();
     private final Set<Session> sessions = new HashSet<>();
 
@@ -27,7 +26,7 @@ public class Team {
      * @param name Name of the team
      * @param members Set of team members (must have 4 distinct members)
      */
-    public Team(String name, Set<Person> members) {
+    public Team(TeamName name, Set<Person> members) {
         requireNonNull(name);
         requireNonNull(members);
 
@@ -39,7 +38,28 @@ public class Team {
         this.members.addAll(members);
     }
 
-    public String getName() {
+    /**
+     * Constructs a {@code Team}.
+     *
+     * @param name Name of the team
+     * @param members Set of team members (must have 4 distinct members)
+     * @param sessions Set of sessions associated with the team
+     */
+    public Team(TeamName name, Set<Person> members, Set<Session> sessions) {
+        requireNonNull(name);
+        requireNonNull(members);
+        requireNonNull(sessions);
+
+        if (members.size() != TEAM_SIZE) {
+            throw new IllegalArgumentException("A team must have exactly 4 members.");
+        }
+
+        this.name = name;
+        this.members.addAll(members);
+        this.sessions.addAll(sessions);
+    }
+
+    public TeamName getName() {
         return name;
     }
 
@@ -73,6 +93,18 @@ public class Team {
                 && sessions.equals(otherTeam.sessions);
     }
 
+    /**
+     * Returns true if both teams have the same name.
+     * This defines a weaker notion of equality between two teams.
+     */
+    public boolean isSameTeam(Team otherTeam) {
+        if (otherTeam == this) {
+            return true;
+        }
+        return otherTeam != null
+                && otherTeam.getName().equals(getName());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, members, sessions);
@@ -80,7 +112,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return String.format("Team %s: %s", name, members); // TODO: Configure toString format
+        return String.format("Team %s: %s", name, members, sessions); // TODO: Configure toString format
     }
 }
 

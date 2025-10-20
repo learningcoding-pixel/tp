@@ -19,6 +19,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.team.TeamName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -200,5 +201,38 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String teamName} into a {@code TeamName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code teamName} is invalid.
+     */
+    public static TeamName parseTeamName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!TeamName.isValidName(trimmedName)) {
+            throw new ParseException(TeamName.MESSAGE_CONSTRAINTS);
+        }
+        return new TeamName(trimmedName);
+    }
+
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code Set<Index>}.
+     */
+    public static Set<Index> parseIndexes(Collection<String> indexes) throws ParseException {
+        requireNonNull(indexes);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : indexes) {
+            String[] parts = index.trim().split("\\s+");
+            for (String part : parts) {
+                if (!StringUtil.isNonZeroUnsignedInteger(part)) {
+                    throw new ParseException(MESSAGE_INVALID_INDEX);
+                }
+                indexSet.add(Index.fromOneBased(Integer.parseInt(part)));
+            }
+        }
+        return indexSet;
     }
 }
