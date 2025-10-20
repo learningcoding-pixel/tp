@@ -112,4 +112,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered team list */
     ObservableList<Team> getFilteredTeamList();
+
+    /**
+     * Returns the team that the person belongs to.
+     * @param person The person whose team is to be retrieved.
+     * @return The team of the person.
+     */
+    public Team getTeamOfPerson(Person person);
 }
