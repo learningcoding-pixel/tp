@@ -5,7 +5,14 @@ package seedu.address.model.person;
  * Guarantees: immutable}
  */
 public class Role {
-    public static final String MESSAGE_CONSTRAINTS = "test";
+    public static final String MESSAGE_CONSTRAINTS = "Role must be a valid role";
+
+    /*
+     * The first character of the role must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     public final String value;
 
     public Role(String role) {
@@ -13,7 +20,7 @@ public class Role {
     }
 
     public static boolean isValidRole(String test) {
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
