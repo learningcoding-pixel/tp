@@ -33,7 +33,7 @@ public class AddTeamCommand extends Command {
             + PREFIX_INDEX + "1 " + PREFIX_INDEX + "2 " + PREFIX_INDEX + "3 " + PREFIX_INDEX + "4";
 
     public static final String MESSAGE_SUCCESS = "New team added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TEAM = "This team already exists.";
+    public static final String MESSAGE_DUPLICATE_TEAM_NAME = "This team name already exists.";
     public static final String MESSAGE_INVALID_INDEX = "One or more athlete indexes are invalid.";
     public static final String MESSAGE_INVALID_TEAM_SIZE = "A team must have exactly 4 distinct members.";
     public static final String MESSAGE_MEMBER_ALREADY_IN_TEAM = "Member(s) already in a team: %s";
@@ -75,7 +75,7 @@ public class AddTeamCommand extends Command {
 
         // Checks if the team already exists using weak equality {@code isSameTeam()}.
         if (model.hasTeam(newTeam)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TEAM);
+            throw new CommandException(MESSAGE_DUPLICATE_TEAM_NAME);
         }
 
         List<Integer> conflictingIndexes = memberIndexes.stream()
