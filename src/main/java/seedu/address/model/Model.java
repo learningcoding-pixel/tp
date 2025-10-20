@@ -109,4 +109,7 @@ public interface Model {
      * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
      */
     void setTeam(Team target, Team editedTeam);
+
+    /** Returns an unmodifiable view of the filtered team list */
+    ObservableList<Team> getFilteredTeamList();
 }

@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Team> filteredTeams;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
     public ModelManager() {
@@ -169,4 +171,9 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Team List Accessors =============================================================
+    @Override
+    public ObservableList<Team> getFilteredTeamList() {
+        return filteredTeams;
+    }
 }
