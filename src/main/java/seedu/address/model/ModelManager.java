@@ -176,4 +176,12 @@ public class ModelManager implements Model {
     public ObservableList<Team> getFilteredTeamList() {
         return filteredTeams;
     }
+
+    @Override
+    public Team getTeamOfPerson(Person person) {
+        return addressBook.getTeamList().stream()
+                .filter(team -> team.containsPerson(person))
+                .findFirst()
+                .orElse(null);
+    }
 }
