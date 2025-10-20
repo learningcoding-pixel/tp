@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,10 +66,15 @@ public class Messages {
      */
     public static String format(Team team) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ")
+        builder.append("\n " + "Team name: ")
                 .append(team.getName())
-                .append("; Athletes: ")
-                .append(team.getMembers());
+                .append("\n " + "Athletes: ");
+        AtomicInteger counter = new AtomicInteger(1);
+
+        String members = team.getMembers().stream()
+                .map(person -> counter.getAndIncrement() + ". " + Messages.format(person))
+                .collect(Collectors.joining("\n "));
+        builder.append("\n ").append(members);
         return builder.toString();
     }
 

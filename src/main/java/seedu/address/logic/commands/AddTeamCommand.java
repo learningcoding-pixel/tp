@@ -33,9 +33,10 @@ public class AddTeamCommand extends Command {
             + PREFIX_INDEX + "1 " + PREFIX_INDEX + "2 " + PREFIX_INDEX + "3 " + PREFIX_INDEX + "4";
 
     public static final String MESSAGE_SUCCESS = "New team added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TEAM = "This team already exists.";
+    public static final String MESSAGE_DUPLICATE_TEAM_NAME = "This team name already exists.";
     public static final String MESSAGE_INVALID_INDEX = "One or more athlete indexes are invalid.";
     public static final String MESSAGE_INVALID_TEAM_SIZE = "A team must have exactly 4 distinct members.";
+    public static final String MESSAGE_MEMBER_ALREADY_IN_TEAM = "Member(s) already in a team: %s";
 
     private final TeamName teamName;
     private final Set<Index> memberIndexes;
@@ -68,10 +69,30 @@ public class AddTeamCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_TEAM_SIZE);
         }
 
+        List<Team> existingTeams = model.getFilteredTeamList();
+
         Team newTeam = new Team(teamName, members);
 
+        // Checks if the team already exists using weak equality {@code isSameTeam()}.
         if (model.hasTeam(newTeam)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TEAM);
+            throw new CommandException(MESSAGE_DUPLICATE_TEAM_NAME);
+        }
+
+        List<Integer> conflictingIndexes = memberIndexes.stream()
+                .filter(index -> {
+                    Person member = lastShownList.get(index.getZeroBased());
+                    return existingTeams.stream().anyMatch(team -> team.hasMember(member));
+                })
+                .map(Index::getOneBased)
+                .toList();
+
+        if (!conflictingIndexes.isEmpty()) {
+            String conflicts = conflictingIndexes.stream()
+                    .sorted()
+                    .map(String::valueOf)
+                    .reduce((a, b) -> a + ", " + b)
+                    .orElse("");
+            throw new CommandException(String.format(MESSAGE_MEMBER_ALREADY_IN_TEAM, conflicts));
         }
 
         model.addTeam(newTeam);

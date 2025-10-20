@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted athlete: %1$s";
+    public static final String MESSAGE_DELETE_TEAM_SUCCESS = "Deleted team the athlete is in: %1$s";
 
     private final Index targetIndex;
 
@@ -42,6 +44,16 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+
+        Team team = model.getTeamOfPerson(personToDelete); // Check if person is in a team
+        if (team != null) {
+            model.deleteTeam(team); // Team cannot exist without 4 members
+            return new CommandResult(
+                    String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete))
+                            + "\n"
+                            + String.format(MESSAGE_DELETE_TEAM_SUCCESS, Messages.format(team))
+            );
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
@@ -52,11 +64,10 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
