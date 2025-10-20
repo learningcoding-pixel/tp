@@ -67,6 +67,10 @@ public class Team {
         return Set.copyOf(members);
     }
 
+    public boolean hasMember(Person person) {
+        return members.contains(person);
+    }
+
     public Set<Session> getSessions() {
         return Set.copyOf(sessions);
     }
