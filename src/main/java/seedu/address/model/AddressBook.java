@@ -137,6 +137,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeTeam(Team key) {
+        requireNonNull(key);
         teams.remove(key);
     }
     //// util methods
