@@ -9,6 +9,10 @@
 
 <VBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="5">
     <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="100" hgrow="ALWAYS"/>
+        </columnConstraints>
+
         <VBox alignment="CENTER_LEFT" minHeight="130" spacing="5" GridPane.columnIndex="0">
             <padding>
                 <Insets top="8" right="12" bottom="8" left="12"/>
