@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Team> PREDICATE_SHOW_ALL_TEAMS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +88,44 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a team with the same identity as {@code team} exists in the address book.
+     */
+    boolean hasTeam(Team target);
+
+    /**
+     * Deletes the given team.
+     * The team must exist in the address book.
+     */
+    void deleteTeam(Team target);
+
+    /**
+     * Adds the given team.
+     * {@code team} must not already exist in the address book.
+     */
+    void addTeam(Team team);
+
+    /**
+     * Replaces the given team {@code target} with {@code editedTeam}.
+     * {@code target} must exist in the address book.
+     * The team identity of {@code editedTeam} must not be the same as another existing team in the address book.
+     */
+    void setTeam(Team target, Team editedTeam);
+
+    /** Returns an unmodifiable view of the filtered team list */
+    ObservableList<Team> getFilteredTeamList();
+
+    /**
+     * Returns the team that the person belongs to.
+     * @param person The person whose team is to be retrieved.
+     * @return The team of the person.
+     */
+    public Team getTeamOfPerson(Person person);
+
+    /**
+     * Updates the filter of the filtered team list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTeamList(Predicate<Team> predicate);
 }

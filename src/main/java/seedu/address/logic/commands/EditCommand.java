@@ -36,6 +36,7 @@ import seedu.address.model.person.Role;
 import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.team.Team;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -98,6 +99,15 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        List<Team> teams = model.getFilteredTeamList();
+        for (Team team : teams) {
+            if (team.hasMember(personToEdit)) {
+                Team updatedTeam = team.updateTeamMember(personToEdit, editedPerson);
+                model.setTeam(team, updatedTeam);
+            }
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

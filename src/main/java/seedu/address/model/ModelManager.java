@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Team> filteredTeams;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
     }
 
     public ModelManager() {
@@ -111,6 +114,29 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasTeam(Team team) {
+        requireNonNull(team);
+        return addressBook.hasTeam(team);
+    }
+
+    @Override
+    public void deleteTeam(Team target) {
+        addressBook.removeTeam(target);
+    }
+
+    @Override
+    public void addTeam(Team team) {
+        addressBook.addTeam(team);
+    }
+
+    @Override
+    public void setTeam(Team target, Team editedTeam) {
+        requireAllNonNull(target, editedTeam);
+
+        addressBook.setTeam(target, editedTeam);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -145,4 +171,23 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== Filtered Team List Accessors =============================================================
+    @Override
+    public ObservableList<Team> getFilteredTeamList() {
+        return filteredTeams;
+    }
+
+    @Override
+    public Team getTeamOfPerson(Person person) {
+        return addressBook.getTeamList().stream()
+                .filter(team -> team.hasMember(person))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public void updateFilteredTeamList(Predicate<Team> predicate) {
+        requireNonNull(predicate);
+        filteredTeams.setPredicate(predicate);
+    }
 }

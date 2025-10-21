@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_HEIGHT = new Prefix("h/");
     public static final Prefix PREFIX_WEIGHT = new Prefix("w/");
     public static final Prefix PREFIX_SCHOOL = new Prefix("s/");
+    public static final Prefix PREFIX_TEAM_NAME = new Prefix("tn/");
+    public static final Prefix PREFIX_INDEX = new Prefix("i/");
 }

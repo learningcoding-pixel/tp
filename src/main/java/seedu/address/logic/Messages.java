@@ -1,11 +1,13 @@
 package seedu.address.logic;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 
 /**
  * Container for user visible messages.
@@ -56,6 +58,23 @@ public class Messages {
                 .append(person.getWeight())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code team} for display to the user.
+     */
+    public static String format(Team team) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n " + "Team name: ")
+                .append(team.getName())
+                .append("\n " + "Athletes: ");
+        AtomicInteger counter = new AtomicInteger(1);
+
+        String members = team.getMembers().stream()
+                .map(person -> counter.getAndIncrement() + ". " + Messages.format(person))
+                .collect(Collectors.joining("\n "));
+        builder.append("\n ").append(members);
         return builder.toString();
     }
 

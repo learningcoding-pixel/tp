@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -155,6 +156,41 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTeam(Team team) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTeam(Team target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTeam(Team target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTeam(Team target, Team editedTeam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Team> getFilteredTeamList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTeamList(Predicate<Team> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Team getTeamOfPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }
