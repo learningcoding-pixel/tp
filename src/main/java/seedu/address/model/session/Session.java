@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 
 /**
- * Represents a Person's session in the RelayCoach app.
+ * Represents a Team's session in the RelayCoach app.
  * Guarantees: immutable}
  */
 public class Session {
@@ -16,25 +16,20 @@ public class Session {
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-    private final String session;
-    private final String location;
+    private final Location location;
 
     /**
-     * Represents a Session in the address book.
+     * Represents a Session in the Team.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Session(String session, String location, LocalDateTime startDate, LocalDateTime EndDate) {
-        this.session = session;
+    public Session(Location location, LocalDateTime startDate, LocalDateTime EndDate) {
         this.location = location;
         this.startDate = startDate;
         this.endDate = EndDate;
     }
 
-    public String getSession() {
-        return session;
-    }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -46,18 +41,6 @@ public class Session {
         return endDate;
     }
 
-    /**
-     * Returns true if both sessions have the same session name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSameSession(Session otherSession) {
-        if (otherSession == this) {
-            return true;
-        }
-
-        return otherSession != null
-                && otherSession.getSession().equals(getSession());
-    }
 
     /**
      * Returns true if both sessions have the same identity and data fields.
@@ -75,8 +58,7 @@ public class Session {
         }
 
         Session otherSession = (Session) other;
-        return session.equals(otherSession.session)
-                && location.equals(otherSession.location)
+        return  location.equals(otherSession.location)
                 && startDate.equals(otherSession.startDate)
                 && endDate.equals(otherSession.endDate);
     }
@@ -84,14 +66,13 @@ public class Session {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(session, location, startDate, endDate);
+        return Objects.hash(location, startDate, endDate);
     }
 
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Session", session)
                 .add("Location",location)
                 .add("StartDate", startDate.format(formatter))
                 .add("EndDate", endDate.format(formatter))
