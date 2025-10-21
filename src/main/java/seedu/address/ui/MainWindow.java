@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TeamListPanel teamListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +51,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane teamListPanelPlaceholder;
+
+    @FXML
+    private VBox teamList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,6 +121,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
+
+        teamList.setVisible(false);
+        teamList.setManaged(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -122,6 +136,29 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
+    /**
+     * Shows the team list and hides the person list.
+     */
+    public void showTeamList() {
+        teamList.setVisible(true);
+        teamList.setManaged(true);
+
+        personListPanelPlaceholder.setVisible(false);
+        personListPanelPlaceholder.setManaged(false);
+    }
+
+    /**
+     * Shows the person list and hides the team list.
+     */
+    public void showPersonList() {
+        teamList.setVisible(false);
+        teamList.setManaged(false);
+
+        personListPanelPlaceholder.setVisible(true);
+        personListPanelPlaceholder.setManaged(true);
+    }
+
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -178,6 +215,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowTeams()) {
+                showTeamList();
+            } else {
+                showPersonList();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -193,4 +236,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }

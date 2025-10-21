@@ -180,8 +180,14 @@ public class ModelManager implements Model {
     @Override
     public Team getTeamOfPerson(Person person) {
         return addressBook.getTeamList().stream()
-                .filter(team -> team.containsPerson(person))
+                .filter(team -> team.hasMember(person))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public void updateFilteredTeamList(Predicate<Team> predicate) {
+        requireNonNull(predicate);
+        filteredTeams.setPredicate(predicate);
     }
 }
