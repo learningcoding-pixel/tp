@@ -71,6 +71,16 @@ public class Team {
         return members.contains(person);
     }
 
+    /**
+     * Returns a new {@code Team} with the given member replaced by the edited person.
+     */
+    public Team updateTeamMember(Person oldMember, Person newMember) {
+        Set<Person> updatedMembers = new HashSet<>(members);
+        updatedMembers.remove(oldMember);
+        updatedMembers.add(newMember);
+        return new Team(this.name, updatedMembers);
+    }
+
     public Set<Session> getSessions() {
         return Set.copyOf(sessions);
     }
