@@ -185,6 +185,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredTeamList(Predicate<Team> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Team getTeamOfPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

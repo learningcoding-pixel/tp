@@ -63,9 +63,7 @@ public class Team {
         return name;
     }
 
-    public Set<Person> getMembers() {
-        return Set.copyOf(members);
-    }
+
 
     public boolean hasMember(Person person) {
         return members.contains(person);
@@ -128,5 +126,8 @@ public class Team {
     public String toString() {
         return String.format("Team %s: %s", name, members, sessions); // TODO: Configure toString format
     }
-}
 
+    public Set<Person> getMembers() {
+        return members;
+    }
+}
