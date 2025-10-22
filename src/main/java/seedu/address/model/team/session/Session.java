@@ -14,6 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Session {
 
+    public static final String MESSAGE_CONSTRAINTS = "Session must have a valid location and start and end date";
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");

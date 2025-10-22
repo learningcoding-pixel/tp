@@ -26,6 +26,10 @@
 
             <!-- Vertical member cards -->
             <VBox fx:id="memberCards" spacing="5" alignment="CENTER_LEFT"/>
+
+            <!-- Sessions header and vertical session cards -->
+            <Label text="Sessions:" styleClass="cell_big_label" style="-fx-font-weight: bold;" />
+            <VBox fx:id="sessionCards" spacing="5" alignment="CENTER_LEFT"/>
         </VBox>
     </GridPane>
 </VBox>

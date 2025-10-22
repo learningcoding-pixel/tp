@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.team.Team;
+import seedu.address.model.team.session.Session;
 
 /**
  * An UI component that displays information of a {@code Team}.
@@ -22,6 +24,8 @@ public class TeamCard extends UiPart<Region> {
     private Label name;
     @FXML
     private VBox memberCards;
+    @FXML
+    private VBox sessionCards;
 
     /**
      * Creates a {@code TeamCard} with the given {@code Team} and index to display.
@@ -49,6 +53,19 @@ public class TeamCard extends UiPart<Region> {
                     smallCard.getTags().setVisible(true);
 
                     memberCards.getChildren().add(smallCard.getRoot());
+                });
+
+        AtomicInteger index = new AtomicInteger(1);
+        team.getSessions().stream()
+                .sorted(Comparator.comparing(
+                        Session::getStartDate,
+                        Comparator.nullsLast(Comparator.naturalOrder())
+                ))
+                .forEach(session -> {
+                    SessionCard smallCard = new SessionCard(session, index.getAndIncrement());
+                    smallCard.getLocation().setVisible(true);
+                    smallCard.getSessionTimeRange().setVisible(true);
+                    sessionCards.getChildren().add(smallCard.getRoot());
                 });
     }
 
