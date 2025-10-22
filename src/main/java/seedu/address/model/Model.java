@@ -145,4 +145,5 @@ public interface Model {
 
     void addSessionToTeam(Team target, Session session);
 
+    void deleteSession(Team team, Session toDelete);
 }
