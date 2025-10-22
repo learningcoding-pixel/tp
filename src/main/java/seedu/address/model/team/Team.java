@@ -63,8 +63,6 @@ public class Team {
         return name;
     }
 
-
-
     public boolean hasMember(Person person) {
         return members.contains(person);
     }

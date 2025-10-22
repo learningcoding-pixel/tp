@@ -1,4 +1,4 @@
-package seedu.address.model.session;
+package seedu.address.model.team;
 
 /**
  * Represents a Session's Location in the RelayCoach app.

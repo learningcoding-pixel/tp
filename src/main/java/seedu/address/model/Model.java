@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Session;
 import seedu.address.model.team.Team;
 
 /**
@@ -128,4 +130,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
+
+    /** Returns an unmodifiable view of the filtered session list */
+    List<Session> getFilteredSessionList();
+
+    /**
+     * Deletes the given session.
+     * The session must exist in the address book.
+     */
+    void deleteSession(Session sessionToDelete);
 }
