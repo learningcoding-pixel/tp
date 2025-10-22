@@ -84,7 +84,6 @@ class JsonAdaptedTeam {
             throw new IllegalValueException("A team must have exactly " + Team.TEAM_SIZE + " members.");
         }
 
-        // Sessions
         final Set<Session> modelSessions = new HashSet<>();
         for (JsonAdaptedSession session : sessions) {
             modelSessions.add(session.toModelType());

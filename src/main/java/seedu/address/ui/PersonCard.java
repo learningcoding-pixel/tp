@@ -5,77 +5,108 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
-
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
     public final Person person;
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name;
-    @FXML
-    private Label dob;
-    @FXML
-    private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
-    @FXML
-    private Label school;
-    @FXML
-    private Label role;
-    @FXML
-    private Label height;
-    @FXML
-    private Label weight;
+    @FXML private HBox cardPane;
+    @FXML private Label name;
+    @FXML private Label dob;
+    @FXML private Label id;
+    @FXML private Label phone;
+    @FXML private Label address;
+    @FXML private Label email;
+    @FXML private FlowPane tags;
+    @FXML private Label school;
+    @FXML private Label role;
+    @FXML private Label height;
+    @FXML private Label weight;
 
+    @FXML private HBox dobBox;
+    @FXML private HBox phoneBox;
+    @FXML private HBox addressBox;
+    @FXML private HBox emailBox;
+    @FXML private HBox schoolBox;
+    @FXML private HBox roleBox;
+    @FXML private HBox heightBox;
+    @FXML private HBox weightBox;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * A UI component that displays information of a {@code Person}.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+
+        // bind the container HBoxes so hiding fields removes their layout space
+        bindManagedToVisible(dobBox, phoneBox, addressBox, emailBox, schoolBox, roleBox, heightBox, weightBox, tags);
+
+        // each container's visibility follows the inner label's visibility
+        if (dobBox != null && dob != null) {
+            dobBox.visibleProperty().bind(dob.visibleProperty());
+        }
+        if (phoneBox != null && phone != null) {
+            phoneBox.visibleProperty().bind(phone.visibleProperty());
+        }
+        if (addressBox != null && address != null) {
+            addressBox.visibleProperty().bind(address.visibleProperty());
+        }
+        if (emailBox != null && email != null) {
+            emailBox.visibleProperty().bind(email.visibleProperty());
+        }
+        if (schoolBox != null && school != null) {
+            schoolBox.visibleProperty().bind(school.visibleProperty());
+        }
+        if (roleBox != null && role != null) {
+            roleBox.visibleProperty().bind(role.visibleProperty());
+        }
+        if (heightBox != null && height != null) {
+            heightBox.visibleProperty().bind(height.visibleProperty());
+        }
+        if (weightBox != null && weight != null) {
+            weightBox.visibleProperty().bind(weight.visibleProperty());
+        }
+
+        if (id != null) {
+            id.managedProperty().bind(id.visibleProperty());
+        }
+
         String rawDob = person.getDob().value;
         String formattedDob = formatDateOfBirth(rawDob);
-        dob.setText(formattedDob);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        address.setText(person.getAddress().value);
-        school.setText(person.getSchool().value);
-        role.setText(person.getRole().value);
-        height.setText(person.getHeight().value);
-        weight.setText(person.getWeight().value);
+        dob.setText(PersonField.DOB.getLabel() + formattedDob);
+        phone.setText(PersonField.PHONE.getLabel() + person.getPhone().value);
+        email.setText(PersonField.EMAIL.getLabel() + person.getEmail().value);
+        address.setText(PersonField.ADDRESS.getLabel() + person.getAddress().value);
+        school.setText(PersonField.SCHOOL.getLabel() + person.getSchool().value);
+        role.setText(PersonField.ROLE.getLabel() + person.getRole().value);
+        height.setText(PersonField.HEIGHT.getLabel() + person.getHeight().value);
+        weight.setText(PersonField.WEIGHT.getLabel() + person.getWeight().value);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void bindManagedToVisible(Node... nodes) {
+        for (Node n : nodes) {
+            if (n != null) {
+                n.managedProperty().bind(n.visibleProperty());
+            }
+        }
     }
 
     // Getters for testing
@@ -111,6 +142,36 @@ public class PersonCard extends UiPart<Region> {
     }
     public FlowPane getTags() {
         return tags;
+    }
+
+    /**
+     * Centralized fields with emoji code points.
+     */
+    public enum PersonField {
+        DOB(0x1F4C5, "Date of Birth"),
+        PHONE(0x1F4DE, "Phone"),
+        ADDRESS(0x1F3E0, "Address"),
+        EMAIL(0x1F4E7, "Email"),
+        SCHOOL(0x1F4D6, "School"),
+        ROLE(0x1F3AF, "Role"),
+        HEIGHT(0x1F4CF, "Height (in cm)"),
+        WEIGHT(0x2696, "Weight (in kg)");
+
+        private final int codePoint;
+        private final String text;
+
+        PersonField(int codePoint, String text) {
+            this.codePoint = codePoint;
+            this.text = text;
+        }
+
+        public String emoji() {
+            return new String(Character.toChars(codePoint));
+        }
+
+        public String getLabel() {
+            return emoji() + " " + text + ": ";
+        }
     }
 
     /**

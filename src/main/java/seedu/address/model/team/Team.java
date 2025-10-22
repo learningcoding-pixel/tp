@@ -2,11 +2,15 @@ package seedu.address.model.team;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Location;
 
 /**
  * Represents a Team in the RelayCoach app.

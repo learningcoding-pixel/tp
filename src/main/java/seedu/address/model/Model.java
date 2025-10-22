@@ -131,6 +131,8 @@ public interface Model {
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
 
+    void addSessionToTeam(Team target, Session session);
+
     /** Returns an unmodifiable view of the filtered session list */
     List<Session> getFilteredSessionList();
 

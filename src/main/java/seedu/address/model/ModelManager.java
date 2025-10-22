@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Session;
 import seedu.address.model.team.Team;
 
 /**
@@ -190,4 +194,20 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTeams.setPredicate(predicate);
     }
+
+    @Override
+    public void addSessionToTeam(Team target, Session session) {
+        requireAllNonNull(target, session);
+
+        // create a new Team instance with the extra session to avoid surprising side-effects
+        Set<Session> updatedSessions = new HashSet<>(target.getSessions());
+        updatedSessions.add(session);
+
+        Team updatedTeam = new Team(target.getName(), target.getMembers(), updatedSessions);
+
+        // delegate to AddressBook to replace the old team with the updated one
+        addressBook.setTeam(target, updatedTeam);
+    }
+
+
 }
