@@ -146,10 +146,4 @@ public interface Model {
 
     void addSessionToTeam(Team target, Session session);
 
-    /**
-     * Returns an unmodifiable view of the filtered session list
-     */
-    ObservableList<Session> getFilteredSessionList();
-
-    void setFilteredSessions(List<Session> sessions);
 }
