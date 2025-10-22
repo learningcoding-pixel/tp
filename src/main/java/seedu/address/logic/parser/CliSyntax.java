@@ -21,4 +21,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_START_DATETIME = new Prefix("sdt/");
     public static final Prefix PREFIX_END_DATETIME = new Prefix("edt/");
+    public static final Prefix PREFIX_SESSION_INDEX = new Prefix("si/");
 }
