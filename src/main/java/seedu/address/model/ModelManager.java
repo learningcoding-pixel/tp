@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Team> filteredTeams;
+    private final FilteredList<Session> filteredSessions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
+        filteredSessions = new FilteredList<>(this.addressBook.getSessionsList());
     }
 
     public ModelManager() {
@@ -207,6 +209,16 @@ public class ModelManager implements Model {
 
         // delegate to AddressBook to replace the old team with the updated one
         addressBook.setTeam(target, updatedTeam);
+    }
+
+    @Override
+    public List<Session> getFilteredSessionList() {
+        return List.of();
+    }
+
+    @Override
+    public void deleteSession(Session sessionToDelete) {
+
     }
 
 

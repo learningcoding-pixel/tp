@@ -19,7 +19,7 @@ public class AddSessionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a session to the team identified by its name.\n"
-            + "Format: addsession /tn TEAM_NAME /sn SESSION_NAME /l LOCATION /s START_ISO /e END_ISO\n"
+            + "Format: addsession /tn TEAM_NAME /sn SESSION_NAME /l LOCATION /s START_DATE /e END_DATE\n"
             + "Example: addsession /tn TeamA /sn MorningRun /l Track /s 2025-10-21T07:00 /e 2025-10-21T08:00";
 
     public static final String MESSAGE_SUCCESS = "Added session to %1$s: %2$s";

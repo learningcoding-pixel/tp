@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Team's session in the RelayCoach app.
- * Guarantees: immutable}
+ * Guarantees: immutable
  */
 public class Session {
 
