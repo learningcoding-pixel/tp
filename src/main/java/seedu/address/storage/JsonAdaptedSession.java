@@ -17,17 +17,17 @@ class JsonAdaptedSession {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Team session data is missing!";
 
-    private final Location sessionLocation;
-    private final LocalDateTime sessionStartDate;
-    private final LocalDateTime sessionEndDate;
+    private final String sessionLocation;
+    private final String sessionStartDate;
+    private final String sessionEndDate;
 
     /**
      * Constructs a {@code JsonAdaptedTeamSession} with the given session details.
      */
     @JsonCreator
-    public JsonAdaptedSession(@JsonProperty("sessionLocation") Location sessionLocation,
-                              @JsonProperty("sessionStartDate") LocalDateTime sessionStartDate,
-                              @JsonProperty("sessionEndDate") LocalDateTime sessionEndDate) {
+    public JsonAdaptedSession(@JsonProperty("sessionLocation") String sessionLocation,
+                              @JsonProperty("sessionStartDate") String sessionStartDate,
+                              @JsonProperty("sessionEndDate") String sessionEndDate) {
         this.sessionLocation = sessionLocation;
         this.sessionStartDate = sessionStartDate;
         this.sessionEndDate = sessionEndDate;
@@ -37,9 +37,9 @@ class JsonAdaptedSession {
      * Converts a given {@code Session} into this class for Jackson use.
      */
     public JsonAdaptedSession(Session source) {
-        this.sessionLocation = source.getLocation();
-        this.sessionStartDate = source.getStartDate();
-        this.sessionEndDate = source.getEndDate();
+        this.sessionLocation = source.getLocation().value;
+        this.sessionStartDate = source.getStartDate().toString();
+        this.sessionEndDate = source.getEndDate().toString();
     }
 
     /**
@@ -48,9 +48,38 @@ class JsonAdaptedSession {
      * @throws IllegalValueException if any session field is null
      */
     public Session toModelType() throws IllegalValueException {
-        if (sessionLocation == null || sessionStartDate == null || sessionEndDate == null) {
+        // location
+        if (sessionLocation == null) {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
-        return new Session(sessionLocation, sessionStartDate, sessionEndDate);
+        if (!Location.isValidLocation(sessionLocation)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        }
+        final Location modelLocation = new Location(sessionLocation);
+
+        //start date
+        if (sessionStartDate == null) {
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
+        }
+        if (!LocalDateTime.parse(sessionStartDate).isBefore(LocalDateTime.parse(sessionEndDate))) {
+            throw new IllegalValueException(Session.MESSAGE_CONSTRAINTS);
+        }
+        final LocalDateTime modelStartDate = LocalDateTime.parse(sessionStartDate);
+
+        //end date
+        if (sessionEndDate == null) {
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
+        }
+        if (!LocalDateTime.parse(sessionEndDate).isAfter(LocalDateTime.parse(sessionStartDate))) {
+            throw new IllegalValueException(Session.MESSAGE_CONSTRAINTS);
+        }
+        final LocalDateTime modelEndDate = LocalDateTime.parse(sessionEndDate);
+
+        //check if start date is after end date
+        if (modelStartDate.isAfter(modelEndDate)) {
+            throw new IllegalValueException(Session.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Session(modelLocation, modelStartDate, modelEndDate);
     }
 }
