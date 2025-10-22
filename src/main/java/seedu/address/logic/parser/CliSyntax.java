@@ -18,4 +18,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SCHOOL = new Prefix("s/");
     public static final Prefix PREFIX_TEAM_NAME = new Prefix("tn/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_LOCATION = new Prefix("l/");
+    public static final Prefix PREFIX_SESSION_NAME = new Prefix("sn/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("s/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("e/");
 }
