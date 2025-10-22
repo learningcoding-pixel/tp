@@ -6,16 +6,21 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.session.Session;
 import seedu.address.model.team.Team;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Team> PREDICATE_SHOW_ALL_TEAMS = unused -> true;
 
     /**
@@ -53,7 +58,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -80,11 +87,14 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -113,11 +123,14 @@ public interface Model {
      */
     void setTeam(Team target, Team editedTeam);
 
-    /** Returns an unmodifiable view of the filtered team list */
+    /**
+     * Returns an unmodifiable view of the filtered team list
+     */
     ObservableList<Team> getFilteredTeamList();
 
     /**
      * Returns the team that the person belongs to.
+     *
      * @param person The person whose team is to be retrieved.
      * @return The team of the person.
      */
@@ -125,10 +138,11 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered team list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTeamList(Predicate<Team> predicate);
 
-    void addSessionToTeam(Team target, Team.Session session);
+    void addSessionToTeam(Team target, Session session);
 
 }

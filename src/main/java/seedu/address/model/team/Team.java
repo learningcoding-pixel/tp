@@ -2,15 +2,12 @@ package seedu.address.model.team;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.session.Location;
+import seedu.address.model.team.session.Session;
 
 /**
  * Represents a Team in the RelayCoach app.
@@ -67,8 +64,6 @@ public class Team {
         return name;
     }
 
-
-
     public boolean hasMember(Person person) {
         return members.contains(person);
     }
@@ -85,14 +80,6 @@ public class Team {
 
     public Set<Session> getSessions() {
         return Set.copyOf(sessions);
-    }
-
-    public void addSession(Session session) {
-        sessions.add(session);
-    }
-
-    public void removeSession(Session session) {
-        sessions.remove(session);
     }
 
     @Override
@@ -133,88 +120,5 @@ public class Team {
 
     public Set<Person> getMembers() {
         return members;
-    }
-
-    /**
-     * Represents a Team's session in the RelayCoach app.
-     * Guarantees: immutable
-     */
-    public static final class Session {
-
-        private final String name;
-        private final Location location;
-        private final LocalDateTime startDate;
-        private final LocalDateTime endDate;
-        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-
-        /**
-         * Constructs a {@code Session}.
-         *
-         * @param name non-null session name
-         * @param location non-null location
-         * @param startDate non-null start date/time
-         * @param endDate non-null end date/time; must be the same or after startDate
-         */
-        public Session(String name, Location location, LocalDateTime startDate, LocalDateTime endDate) {
-            requireNonNull(name);
-            requireNonNull(location);
-            requireNonNull(startDate);
-            requireNonNull(endDate);
-
-            if (startDate.isAfter(endDate)) {
-                throw new IllegalArgumentException("Start date/time must be before or equal to end date/time.");
-            }
-
-            this.name = name;
-            this.location = location;
-            this.startDate = startDate;
-            this.endDate = endDate;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
-
-        public LocalDateTime getStartDate() {
-            return startDate;
-        }
-
-        public LocalDateTime getEndDate() {
-            return endDate;
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-            if (!(other instanceof Session)) {
-                return false;
-            }
-            Session o = (Session) other;
-            return Objects.equals(name, o.name)
-                    && Objects.equals(location, o.location)
-                    && Objects.equals(startDate, o.startDate)
-                    && Objects.equals(endDate, o.endDate);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, location, startDate, endDate);
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .add("Name", name)
-                    .add("Location", location)
-                    .add("StartDate", startDate.format(FORMATTER))
-                    .add("EndDate", endDate.format(FORMATTER))
-                    .toString();
-        }
     }
 }

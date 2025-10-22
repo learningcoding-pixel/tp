@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.session.Session;
 import seedu.address.model.team.Team;
 
 /**
@@ -194,11 +195,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addSessionToTeam(Team target, Team.Session session) {
+    public void addSessionToTeam(Team target, Session session) {
         requireAllNonNull(target, session);
 
         // create a new Team instance with the extra session to avoid surprising side-effects
-        Set<Team.Session> updatedSessions = new HashSet<>(target.getSessions());
+        Set<Session> updatedSessions = new HashSet<>(target.getSessions());
         updatedSessions.add(session);
 
         Team updatedTeam = new Team(target.getName(), target.getMembers(), updatedSessions);
@@ -206,5 +207,4 @@ public class ModelManager implements Model {
         // delegate to AddressBook to replace the old team with the updated one
         addressBook.setTeam(target, updatedTeam);
     }
-
 }

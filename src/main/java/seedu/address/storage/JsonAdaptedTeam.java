@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.session.Session;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.TeamName;
 
@@ -83,7 +84,7 @@ class JsonAdaptedTeam {
             throw new IllegalValueException("A team must have exactly " + Team.TEAM_SIZE + " members.");
         }
 
-        final Set<Team.Session> modelSessions = new HashSet<>();
+        final Set<Session> modelSessions = new HashSet<>();
         for (JsonAdaptedSession session : sessions) {
             modelSessions.add(session.toModelType());
         }
