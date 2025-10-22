@@ -28,6 +28,10 @@ public class AddSessionCommand extends Command {
     private final Index teamIndex;
     private final Session session;
 
+    /**
+     * Creates an AddSessionCommand to add the specified {@code Session}
+     * to the {@code Team} at {@code teamIndex}.
+     */
     public AddSessionCommand(Index teamIndex, Session session) {
         this.teamIndex = requireNonNull(teamIndex);
         this.session = requireNonNull(session);

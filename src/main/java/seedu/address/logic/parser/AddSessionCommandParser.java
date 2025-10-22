@@ -23,14 +23,16 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
     @Override
     public AddSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_LOCATION,
+                        PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_LOCATION,
+                PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
         try {
             Index teamIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());

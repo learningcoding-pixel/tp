@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.address.model.team.session.Session;
 
+/**
+ * An UI component that displays information of a {@code Session}.
+ */
 public class SessionCard extends UiPart<HBox> {
     private static final String FXML = "SessionCard.fxml";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
@@ -15,6 +18,9 @@ public class SessionCard extends UiPart<HBox> {
     @FXML private Label locationLabel;
     @FXML private Label timeRange;
 
+    /**
+     * Creates a {@code SessionCard} with the given {@code Session} and index to display.
+     */
     public SessionCard(Session session, int displayedIndex) {
         super(FXML);
         index.setText(displayedIndex + ".");

@@ -14,24 +14,26 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Session {
 
-    public static final String MESSAGE_CONSTRAINTS = "Session must have a valid location and start and end date";
-    protected LocalDateTime startDate;
-    protected LocalDateTime endDate;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
-    private final Location location;
     public static final java.util.Comparator<Session> SESSION_ORDER = Comparator
             .comparing(Session::getStartDate)
             .thenComparing(Session::getEndDate)
             .thenComparing(s -> s.getLocation().toString());
 
+    public static final String MESSAGE_CONSTRAINTS = "Session must have a valid location and start and end date";
+
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+    private final Location location;
+
     /**
      * Represents a Session in the Team.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Session(Location location, LocalDateTime startDate, LocalDateTime EndDate) {
+    public Session(Location location, LocalDateTime startDate, LocalDateTime endDate) {
         this.location = location;
         this.startDate = startDate;
-        this.endDate = EndDate;
+        this.endDate = endDate;
     }
 
     public Location getLocation() {
@@ -62,7 +64,7 @@ public class Session {
         }
 
         Session otherSession = (Session) other;
-        return  location.equals(otherSession.location)
+        return location.equals(otherSession.location)
                 && startDate.equals(otherSession.startDate)
                 && endDate.equals(otherSession.endDate);
     }
@@ -77,7 +79,7 @@ public class Session {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Location",location)
+                .add("Location", location)
                 .add("StartDate", startDate.format(formatter))
                 .add("EndDate", endDate.format(formatter))
                 .toString();

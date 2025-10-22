@@ -12,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.session.Session;
 
+/**
+ * Deletes a session identified using it's displayed index from a team.
+ */
 public class DeleteSessionCommand extends Command {
 
     public static final String COMMAND_WORD = "deletesession";
@@ -29,6 +32,10 @@ public class DeleteSessionCommand extends Command {
     private final Index teamIndex;
     private final Index sessionIndex;
 
+    /**
+     * Creates a DeleteSessionCommand to delete the {@code Session}
+     * at {@code sessionIndex} from the {@code Team} at {@code teamIndex}.
+     */
     public DeleteSessionCommand(Index teamIndex, Index sessionIndex) {
         this.teamIndex = teamIndex;
         this.sessionIndex = sessionIndex;

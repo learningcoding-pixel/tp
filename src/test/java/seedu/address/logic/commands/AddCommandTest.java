@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
+import seedu.address.model.team.session.Session;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -191,6 +192,16 @@ public class AddCommandTest {
 
         @Override
         public Team getTeamOfPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSessionToTeam(Team team, Session session) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSession(Team team, Session session) {
             throw new AssertionError("This method should not be called.");
         }
     }
