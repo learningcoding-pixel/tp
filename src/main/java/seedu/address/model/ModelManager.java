@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,7 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.team.Session;
+import seedu.address.model.team.session.Session;
 import seedu.address.model.team.Team;
 
 /**
@@ -28,7 +27,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Team> filteredTeams;
-    private final FilteredList<Session> filteredSessions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,7 +40,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTeams = new FilteredList<>(this.addressBook.getTeamList());
-        filteredSessions = new FilteredList<>(this.addressBook.getSessionsList());
     }
 
     public ModelManager() {
@@ -210,16 +207,4 @@ public class ModelManager implements Model {
         // delegate to AddressBook to replace the old team with the updated one
         addressBook.setTeam(target, updatedTeam);
     }
-
-    @Override
-    public List<Session> getFilteredSessionList() {
-        return List.of();
-    }
-
-    @Override
-    public void deleteSession(Session sessionToDelete) {
-
-    }
-
-
 }

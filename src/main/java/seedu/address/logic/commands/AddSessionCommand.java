@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Optional;
+import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.team.Session;
 import seedu.address.model.team.Team;
-import seedu.address.model.team.TeamName;
+import seedu.address.model.team.session.Session;
 
 /**
  * Adds a {@code Session} to a {@code Team}.
@@ -18,18 +18,18 @@ public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "addsession";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a session to the team identified by its name.\n"
-            + "Format: addsession /tn TEAM_NAME /sn SESSION_NAME /l LOCATION /s START_DATE /e END_DATE\n"
-            + "Example: addsession /tn TeamA /sn MorningRun /l Track /s 2025-10-21T07:00 /e 2025-10-21T08:00";
+            + ": Adds a session to the team identified by its index in the team list.\n"
+            + "Format: addsession i/TEAM_INDEX sdt/START_DATETIME edt/END_DATETIME l/LOCATION\n"
+            + "Example: addsession i/1 sdt/2025-10-21T07:00 edt/2025-10-21T08:00 l/Track";
 
     public static final String MESSAGE_SUCCESS = "Added session to %1$s: %2$s";
-    public static final String MESSAGE_TEAM_NOT_FOUND = "Team not found.";
+    public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team index provided is invalid.";
 
-    private final TeamName targetName;
+    private final Index teamIndex;
     private final Session session;
 
-    public AddSessionCommand(TeamName targetName, Session session) {
-        this.targetName = requireNonNull(targetName);
+    public AddSessionCommand(Index teamIndex, Session session) {
+        this.teamIndex = requireNonNull(teamIndex);
         this.session = requireNonNull(session);
     }
 
@@ -37,17 +37,14 @@ public class AddSessionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Optional<Team> maybeTeam = model.getFilteredTeamList().stream()
-                .filter(t -> t.getName().equals(targetName))
-                .findFirst();
+        List<Team> lastShownList = model.getFilteredTeamList();
 
-        if (maybeTeam.isEmpty()) {
-            throw new CommandException(MESSAGE_TEAM_NOT_FOUND);
+        if (teamIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
 
-        Team targetTeam = maybeTeam.get();
+        Team targetTeam = lastShownList.get(teamIndex.getZeroBased());
 
-        // Model should implement addSessionToTeam(Team, Session)
         model.addSessionToTeam(targetTeam, session);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetTeam.getName(), session));
@@ -61,11 +58,7 @@ public class AddSessionCommand extends Command {
         if (!(other instanceof AddSessionCommand)) {
             return false;
         }
-        AddSessionCommand o = (AddSessionCommand) other;
-        return targetName.equals(o.targetName) && session.equals(o.session);
+        AddSessionCommand otherCmd = (AddSessionCommand) other;
+        return teamIndex.equals(otherCmd.teamIndex) && session.equals(otherCmd.session);
     }
 }
-
-
-
-

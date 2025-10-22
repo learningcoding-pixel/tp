@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.team.Location;
-import seedu.address.model.team.Session;
-import seedu.address.model.team.Team;
+import seedu.address.model.team.session.Location;
+import seedu.address.model.team.session.Session;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Jackson-friendly version of {@link Session}.

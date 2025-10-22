@@ -1,4 +1,4 @@
-package seedu.address.model.team;
+package seedu.address.model.team.session;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

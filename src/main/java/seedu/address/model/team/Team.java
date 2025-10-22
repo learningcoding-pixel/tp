@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.team.session.Session;
 
 /**
  * Represents a Team in the RelayCoach app.
