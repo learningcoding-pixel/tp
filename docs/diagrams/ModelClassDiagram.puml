@@ -19,6 +19,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Dob
+Class School
+Class Role
+Class Height
+Class Weight
 
 Class I #FFFFFF
 }
@@ -37,10 +42,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *---> Name
+Person *---> Phone
+Person *---> Email
+Person *---> Address
+Person *---> Dob
+Person *--> School
+Person *--> Role
+Person *--> Height
+Person *--> Weight
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
@@ -49,6 +59,14 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Dob
+Dob -[hidden]right-> School
+School -[hidden]right-> Role
+Role -[hidden]right-> Height
+Height -[hidden]right-> Weight
+Weight -[hidden]right-> Tag
 
+class _Spacer #FFFFFF
+ModelManager -[hidden]-> _Spacer
 ModelManager --> "~* filtered" Person
 @enduml

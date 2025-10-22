@@ -14,8 +14,13 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *---> Name
+Person *---> Phone
+Person *---> Email
+Person *---> Address
+Person *---> Dob
+Person *--> School
+Person *--> Role
+Person *--> Height
+Person *--> Weight
 @enduml
