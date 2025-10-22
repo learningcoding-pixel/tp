@@ -265,21 +265,12 @@ public class ParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
-            return LocalDateTime.parse(trimmedDateTime);
+            return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date/time format. Please use ISO-8601 format (e.g. 2025-10-21T07:00).");
+            throw new ParseException("Invalid date/time format. Please use 'yyyy-MM-dd HHmm' "
+                    + "format (e.g. 2025-10-21 07:00).");
         }
-    }
-
-    /**
-     * Formats a {@code LocalDateTime} into a string with pattern "dd MMMM yyyy HH:mm".
-     *
-     * @param dateTime the LocalDateTime to format
-     * @return formatted string
-     */
-    public static String formatDateTime(LocalDateTime dateTime) {
-        requireNonNull(dateTime);
-        return dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm"));
     }
 }
