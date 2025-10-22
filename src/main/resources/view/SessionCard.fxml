@@ -18,9 +18,9 @@
         <!-- Index label, vertically centered -->
         <Label fx:id="index" styleClass="cell_big_label"
                GridPane.rowIndex="0" GridPane.columnIndex="0"
-               GridPane.valignment="CENTER" alignment="CENTER_LEFT">
+               GridPane.valignment="CENTER">
             <GridPane.margin>
-                <Insets top="0" right="0" bottom="0" left="16"/>
+                <Insets left="16"/>
             </GridPane.margin>
         </Label>
 
