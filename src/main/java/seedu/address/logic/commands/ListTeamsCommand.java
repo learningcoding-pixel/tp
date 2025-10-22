@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TEAMS;
 
+import java.util.ArrayList;
+
 import seedu.address.model.Model;
+import seedu.address.model.team.Team;
+import seedu.address.model.team.session.Session;
 
 /**
  * Lists all teams in the address book to the user.

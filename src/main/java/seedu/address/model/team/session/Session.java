@@ -2,6 +2,7 @@ package seedu.address.model.team.session;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -17,6 +18,10 @@ public class Session {
     protected LocalDateTime endDate;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
     private final Location location;
+    public static final java.util.Comparator<Session> SESSION_ORDER = Comparator
+            .comparing(Session::getStartDate)
+            .thenComparing(Session::getEndDate)
+            .thenComparing(s -> s.getLocation().toString());
 
     /**
      * Represents a Session in the Team.

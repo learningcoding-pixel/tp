@@ -207,4 +207,18 @@ public class ModelManager implements Model {
         // delegate to AddressBook to replace the old team with the updated one
         addressBook.setTeam(target, updatedTeam);
     }
+
+    @Override
+    public void deleteSession(Team target, Session toDelete) {
+        requireAllNonNull(target, toDelete);
+        Set<Session> updatedSessions = new HashSet<>(target.getSessions());
+
+        boolean removed = updatedSessions.remove(toDelete);
+        if (!removed) {
+            throw new IllegalArgumentException("Session not found in the target team.");
+        }
+
+        Team updatedTeam = new Team(target.getName(), target.getMembers(), updatedSessions);
+        addressBook.setTeam(target, updatedTeam);
+    }
 }
