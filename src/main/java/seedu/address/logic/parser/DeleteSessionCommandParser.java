@@ -8,6 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteSessionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteSessionCommand object
+ */
 public class DeleteSessionCommandParser implements Parser<DeleteSessionCommand> {
 
     @Override

@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
-import seedu.address.model.team.session.Session;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.TeamName;
+import seedu.address.model.team.session.Session;
 
 /**
  * Jackson-friendly version of {@link Team}.
