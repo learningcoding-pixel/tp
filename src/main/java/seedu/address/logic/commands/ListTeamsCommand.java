@@ -21,26 +21,7 @@ public class ListTeamsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        var teams = model.getFilteredTeamList();
-        StringBuilder sb = new StringBuilder("Listed all teams\n");
-
-        for (int i = 0; i < teams.size(); i++) {
-            Team t = teams.get(i);
-            sb.append(String.format("%d. Team name: %s\n", i + 1, t.getName()));
-
-            var ordered = new ArrayList<>(t.getSessions());
-            ordered.sort(Session.SESSION_ORDER);
-
-            if (ordered.isEmpty()) {
-                sb.append("   (no sessions)\n");
-            } else {
-                sb.append("   Sessions:\n");
-                int cnt = 1;
-                for (Session s : ordered) {
-                    sb.append(String.format("     %d) %s\n", cnt++, s.toString()));
-                }
-            }
-        }
-        return new CommandResult(sb.toString(), false, false, true);
+        model.updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false , true);
     }
 }
