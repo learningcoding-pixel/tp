@@ -20,7 +20,7 @@ public class AddSessionCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a session to the team identified by its index in the team list.\n"
             + "Format: addsession i/TEAM_INDEX sdt/START_DATETIME edt/END_DATETIME l/LOCATION\n"
-            + "Example: addsession i/1 sdt/2025-10-21T07:00 edt/2025-10-21T08:00 l/Track";
+            + "Example: addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track";
 
     public static final String MESSAGE_SUCCESS = "Added session to %1$s: %2$s";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team index provided is invalid.";
