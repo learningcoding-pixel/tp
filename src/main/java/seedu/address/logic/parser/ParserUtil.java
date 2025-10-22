@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -20,6 +24,7 @@ import seedu.address.model.person.School;
 import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.team.TeamName;
+import seedu.address.model.team.session.Location;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -234,5 +239,47 @@ public class ParserUtil {
             }
         }
         return indexSet;
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        try {
+            return LocalDateTime.parse(trimmedDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date/time format. Please use ISO-8601 format (e.g. 2025-10-21T07:00).");
+        }
+    }
+
+    /**
+     * Formats a {@code LocalDateTime} into a string with pattern "dd MMMM yyyy HH:mm".
+     *
+     * @param dateTime the LocalDateTime to format
+     * @return formatted string
+     */
+    public static String formatDateTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        return dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm"));
     }
 }

@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddSessionCommand;
@@ -20,31 +22,24 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
 
     @Override
     public AddSessionCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        String trimmed = args.trim();
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
-        if (trimmed.isEmpty()) {
-            throw new ParseException("Empty command\nUsage: " + AddSessionCommand.MESSAGE_USAGE);
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
         }
 
-        // Use a token-based parser for new prefixes
-        Map<String, String> arguments = parseArguments(trimmed);
-
-        String indexStr = getArgument(arguments, "i/", "Team Index");
-        String locationStr = getArgument(arguments, "l/", "Location");
-        String startStr = getArgument(arguments, "sdt/", "Start date/time");
-        String endStr = getArgument(arguments, "edt/", "End date/time");
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX, PREFIX_LOCATION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
         try {
-            Index teamIndex = Index.fromOneBased(Integer.parseInt(indexStr));
-            Location location = new Location(locationStr);
-            LocalDateTime start = LocalDateTime.parse(startStr);
-            LocalDateTime end = LocalDateTime.parse(endStr);
+            Index teamIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+            Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+            LocalDateTime start = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START_DATETIME).get());
+            LocalDateTime end = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATETIME).get());
 
             Session session = new Session(location, start, end);
             return new AddSessionCommand(teamIndex, session);
-        } catch (DateTimeParseException dtpe) {
-            throw new ParseException("Date/time must be ISO format: " + dtpe.getMessage());
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new ParseException("Failed to parse addsession arguments: " + e.getMessage()
                     + "\nUsage: " + AddSessionCommand.MESSAGE_USAGE);
@@ -52,44 +47,10 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
     }
 
     /**
-     * Token-based argument parser that supports prefixes: i/, l/, sdt/, edt/
+     * Returns true if all the prefixes contain non-empty values in the given {@code ArgumentMultimap}.
      */
-    private Map<String, String> parseArguments(String args) throws ParseException {
-        Map<String, String> arguments = new HashMap<>();
-        String[] tokens = args.split("\\s+");
-
-        String currentPrefix = null;
-        StringBuilder currentValue = new StringBuilder();
-
-        for (String token : tokens) {
-            if (token.startsWith("i/") || token.startsWith("l/") || token.startsWith("sdt/") || token.startsWith("edt/")) {
-                // save previous prefix and value if any
-                if (currentPrefix != null) {
-                    arguments.put(currentPrefix, currentValue.toString().trim());
-                }
-                // start new prefix
-                int prefixLength = token.indexOf('/') + 1;
-                currentPrefix = token.substring(0, prefixLength);
-                currentValue = new StringBuilder(token.substring(prefixLength));
-            } else {
-                if (currentPrefix == null) {
-                    throw new ParseException("Unknown argument or missing prefix: " + token);
-                }
-                currentValue.append(" ").append(token);
-            }
-        }
-        if (currentPrefix != null) {
-            arguments.put(currentPrefix, currentValue.toString().trim());
-        }
-
-        return arguments;
-    }
-
-    private String getArgument(Map<String, String> arguments, String prefix, String description) throws ParseException {
-        String value = arguments.get(prefix);
-        if (value == null || value.isEmpty()) {
-            throw new ParseException("Missing " + description + " (" + prefix + ")\nUsage: " + AddSessionCommand.MESSAGE_USAGE);
-        }
-        return value;
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix ->
+                argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap.getValue(prefix).get().isEmpty());
     }
 }
