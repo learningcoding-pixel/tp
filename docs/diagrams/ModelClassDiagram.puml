@@ -13,7 +13,10 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueTeamList
 Class Person
+Class Team
+Class TeamName
 Class Address
 Class Email
 Class Name
@@ -24,6 +27,7 @@ Class School
 Class Role
 Class Height
 Class Weight
+Class Session
 
 Class I #FFFFFF
 }
@@ -40,6 +44,7 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+' Existing relations for Person
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *---> Name
@@ -53,6 +58,13 @@ Person *--> Height
 Person *--> Weight
 Person *--> "*" Tag
 
+' New relations for Team
+AddressBook *--> "1" UniqueTeamList
+UniqueTeamList --> "~* all" Team
+Team *--> "4" Person
+Team *--> "*" Session
+Team *--> "1" TeamName
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
@@ -65,6 +77,8 @@ School -[hidden]right-> Role
 Role -[hidden]right-> Height
 Height -[hidden]right-> Weight
 Weight -[hidden]right-> Tag
+
+Team -[hidden]down-> _Spacer
 
 class _Spacer #FFFFFF
 ModelManager -[hidden]-> _Spacer
