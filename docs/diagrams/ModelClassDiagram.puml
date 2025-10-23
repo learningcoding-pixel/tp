@@ -41,7 +41,6 @@ Class Session {
   +hashCode() : int
   +toString() : String
 }
-Class UniqueSessionList
 Class Location
 
 Class I #FFFFFF
@@ -81,10 +80,7 @@ Team *--> "*" Session
 Team *--> "1" TeamName
 
 ' Session-related associations
-AddressBook *--> "1" UniqueSessionList
-UniqueSessionList --> "0..*" Session
 Session *--> "1" Location
-Team *--> "0..*" Session
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -105,5 +101,4 @@ Session -[hidden]down-> _Spacer
 class _Spacer #FFFFFF
 ModelManager -[hidden]-> _Spacer
 ModelManager --> "~* filtered" Person
-ModelManager --> "~* filtered" Session
 @enduml
