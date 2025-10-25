@@ -65,7 +65,7 @@ public class DeleteSessionCommand extends Command {
         return new CommandResult(String.format(
                 MESSAGE_DELETE_SESSION_SUCCESS,
                 toDelete.toString(),
-                team.getName()));
+                team.getName()), false, false, true);
     }
 
     @Override

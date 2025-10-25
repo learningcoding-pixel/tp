@@ -96,7 +96,7 @@ public class AddTeamCommand extends Command {
         }
 
         model.addTeam(newTeam);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newTeam)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newTeam)), false, false, true);
     }
 
     @Override
