@@ -1,4 +1,6 @@
+
 package seedu.address.ui;
+
 
 import java.util.logging.Logger;
 
@@ -46,3 +48,5 @@ public class TeamListPanel extends UiPart<Region> {
         }
     }
 }
+
+

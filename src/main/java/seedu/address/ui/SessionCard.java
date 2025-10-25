@@ -28,8 +28,8 @@ public class SessionCard extends UiPart<HBox> {
         String formattedStart = session.getStartDate().format(DATE_FORMATTER);
         String formattedEnd = session.getEndDate().format(DATE_FORMATTER);
 
-        locationLabel.setText("Location: " + session.getLocation().toString());
-        timeRange.setText("Time: " + formattedStart + " → " + formattedEnd);
+        locationLabel.setText("📍 Location: " + session.getLocation().toString());
+        timeRange.setText("🕐 Time: " + formattedStart + " → " + formattedEnd);
     }
 
     public Label getLocation() {

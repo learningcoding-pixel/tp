@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS" vgap="4" hgap="10">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-background-color: #3a3a3a; -fx-background-radius: 8; -fx-border-color: #4a4a4a; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 12;">    <GridPane HBox.hgrow="ALWAYS" vgap="4" hgap="10">
         <!-- Columns: Index | Details -->
         <columnConstraints>
             <ColumnConstraints minWidth="30" prefWidth="40" />

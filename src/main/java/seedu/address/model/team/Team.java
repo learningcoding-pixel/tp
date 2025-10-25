@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.team.session.Session;
 
 /**
@@ -20,6 +21,7 @@ public class Team {
     private final TeamName name;
     private final Set<Person> members = new HashSet<>();
     private final Set<Session> sessions = new HashSet<>();
+
 
     /**
      * Constructs a {@code Team}.
