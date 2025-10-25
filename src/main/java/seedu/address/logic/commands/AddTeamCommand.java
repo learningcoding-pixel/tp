@@ -30,7 +30,7 @@ public class AddTeamCommand extends Command {
             + PREFIX_INDEX + "ATHLETE_INDEX... (exactly 4 athletes)\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TEAM_NAME + "StarTeam "
-            + PREFIX_INDEX + "1 " + PREFIX_INDEX + "2 " + PREFIX_INDEX + "3 " + PREFIX_INDEX + "4";
+            + PREFIX_INDEX + "1 " + "2 " + "3 " + "4";
 
     public static final String MESSAGE_SUCCESS = "New team added: %1$s";
     public static final String MESSAGE_DUPLICATE_TEAM_NAME = "This team name already exists.";
