@@ -28,13 +28,7 @@
             <Label text="Members:" styleClass="cell_big_label" style="-fx-font-weight: bold;" />
 
             <!-- Vertical member cards with dark styling -->
-            <VBox fx:id="memberCards" spacing="5" alignment="CENTER_LEFT"
-                  style="-fx-background-color: #3a3a3a;
-             -fx-background-radius: 8;
-             -fx-border-color: #4a4a4a;
-             -fx-border-radius: 8;
-             -fx-border-width: 1;
-             -fx-padding: 12;"/>
+            <VBox fx:id="memberCards" spacing="5" alignment="CENTER_LEFT"/>
 
             <!-- Sessions header and vertical session cards -->
             <Label text="Sessions:" styleClass="cell_big_label" style="-fx-font-weight: bold;" />
