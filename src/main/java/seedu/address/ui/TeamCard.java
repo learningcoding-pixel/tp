@@ -51,12 +51,6 @@ public class TeamCard extends UiPart<Region> {
                     smallCard.getHeight().setVisible(false);
                     smallCard.getWeight().setVisible(false);
                     smallCard.getTags().setVisible(true);
-                    smallCard.getRoot().setStyle("-fx-background-color: #3a3a3a; " +
-                            "-fx-background-radius: 6; " +
-                            "-fx-border-color: #4a4a4a; " +
-                            "-fx-border-radius: 6; " +
-                            "-fx-border-width: 1; " +
-                            "-fx-padding: 6;");
                     memberCards.getChildren().add(smallCard.getRoot());
                 });
 
