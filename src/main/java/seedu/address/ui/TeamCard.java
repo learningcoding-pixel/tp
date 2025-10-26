@@ -54,18 +54,26 @@ public class TeamCard extends UiPart<Region> {
                     memberCards.getChildren().add(smallCard.getRoot());
                 });
 
-        AtomicInteger index = new AtomicInteger(1);
-        team.getSessions().stream()
-                .sorted(Comparator.comparing(
-                        Session::getStartDate,
-                        Comparator.nullsLast(Comparator.naturalOrder())
-                ))
-                .forEach(session -> {
-                    SessionCard smallCard = new SessionCard(session, index.getAndIncrement());
-                    smallCard.getLocation().setVisible(true);
-                    smallCard.getSessionTimeRange().setVisible(true);
-                    sessionCards.getChildren().add(smallCard.getRoot());
-                });
+        // Check if there are any sessions
+        if (team.getSessions().isEmpty()) {
+            // Display "No sessions yet" message
+            Label noSessionsLabel = new Label("No sessions yet");
+            noSessionsLabel.setStyle("-fx-text-fill: #888; -fx-font-style: italic; -fx-padding: 5;");
+            sessionCards.getChildren().add(noSessionsLabel);
+        } else {
+            AtomicInteger index = new AtomicInteger(1);
+            team.getSessions().stream()
+                    .sorted(Comparator.comparing(
+                            Session::getStartDate,
+                            Comparator.nullsLast(Comparator.naturalOrder())
+                    ))
+                    .forEach(session -> {
+                        SessionCard smallCard = new SessionCard(session, index.getAndIncrement());
+                        smallCard.getLocation().setVisible(true);
+                        smallCard.getSessionTimeRange().setVisible(true);
+                        sessionCards.getChildren().add(smallCard.getRoot());
+                    });
+        }
     }
 
     @Override
