@@ -51,7 +51,7 @@ public class AddSessionCommand extends Command {
 
         model.addSessionToTeam(targetTeam, session);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetTeam.getName(), session));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetTeam.getName(), session), false, false, true);
     }
 
     @Override

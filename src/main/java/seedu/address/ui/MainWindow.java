@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -144,8 +145,11 @@ public class MainWindow extends UiPart<Stage> {
         teamList.setVisible(true);
         teamList.setManaged(true);
 
-        personListPanelPlaceholder.setVisible(false);
-        personListPanelPlaceholder.setManaged(false);
+        Node personListContainer = personListPanelPlaceholder.getParent();
+        if (personListContainer != null) {
+            personListContainer.setVisible(false);
+            personListContainer.setManaged(false);
+        }
     }
 
     /**
@@ -155,8 +159,11 @@ public class MainWindow extends UiPart<Stage> {
         teamList.setVisible(false);
         teamList.setManaged(false);
 
-        personListPanelPlaceholder.setVisible(true);
-        personListPanelPlaceholder.setManaged(true);
+        Node personListContainer = personListPanelPlaceholder.getParent();
+        if (personListContainer != null) {
+            personListContainer.setVisible(true);
+            personListContainer.setManaged(true);
+        }
     }
 
 
