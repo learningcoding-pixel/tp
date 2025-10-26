@@ -32,7 +32,7 @@ public class FindTeamCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTeamList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FindTeamCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindTeamCommand)) {
             return false;
         }
 
