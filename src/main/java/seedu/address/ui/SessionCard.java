@@ -28,8 +28,8 @@ public class SessionCard extends UiPart<HBox> {
         String formattedStart = session.getStartDate().format(DATE_FORMATTER);
         String formattedEnd = session.getEndDate().format(DATE_FORMATTER);
 
-        locationLabel.setText("📍 Location: " + session.getLocation().toString());
-        timeRange.setText("🕐 Time: " + formattedStart + " → " + formattedEnd);
+        locationLabel.setText(SessionField.LOCATION.getLabel() + session.getLocation().toString());
+        timeRange.setText(SessionField.TIME.getLabel() + formattedStart + " → " + formattedEnd);
     }
 
     public Label getLocation() {
@@ -39,4 +39,29 @@ public class SessionCard extends UiPart<HBox> {
     public Label getSessionTimeRange() {
         return timeRange;
     }
+
+    /**
+     * Centralized fields with emoji code points for Session.
+     */
+    public enum SessionField {
+        LOCATION(0x1F4CD, "Location"),
+        TIME(0x1F553, "Time");
+
+        private final int codePoint;
+        private final String text;
+
+        SessionField(int codePoint, String text) {
+            this.codePoint = codePoint;
+            this.text = text;
+        }
+
+        public String emoji() {
+            return new String(Character.toChars(codePoint));
+        }
+
+        public String getLabel() {
+            return emoji() + " " + text + ": ";
+        }
+    }
+
 }
