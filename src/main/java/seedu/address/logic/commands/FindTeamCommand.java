@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.team.TeamNameContainsKeywordsPredicate;
 
 
+
 /**
  * Finds and lists all teams in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -31,8 +32,9 @@ public class FindTeamCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTeamList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()));
+        return new CommandResult(String.format(
+                Messages.MESSAGE_TEAMS_LISTED_OVERVIEW, model.getFilteredTeamList().size()),
+                false, false , true);
     }
 
     @Override
