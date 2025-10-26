@@ -33,8 +33,8 @@ public class TeamNameContainsKeywordsPredicate implements Predicate<Team> {
             return false;
         }
 
-        TeamNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (TeamNameContainsKeywordsPredicate) other;
-        return keywords.equals(TeamNameContainsKeywordsPredicate.keywords);
+        TeamNameContainsKeywordsPredicate otherPredicate = (TeamNameContainsKeywordsPredicate) other;
+        return keywords.equals(otherPredicate.keywords);
     }
 
     @Override
