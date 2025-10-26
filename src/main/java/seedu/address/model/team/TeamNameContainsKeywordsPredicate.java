@@ -16,10 +16,12 @@ public class TeamNameContainsKeywordsPredicate implements Predicate<Team> {
         this.keywords = keywords;
     }
 
+
     @Override
     public boolean test(Team team) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(team.getName().fullTeamName, keyword));
+                .anyMatch(keyword ->
+                        team.getName().fullTeamName.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override
