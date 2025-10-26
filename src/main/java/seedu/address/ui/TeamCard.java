@@ -51,7 +51,6 @@ public class TeamCard extends UiPart<Region> {
                     smallCard.getHeight().setVisible(false);
                     smallCard.getWeight().setVisible(false);
                     smallCard.getTags().setVisible(true);
-
                     memberCards.getChildren().add(smallCard.getRoot());
                 });
 
