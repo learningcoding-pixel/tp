@@ -8,15 +8,18 @@ import seedu.address.model.Model;
 import seedu.address.model.team.TeamNameContainsKeywordsPredicate;
 
 
-
-public class FindTeamCommand extends Command{
+/**
+ * Finds and lists all teams in address book whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
+public class FindTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "findteam";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Teams whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " starteam pineapple amazingteam";
+            + "Example: " + COMMAND_WORD + " starteam sunteam amazingteam";
 
     private final TeamNameContainsKeywordsPredicate predicate;
 
