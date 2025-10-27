@@ -151,6 +151,13 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Listing all teams: `listteams`
+
+Shows a list of all teams in the RelayCoach app.
+Each team contains a list of 4 members, and a list of training sessions scheduled for the team.
+
+Format: `listteams`
+
 ### Exiting the program : `exit`
 
 Exits the program.
