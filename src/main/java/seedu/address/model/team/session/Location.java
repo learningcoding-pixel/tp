@@ -20,6 +20,11 @@ public class Location {
 
     public final String value;
 
+    /**
+     * Constructs a {@code location}.
+     *
+     * @param location A valid location.
+     */
     public Location(String location) {
         requireNonNull(location);
         checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
