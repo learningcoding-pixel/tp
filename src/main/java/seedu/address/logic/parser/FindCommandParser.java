@@ -34,6 +34,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCHOOL, PREFIX_ROLE, PREFIX_TAG);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCHOOL, PREFIX_ROLE, PREFIX_TAG);
+
         // Checks only if prefix_name exists, else this is empty
         Optional<Predicate<Person>> namePredicate = argMultimap.getValue(PREFIX_NAME)
                 .filter(s -> !s.isBlank())
