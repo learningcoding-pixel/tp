@@ -17,11 +17,13 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The athlete index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d athletes listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d athlete(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
-    public static final String MESSAGE_TEAMS_LISTED_OVERVIEW = "%1$d Teams listed!";
+    public static final String MESSAGE_TEAMS_LISTED_OVERVIEW = "%1$d team(s) listed!";
+    public static final String MESSAGE_NO_ATHLETES_IN_LIST = "No athletes added yet!";
+    public static final String MESSAGE_NO_MATCHING_ATHLETES = "The keywords does not seem to match any athletes.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
