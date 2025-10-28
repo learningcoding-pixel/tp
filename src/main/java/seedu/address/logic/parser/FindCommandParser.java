@@ -35,8 +35,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCHOOL, PREFIX_ROLE, PREFIX_TAG);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCHOOL, PREFIX_ROLE, PREFIX_TAG);
-
-        // Checks only if prefix_name exists, else this is empty
+      
+        // Create predicates for each field if the prefix is present and non-empty
         Optional<Predicate<Person>> namePredicate = argMultimap.getValue(PREFIX_NAME)
                 .filter(s -> !s.isBlank())
                 .map(value -> new NameContainsKeywordsPredicate(Arrays.asList(value.trim().split("\\s+"))));
@@ -63,6 +63,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+        assert !predicates.isEmpty() : "Predicates list should not be empty at this point";
 
         Predicate<Person> combinedPredicate = predicates.get(0);
 
