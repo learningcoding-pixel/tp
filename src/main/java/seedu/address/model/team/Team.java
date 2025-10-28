@@ -35,6 +35,8 @@ public class Team {
             throw new IllegalArgumentException("A team must have exactly 4 members.");
         }
 
+        assert members.size() == TEAM_SIZE : "Team must have exactly 4 members.";
+
         this.name = name;
         this.members.addAll(members);
     }
@@ -79,7 +81,7 @@ public class Team {
     }
 
     public Set<Session> getSessions() {
-        return Set.copyOf(sessions);
+        return Set.copyOf(sessions); // Return an unmodifiable view of sessions
     }
 
     @Override
@@ -115,10 +117,10 @@ public class Team {
 
     @Override
     public String toString() {
-        return String.format("Team %s: %s", name, members, sessions); // TODO: Configure toString format
+        return String.format("Team %s: %s", name, members, sessions);
     }
 
     public Set<Person> getMembers() {
-        return members;
+        return Set.copyOf(members); // Return an unmodifiable view of members
     }
 }
