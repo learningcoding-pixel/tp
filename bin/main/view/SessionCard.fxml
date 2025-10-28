@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-background-color: #3a3a3a; -fx-background-radius: 8; -fx-border-color: #4a4a4a; -fx-border-radius: 8; -fx-border-width: 1; -fx-padding: 12;">    <GridPane HBox.hgrow="ALWAYS" vgap="4" hgap="10">
+        <!-- Columns: Index | Details -->
+        <columnConstraints>
+            <ColumnConstraints minWidth="30" prefWidth="40" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <!-- Index label, vertically centered -->
+        <Label fx:id="index" styleClass="cell_big_label"
+               GridPane.rowIndex="0" GridPane.columnIndex="0"
+               GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets left="16"/>
+            </GridPane.margin>
+        </Label>
+
+        <!-- Details GridPane -->
+        <GridPane GridPane.rowIndex="0" GridPane.columnIndex="1" vgap="4" GridPane.valignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+
+            <!-- Location -->
+            <HBox fx:id="locationBox" spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <Label fx:id="locationLabel" styleClass="cell_small_label" />
+            </HBox>
+
+            <!-- Time Range -->
+            <HBox fx:id="timeRangeBox" spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                <Label fx:id="timeRange" styleClass="cell_small_label" />
+            </HBox>
+        </GridPane>
+    </GridPane>
+</HBox>

@@ -76,20 +76,26 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an athlete: `add`
 
-Adds a person to the address book.
+Adds an athlete to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
+
+* `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
+* `SCHOOL` is the school the athlete is affiliated with.
+* `ROLE` is the role or position of the athlete in the team.
+* `HEIGHT` is the height of the athlete in centimeters.
+* `WEIGHT` is the weight of the athlete in kilograms.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** An athlete can have any number of tags (including 0).
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain`
+* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/Newgate Prison s/Prison r/Runner h/160 w/50`
 
 ### Listing all persons : `list`
 
@@ -131,19 +137,27 @@ Examples:
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
 
-### Deleting a person : `delete`
+### Deleting an athlete : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified athlete by index from the displayed athlete list.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the athlete at the specified `INDEX`.
+* The index refers to the index number shown in the displayed athlete list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If the deleted athlete was part of a team, that team will also be deleted automatically.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+```
+list
+delete 2
+```
+and
+```
+find n/John
+delete 1
+```
 
 ### Clearing all entries : `clear`
 
