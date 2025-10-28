@@ -20,6 +20,8 @@ Team *-left-> "4" Person
 Team *-down-> "*" Session
 Team *-right-> "1" TeamName
 Session *-down-> "1" Location
+Session --> LocalDateTime : startDate
+Session --> LocalDateTime : endDate
 
 
 Person *---> Name
