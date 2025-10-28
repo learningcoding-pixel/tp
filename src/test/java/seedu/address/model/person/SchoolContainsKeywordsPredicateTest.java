@@ -20,13 +20,15 @@ public class SchoolContainsKeywordsPredicateTest {
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
         SchoolContainsKeywordsPredicate firstPredicate = new SchoolContainsKeywordsPredicate(firstPredicateKeywordList);
-        SchoolContainsKeywordsPredicate secondPredicate = new SchoolContainsKeywordsPredicate(secondPredicateKeywordList);
+        SchoolContainsKeywordsPredicate secondPredicate = new SchoolContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        SchoolContainsKeywordsPredicate firstPredicateCopy = new SchoolContainsKeywordsPredicate(firstPredicateKeywordList);
+        SchoolContainsKeywordsPredicate firstPredicateCopy = new SchoolContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +44,8 @@ public class SchoolContainsKeywordsPredicateTest {
     @Test
     public void test_schoolContainsKeywords_returnsTrue() {
         // One keyword
-        SchoolContainsKeywordsPredicate predicate = new SchoolContainsKeywordsPredicate(Collections.singletonList("Jurong"));
+        SchoolContainsKeywordsPredicate predicate = new SchoolContainsKeywordsPredicate(
+                Collections.singletonList("Jurong"));
         assertTrue(predicate.test(new PersonBuilder().withSchool("Jurong High").build()));
 
         // Multiple keywords
