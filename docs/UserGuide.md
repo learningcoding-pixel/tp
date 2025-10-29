@@ -220,14 +220,13 @@ Examples:
 
 ### Deleting Session: `deletesession`
 
-Delete a session from the team in the address book.
+* Deletes the specified session by index from the displayed team list.
 
 Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
 
 Examples:
 * `deletesession i/1 si/1` returns
   Deleted session: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park From team: StarTeam
-  ![result for 'deletesession i/1 si/1'](images/deletesessionResult.png)
 
 ### Clearing all entries : `clear`
 
