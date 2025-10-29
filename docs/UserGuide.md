@@ -84,9 +84,9 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
 * `SCHOOL` is the school the athlete is affiliated with.
-* `ROLE` is the role or position of the athlete in the team.
-* `HEIGHT` is the height of the athlete in centimeters.
-* `WEIGHT` is the weight of the athlete in kilograms.
+* `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
+* `HEIGHT` is the height of the athlete in centimeters, only accepts positive integers.
+* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive integers.
 
 <box type="tip" seamless>
 
@@ -95,7 +95,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 Examples:
 * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain`
-* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/Newgate Prison s/Prison r/Runner h/160 w/50`
+* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/NUS Temasek Hall s/NUS r/Runner h/160 w/50`
 
 ### Listing all persons : `list`
 
@@ -150,13 +150,13 @@ Format: `delete INDEX`
 
 Examples:
 ```
-list
-delete 2
+list (shows 3 athletes)
+delete 2 (shows 2 athletes after deleting the 2nd athlete)
 ```
 and
 ```
-find n/John
-delete 1
+find n/John (shows athlete named John if exists)
+delete 1 (deletes the athlete named John shown at index 1 of the find result)
 ```
 
 ### Clearing all entries : `clear`
