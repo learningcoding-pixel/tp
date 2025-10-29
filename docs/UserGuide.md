@@ -175,6 +175,19 @@ Each team contains a list of 4 members, and a list of training sessions schedule
 
 Format: `listteams`
 
+### Adding Session: `addsession`
+
+Adds a session to the team in the address book. 
+
+Format: `addsession i/Team INDEX std/ STARTDATE edt/ ENDDATE l/ LOCATION`
+
+* startDate must be earlier than enDate
+
+Examples:
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns 
+Added session to StarTeam: startDate: 21 September 2025 17:00, endDate: 21 September 2025 18:00, location: park
+  ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
+* 
 ### Exiting the program : `exit`
 
 Exits the program.

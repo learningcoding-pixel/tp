@@ -78,10 +78,11 @@ public class Session {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("Location", location)
-                .add("StartDate", startDate.format(formatter))
-                .add("EndDate", endDate.format(formatter))
-                .toString();
+        return String.format("startDate: %s, endDate: %s, location: %s",
+                startDate.format(formatter),
+                endDate.format(formatter),
+                location);
     }
+
+
 }
