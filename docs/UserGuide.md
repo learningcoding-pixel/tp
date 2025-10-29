@@ -163,12 +163,15 @@ delete 1 (deletes the athlete named John shown at index 1 of the find result)
 
 Adds a new team with no sessions to the RelayCoach app.
 
-Format: `team tn/TEAM_NAME i/ATHLETE_INDEX ...` 
+Format: `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` 
+
+<box type="tip" seamless>
 
 **Tip:** Exactly 4 unique athlete IDs must be provided to form a team. Each athlete can only be part of exactly one team.
+</box>
 
 Examples:
-* `team tn/StarTeam i/1 2 3 4` : Adds a new team named `StarTeam` with athletes at index 1,2,3,4 in the current athlete list as members.
+* `team tn/StarTeam i/1 2 3 4` : Adds a new team named `StarTeam` with athletes at indexes 1, 2, 3, 4 in the displayed athlete list as members.
 
 ### Listing all teams: `listteams`
 
@@ -267,14 +270,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**AddSession** | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTeam**   | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`
-**List**   | `list`
-**Help**   | `help`
+| Action            | Format, Examples                                                                                                                                                      |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`                 |
+| **Clear**         | `clear`                                                                                                                                                               |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                     |
+| **DeleteTeam**    | `deleteteam INDEX` <br> e.g., `deleteteam 2`                                                                                                                          |
+| **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**          | `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]...`<br> e.g., `find n/John Jack s/NUS`                                                                                     |
+| **FindTeam**      | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`                                                                                              |
+| **Help**          | `help`                                                                                                                                                                |
+| **List**          | `list`                                                                                                                                                                |
+| **ListTeams**     | `listteams`                                                                                                                                                           |
+| **Team**          | `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` <br> e.g., `team tn/StarTeam i/1 2 3 4`                                         |
