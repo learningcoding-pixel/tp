@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="650" />
+<puml src="diagrams/ModelClassDiagram.puml"/>
 
 
 The `Model` component,
@@ -134,7 +134,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` (athlete) needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
+<puml src="diagrams/BetterModelClassDiagram.puml"/>
 
 </box>
 
@@ -159,6 +159,52 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+#### Cascading deletions on athlete removal
+
+When an athlete is deleted via `DeleteCommand`, the system also deletes any team that includes that athlete. Rationale:
+- Teams must always have **exactly 4** members; removing one would violate the invariant.
+- The `Model` exposes `getTeamOfPerson(Person)` to locate the team, and `deleteTeam(Team)` is invoked after `deletePerson(Person)` if applicable.
+- The `DeleteCommand` composes a combined success message for both deletions.
+
+### Teams and Sessions
+
+This project extends AB-3 with `Team` and `Session` domain entities and corresponding commands.
+
+- Teams are groups of exactly 4 distinct athletes (`Person`).
+- Sessions represent training events with a location and start/end datetimes, attached to teams.
+
+Key model classes:
+- `seedu.address.model.team.Team` (holds `TeamName`, members, sessions)
+- `seedu.address.model.team.session.Session` (holds `Location`, `startDate`, `endDate`)
+- `seedu.address.model.team.UniqueTeamList` (manages uniqueness and storage of teams)
+
+Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `l/` (location), `sdt/` (start), `edt/` (end).
+
+Implemented commands:
+- `team tn/TEAM_NAME i/IDX IDX IDX IDX` — create a team of 4 athletes.
+    - Constraints: exactly 4 distinct valid athlete indexes; members cannot already belong to another team; team name must be unique.
+- `listteams` — list all teams.
+- `deleteteam INDEX` — delete a team by displayed index in the team list.
+- `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
+    - Constraints: team index must be valid; `end` must not be before `start`; location and datetimes must satisfy format and validation rules.
+- `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
+    - Notes: sessions are ordered by start datetime (`Session.SESSION_ORDER`) when interpreting `SESSION_INDEX`.
+
+High-level logic and model interactions:
+- Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
+- `ModelManager` updates teams immutably: when adding or removing a session, it constructs a new `Team` instance with updated session sets and replaces the existing team in the address book.
+
+Design considerations:
+- Team immutability avoids side-effects when editing nested collections (sessions, members).
+- Session indices are resolved against a deterministic ordering to ensure predictable deletion behavior.
+
+### Listing Athletes and Teams
+
+This project displays a list of athletes by default but will display either athletes or teams depending on the command being executed.
+- Any athlete-related commands (e.g. `add`, `delete`, `find`) are implemented to display athletes by default after execution.
+- Any team-related commands (e.g. `team`, `listteams`) are implemented to display teams by default after execution.
+- Each team displays its members in alphabetical order and its sessions in chronological order based on start datetime.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -252,45 +298,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-#### Cascading deletions on athlete removal
-
-When an athlete is deleted via `DeleteCommand`, the system also deletes any team that includes that athlete. Rationale:
-- Teams must always have **exactly 4** members; removing one would violate the invariant.
-- The `Model` exposes `getTeamOfPerson(Person)` to locate the team, and `deleteTeam(Team)` is invoked after `deletePerson(Person)` if applicable.
-- The `DeleteCommand` composes a combined success message for both deletions.
-
-### Teams and Sessions
-
-This project extends AB-3 with `Team` and `Session` domain entities and corresponding commands.
-
-- Teams are groups of exactly 4 distinct athletes (`Person`).
-- Sessions represent training events with a location and start/end datetimes, attached to teams.
-
-Key model classes:
-- `seedu.address.model.team.Team` (holds `TeamName`, members, sessions)
-- `seedu.address.model.team.session.Session` (holds `Location`, `startDate`, `endDate`)
-- `seedu.address.model.team.UniqueTeamList` (manages uniqueness and storage of teams)
-
-Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `l/` (location), `sdt/` (start), `edt/` (end).
-
-Implemented commands:
-- `team tn/TEAM_NAME i/IDX IDX IDX IDX` — create a team of 4 athletes.
-  - Constraints: exactly 4 distinct valid athlete indexes; members cannot already belong to another team; team name must be unique.
-- `listteams` — list all teams.
-- `deleteteam INDEX` — delete a team by displayed index in the team list.
-- `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
-  - Constraints: team index must be valid; `end` must not be before `start`; location and datetimes must satisfy format and validation rules.
-- `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
-  - Notes: sessions are ordered by start datetime (`Session.SESSION_ORDER`) when interpreting `SESSION_INDEX`.
-
-High-level logic and model interactions:
-- Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
-- `ModelManager` updates teams immutably: when adding or removing a session, it constructs a new `Team` instance with updated session sets and replaces the existing team in the address book.
-
-Design considerations:
-- Team immutability avoids side-effects when editing nested collections (sessions, members).
-- Session indices are resolved against a deterministic ordering to ensure predictable deletion behavior.
 
 ### \[Proposed\] Data archiving
 
@@ -606,7 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. The system should validate critical data formats (dates, indexes, required fields) before executing commands.
 9. The application should be able to run on standard laptops commonly used by coaches without requiring high-end hardware.
 10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
-11. Command syntax should follow consistent patterns across all features (e.g., n/ for name, index/ for indexes).
+
 
 
 *{More to be added}*
@@ -619,65 +626,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
 * **Athletes**: Secondary school relay race Athletes
-* **Teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
-* **Sessions**: Sessions are used to track a Team's training time and location.
+* **teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
+* **sessions**: Sessions are added to Teams. Each Session has Start Date & Time, End Date & Time and Location.
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Below are step-by-step instructions to manually test the application. 
+For each feature, prerequisites and expected outcomes are provided. 
 
 <box type="info" seamless>
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** These instructions only provide a starting point for testers to work on; 
+Testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+---
 
-1. Initial launch
+### 1. Launch and Setup
 
-   1. Download the jar file and copy into an empty folder
+As a coach, you begin by launching the application for the first time and configuring your workspace.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1. **Initial launch**
+    1. Download the jar file and copy it into an empty folder.
+    2. Double-click the jar file.<br>
+       **Expected:** The GUI opens with a set of sample athletes. The window size may not be optimal.
 
-1. Saving window preferences
+2. **Saving window preferences**
+    1. Resize the window to your preferred size and move it to a different location. Close the window.
+    2. Re-launch the app by double-clicking the jar file.<br>
+       **Expected:** The most recent window size and location are retained.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+---
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### 2. Adding Athletes
 
-1. _{ more test cases …​ }_
+Now, you want to populate your database with athletes.
 
-### Deleting an athlete
+1. **Clear Current Sample Data**
+    1. Test case: `clear`
+      - **Expected:** All sample athletes/teams are removed so you can add your own data from a clean slate.
 
-1. Deleting an athlete while all athletes are being shown
+2. **Adding a new athlete**
+    1. Test case: `add n/Alice Tan d/2003-10-10 p/98765432 e/alicet@example.com a/Alice Street, Block 123, #01-011 s/Singapore School r/Captain h/180 w/75 t/Kneeinjury`
+        - **Expected:** Success message confirming Alice Tan is added. She appears in the athlete list.
 
-   1. Prerequisites: List all athletes using the `list` command. Multiple athletes in the list.
+---
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### 3. Edit Athlete
 
-   1. Test case: `delete 0`<br>
-      Expected: No athlete is deleted. Error details shown in the status message. Status bar remains the same.
+After adding athletes, you may wish to update their details.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. **Editing an athlete's information**
+    1. Prerequisite: At least one athlete exists.
+    2. Test case: `edit 1 r/Sprinter t/Captain`
+        - **Expected:** Success message. Athlete at index 1 now has updated role and tag.
 
-1. _{ more test cases …​ }_
+---
 
-### Saving data
+### 4. Find Athlete
 
-1. Dealing with missing/corrupted data files
+As the list grows, you need to quickly find specific athletes.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. **Finding athletes by name**
+    1. Test case: `find n/Alice`
+        - **Expected:** Only athletes with "Alice" in their name are listed.
 
-1. _{ more test cases …​ }_
+2. **Filtering by tag or role**
+    1. Test case: `find t/Sprinter`
+        - **Expected:** Only athletes tagged as "Sprinter" are shown.
 
-### Teams and Sessions
+---
+
+### 5. Add Team
+
+With your athletes in place, you proceed to group them into teams.
 
 1. Listing teams
 
@@ -727,3 +753,138 @@ testers are expected to do more *exploratory* testing.
       Expected: Success message and session removed.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
+
+---
+
+### 6. Adding sessions
+
+You want to schedule training sessions for your teams.
+
+1. **Adding a session to a team**
+    1. Prerequisite: At least one team exists; note its index from `listteams`.
+    2. Test case: `addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`
+        - **Expected:** Success message showing session details added to the team.
+
+---
+
+### 7. Deleting sessions
+
+Sometimes, you need to remove a session from a team's schedule.
+
+1. **Deleting a session from a team**
+    1. Prerequisite: Team at index `1` has at least one session.
+    2. Test case: `deletesession i/1 si/1`
+        - **Expected:** Success message and session is removed.
+
+---
+
+### 8. Delete Team
+
+You may need to remove teams as circumstances change.
+
+1. **Listing teams**
+    1. Test case: `listteams`
+        - **Expected:** All teams are shown. If none exist, shows an empty team list section.
+
+2. **Deleting a team**
+    1. Prerequisite: At least one team exists (from `listteams`).
+    2. Test case: `deleteteam 1`
+        - **Expected:** First team is deleted, success message.
+
+---
+
+### 9. Deleting Athletes and Cascading Effects
+
+Occasionally, an athlete leaves. You remove them and observe how the system updates related teams.
+
+1. **Deleting an athlete while all athletes are shown**
+    1. Prerequisite: List all athletes using the `list` command. Multiple athletes are present.
+    2. Test case: `delete 1`
+        - **Expected:** First athlete is deleted from the list. If the athlete belonged to a team, that team is also deleted. Success message lists all deletions. Timestamp in the status bar is updated.
+
+---
+
+### 10. Saving and Reloading Data
+
+You want to ensure your data persists between sessions.
+
+1. **Saving and restoring data**
+    1. Add or modify athletes, teams, or sessions.
+    2. Close the application.
+    3. Re-launch the application.
+        - **Expected:** All changes made in the previous session are preserved.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Difficulty level: Medium - High
+
+**Technical Challenges faced**
+
+1. Extended person model to support additional attributes:
+    1. Adding new attributes to the existing `Person` model in AB3 required careful modification of multiple classes
+       to ensure data consistency and sufficient validation.
+2. Advanced search functionality:
+    1. Implementing multi-criteria search (by name, school, role, tags...)
+       required complex parsing and filtering logic, which was more challenging than simple single-criterion searches in AB3.
+2. Complex entity relationship management:
+    1. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions),
+       necessitating careful design to maintain data integrity and consistency.
+    2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams,
+       which added complexity to the delete operations.
+
+### Effort distribution
+
+Estimated manhours spent: 120 hours
+
+**High-Complexity Tasks (40% of effort)**
+1. Designing the relational architecture between athletes, teams, and sessions
+2. Implementing complex validation rules for team composition
+3. Ensuring data integrity across interconnected entities
+
+**Medium-Complexity Tasks (35% of effort)**
+1. Extending existing AB3 components without breaking functionality
+2. Implementing new field types with custom validation
+3. Creating new command parsers and logic
+
+**Routine Implementation Tasks (25% of effort)**
+1. UI component updates
+2. Additional test cases
+3. Documentation updates
+
+### Technical Achievements
+1. Successfully extended AB3's Person model while maintaining all existing functionality
+2. Implemented complex business rules for team formation (exactly 4 unique athletes)
+3. Created a relational system between athletes, teams, and training sessions
+4. Built advanced search that outperforms AB3's basic find functionality
+5. Maintained data integrity across multiple interconnected entities
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### **1. Show team information for each athlete**
+
+**Description:**  
+Enhance the person list panel to include details about the team each athlete belongs to.
+Coaches can better see which team the athlete belongs to at a glance.
+
+### **2. Show attendance for each athlete**
+
+**Description:**
+Implement attendance feature to track session attendance for each athlete.
+Coaches can mark or unmark session attendance for each athlete.
+Provide summary statistics such as attendance rate and missed sessions in the person list panel.
+Coaches can better see which athlete is committed or not.
+
+### **3. Auto deletion of sessions after the end date & time has passed**
+
+**Description:**  
+Sessions whose end date & time has passed will be deleted automatically.
+This will maintain a clutter-free and up-to-date session list for the teams.
+
+1. **Creating a team of 4 athletes**
+    1. Prerequisite: At least 4 athletes listed via `list`.
+    2. Test case: `team tn/Alpha i/1 2 3 4`
+        - **Expected:** Success message. Team "Alpha" appears in the teams list with 4 members.
