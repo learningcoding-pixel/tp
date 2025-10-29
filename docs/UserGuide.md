@@ -131,6 +131,22 @@ Examples:
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
 
+### Locating teams: `findteam`
+
+Finds teams whose fields matches the provided keywords for that field.
+
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+
+* The search is case-insensitive. e.g `starteam` will match `StarTeam`
+* The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
+* Only the TeamName is searched
+* Only Full words will be matched e.g. `Star` will not match `StarTeam`
+* Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
+
+Examples:
+* `findteam starteam` returns `StarTeam`
+* `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
+  ![result for 'findteam starteam'](images/findteamstarteamResult.png)
 
 ### Deleting a person : `delete`
 

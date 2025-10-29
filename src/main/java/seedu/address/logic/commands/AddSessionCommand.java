@@ -24,6 +24,7 @@ public class AddSessionCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added session to %1$s: %2$s";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team index provided is invalid.";
+    public static final String MESSAGE_INVALID_DATES = "Start datetime must be earlier than end datetime.";
 
     private final Index teamIndex;
     private final Session session;
