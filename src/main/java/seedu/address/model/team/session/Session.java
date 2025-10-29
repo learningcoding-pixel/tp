@@ -78,7 +78,7 @@ public class Session {
 
     @Override
     public String toString() {
-        return String.format("startDate: %s, endDate: %s, location: %s",
+        return String.format("Start Date & Time: %s, End Date & Time: %s, Location: %s",
                 startDate.format(formatter),
                 endDate.format(formatter),
                 location);
