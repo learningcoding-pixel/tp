@@ -218,6 +218,17 @@ Examples:
   Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 
+### Deleting Session: `deletesession`
+
+Delete a session from the team in the address book.
+
+Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
+
+Examples:
+* `deletesession i/1 si/1` returns
+  Deleted session: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park From team: StarTeam
+  ![result for 'deletesession i/1 si/1'](images/deletesessionResult.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -267,14 +278,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**AddSession** | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTeam**   | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`
-**List**   | `list`
-**Help**   | `help`
+Action            | Format, Examples
+------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`
+**Clear**         | `clear`
+**Delete**        | `delete INDEX`<br> e.g., `delete 3`
+**DeleteSession** | `delete i/TEAM_INDEX si/SESSION_INDEX`<br> e.g., `deletesession i/1 si/1`
+**Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTeam**      | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`
+**List**          | `list`
+**Help**          | `help`
