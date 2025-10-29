@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding an athlete: `add`
 
-Adds an athlete to the address book.
+Adds an athlete to the RelayCoach app.
 
 Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
 
@@ -104,13 +104,13 @@ Examples:
 
 ### Listing all athletes : `list`
 
-Shows a list of all athletes in the address book.
+Shows a list of all athletes in the RelayCoach app.
 
 Format: `list`
 
 ### Editing an athlete : `edit`
 
-Edits an existing athlete in the address book.
+Edits an existing athlete in the RelayCoach app.
 
 Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
 
@@ -218,15 +218,14 @@ Examples:
 
 ### Adding Session: `addsession`
 
-Adds a session to the team in the address book.
+Adds a session to the team in the RelayCoach app.
 
 Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
 * startDate must be earlier than endDate
 
 Examples:
-* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns
-  Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a team named `StarTeam` with start datetime: 21 September 2025 17:00, end datetime: 21 September 2025 18:00, and location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 
 ### Deleting Session: `deletesession`
@@ -236,12 +235,11 @@ Examples:
 Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
 
 Examples:
-* `deletesession i/1 si/1` returns
-  Deleted session: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park From team: StarTeam
+* `deletesession i/1 si/1` deletes the 1st session from the team at index 1
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the RelayCoach app.
 
 Format: `clear`
 
