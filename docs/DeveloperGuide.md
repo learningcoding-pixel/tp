@@ -747,49 +747,6 @@ With your athletes in place, you proceed to group them into teams.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
 
-## **Appendix: Effort**
-
-### Difficulty level: Medium - High
-
-**Technical Challenges faced**
-
-1. Extended person model to support additional attributes:
-   1. Adding new attributes to the existing `Person` model in AB3 required careful modification of multiple classes 
-      to ensure data consistency and sufficient validation.
-2. Advanced search functionality: 
-   1. Implementing multi-criteria search (by name, school, role, tags...) 
-      required complex parsing and filtering logic, which was more challenging than simple single-criterion searches in AB3.
-2. Complex entity relationship management: 
-   1. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions), 
-      necessitating careful design to maintain data integrity and consistency.
-   2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams, 
-      which added complexity to the delete operations.
-
-### Effort distribution
-
-Estimated manhours spent: 120 hours
-
-**High-Complexity Tasks (40% of effort)**
-1. Designing the relational architecture between athletes, teams, and sessions 
-2. Implementing complex validation rules for team composition 
-3. Ensuring data integrity across interconnected entities
-
-**Medium-Complexity Tasks (35% of effort)**
-1. Extending existing AB3 components without breaking functionality 
-2. Implementing new field types with custom validation 
-3. Creating new command parsers and logic
-
-**Routine Implementation Tasks (25% of effort)**
-1. UI component updates 
-2. Additional test cases 
-3. Documentation updates
-
-### Technical Achievements
-1. Successfully extended AB3's Person model while maintaining all existing functionality 
-2. Implemented complex business rules for team formation (exactly 4 unique athletes)
-3. Created a relational system between athletes, teams, and training sessions 
-4. Built advanced search that outperforms AB3's basic find functionality 
-5. Maintained data integrity across multiple interconnected entities
 
 1. **Creating a team of 4 athletes**
     1. Prerequisite: At least 4 athletes listed via `list`.
@@ -855,4 +812,48 @@ You want to ensure your data persists between sessions.
     3. Re-launch the application.
         - **Expected:** All changes made in the previous session are preserved.
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Difficulty level: Medium - High
+
+**Technical Challenges faced**
+
+1. Extended person model to support additional attributes:
+    1. Adding new attributes to the existing `Person` model in AB3 required careful modification of multiple classes
+       to ensure data consistency and sufficient validation.
+2. Advanced search functionality:
+    1. Implementing multi-criteria search (by name, school, role, tags...)
+       required complex parsing and filtering logic, which was more challenging than simple single-criterion searches in AB3.
+2. Complex entity relationship management:
+    1. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions),
+       necessitating careful design to maintain data integrity and consistency.
+    2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams,
+       which added complexity to the delete operations.
+
+### Effort distribution
+
+Estimated manhours spent: 120 hours
+
+**High-Complexity Tasks (40% of effort)**
+1. Designing the relational architecture between athletes, teams, and sessions
+2. Implementing complex validation rules for team composition
+3. Ensuring data integrity across interconnected entities
+
+**Medium-Complexity Tasks (35% of effort)**
+1. Extending existing AB3 components without breaking functionality
+2. Implementing new field types with custom validation
+3. Creating new command parsers and logic
+
+**Routine Implementation Tasks (25% of effort)**
+1. UI component updates
+2. Additional test cases
+3. Documentation updates
+
+### Technical Achievements
+1. Successfully extended AB3's Person model while maintaining all existing functionality
+2. Implemented complex business rules for team formation (exactly 4 unique athletes)
+3. Created a relational system between athletes, teams, and training sessions
+4. Built advanced search that outperforms AB3's basic find functionality
+5. Maintained data integrity across multiple interconnected entities
