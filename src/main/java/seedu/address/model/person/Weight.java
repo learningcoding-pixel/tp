@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
     public static final String MESSAGE_CONSTRAINTS =
-            "Weight must be a non-negative number and cannot be blank.";
+            "Weight must be a positive number between 25 and 120 kg (inclusive), and may have up to one decimal place.";
+    public static final String VALIDATION_REGEX =
+            "^(?:2[5-9](?:\\.\\d)?|[3-9]\\d(?:\\.\\d)?|1[01]\\d(?:\\.\\d)?|120(?:\\.0)?)$";
     public final String value;
 
     /**
@@ -27,15 +29,7 @@ public class Weight {
      * Returns true if a given string is a valid weight.
      */
     public static boolean isValidWeight(String test) {
-        if (test == null || test.isBlank()) {
-            return false;
-        }
-        try {
-            double value = Double.parseDouble(test);
-            return value >= 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return test != null && test.matches(VALIDATION_REGEX);
     }
 
     @Override

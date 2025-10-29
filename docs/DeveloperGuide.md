@@ -1,10 +1,10 @@
 ---
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# RelayCoach Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` (athlete) objects residing in the `Model`.
 
 ### Logic component
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete an athlete).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -123,14 +123,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` (athlete) needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th athlete in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new athlete. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the athlete was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,10 +246,49 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the athlete being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+#### Cascading deletions on athlete removal
+
+When an athlete is deleted via `DeleteCommand`, the system also deletes any team that includes that athlete. Rationale:
+- Teams must always have **exactly 4** members; removing one would violate the invariant.
+- The `Model` exposes `getTeamOfPerson(Person)` to locate the team, and `deleteTeam(Team)` is invoked after `deletePerson(Person)` if applicable.
+- The `DeleteCommand` composes a combined success message for both deletions.
+
+### Teams and Sessions
+
+This project extends AB-3 with `Team` and `Session` domain entities and corresponding commands.
+
+- Teams are groups of exactly 4 distinct athletes (`Person`).
+- Sessions represent training events with a location and start/end datetimes, attached to teams.
+
+Key model classes:
+- `seedu.address.model.team.Team` (holds `TeamName`, members, sessions)
+- `seedu.address.model.team.session.Session` (holds `Location`, `startDate`, `endDate`)
+- `seedu.address.model.team.UniqueTeamList` (manages uniqueness and storage of teams)
+
+Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `l/` (location), `sdt/` (start), `edt/` (end).
+
+Implemented commands:
+- `team tn/TEAM_NAME i/IDX IDX IDX IDX` — create a team of 4 athletes.
+  - Constraints: exactly 4 distinct valid athlete indexes; members cannot already belong to another team; team name must be unique.
+- `listteams` — list all teams.
+- `deleteteam INDEX` — delete a team by displayed index in the team list.
+- `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
+  - Constraints: team index must be valid; `end` must not be before `start`; location and datetimes must satisfy format and validation rules.
+- `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
+  - Notes: sessions are ordered by start datetime (`Session.SESSION_ORDER`) when interpreting `SESSION_INDEX`.
+
+High-level logic and model interactions:
+- Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
+- `ModelManager` updates teams immutably: when adding or removing a session, it constructs a new `Team` instance with updated session sets and replaces the existing team in the address book.
+
+Design considerations:
+- Team immutability avoids side-effects when editing nested collections (sessions, members).
+- Session indices are resolved against a deterministic ordering to ensure predictable deletion behavior.
 
 ### \[Proposed\] Data archiving
 
@@ -289,23 +328,23 @@ coaches manage athletes and teams from different schools faster than a typical m
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                        |
-|----------|-----------------------------------------------------|--------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                                | add a new athlete                    |                                                                        |
-| `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                   |
-| `* * *`  | user                                                | find a person by name                | locate details of persons without having to go through the entire list |
-| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means         |
-| `* *`    | user managing multiple teams                        | group athletes by their teams        | keep track of who is in which team                                     |
-| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list   |
-| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                 |
-| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                     |
-| `*`      | user with many persons in the address book          | sort persons by name                 | locate a person easily                                                 |
-| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                 |
-| `*`      | user                                                | add a new session                    | record down all sessions date time and location                        |
-| `*`      | user                                                | assign athletes to a session         | track down which athlete is supposed to attend a particular session    |
-| `*`      | user                                                | list down all upcoming sessions      | keep track of which sessions are upcoming and who is attending         |
-| `*`      | user                                                | delete a session                     | remove unwanted sessions                                               |
+| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                         |
+|----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                  |
+| `* * *`  | user                                                | add a new athlete                    |                                                                         |
+| `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                    |
+| `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list |
+| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means          |
+| `* *`    | user managing multiple teams                        | group athletes by their teams        | keep track of who is in which team                                      |
+| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list    |
+| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
+| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
+| `*`      | user with many athletes in the address book         | sort athletes by name                | locate an athlete easily                                                |
+| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
+| `*`      | user                                                | add a new session                    | record down all sessions date time and location                         |
+| `*`      | user                                                | assign athletes to a session         | track down which athlete is supposed to attend a particular session     |
+| `*`      | user                                                | list down all upcoming sessions      | keep track of which sessions are upcoming and who is attending          |
+| `*`      | user                                                | delete a session                     | remove unwanted sessions                                                |
 
 *{More to be added}*
 
@@ -403,6 +442,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     2a. Selection invalid (e.g., index out of bounds).
         2a1. RelayCoach prompts for correction.
+        Use case ends.
+
+    3a. Athlete belongs to a team.
+        3a1. RelayCoach deletes the team that includes the athlete.
+        3a2. RelayCoach confirms both deletions in the success message.
         Use case ends.
 
 **Use case: Group Athletes by Teams**
@@ -553,7 +597,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 athletes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The command interface should allow coaches to perform common tasks while standing or in outdoor environments without requiring precise mouse movements.
 5. The application should efficiently handle peak usage during competition seasons when coaches need to manage multiple teams and training sessions simultaneously.
@@ -608,17 +652,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an athlete
 
-1. Deleting a person while all persons are being shown
+1. Deleting an athlete while all athletes are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all athletes using the `list` command. Multiple athletes in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No athlete is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -632,3 +676,54 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Teams and Sessions
+
+1. Listing teams
+
+   1. Test case: `listteams`  
+      Expected: All teams are shown. If none exist, shows an empty team list section.
+
+2. Creating a team of 4 athletes
+
+   1. Prerequisites: At least 4 athletes listed via `list`.
+   2. Test case: `team tn/Alpha i/1 2 3 4`  
+      Expected: Success message. Team `Alpha` appears in teams list with 4 members.
+   3. Test case: `team tn/Alpha i/1 2 3 4` (duplicate name)  
+      Expected: Error about duplicate team name.
+   4. Test case: `team tn/Beta i/1 2 3` (fewer than 4)  
+      Expected: Error about team size must be exactly 4.
+   5. Test case: `team tn/Gamma i/1 2 3 3` (duplicate index)  
+      Expected: Error about requiring 4 distinct members.
+   6. Test case: `team tn/Delta i/100 101 102 103` (invalid indexes)  
+      Expected: Error about invalid athlete indexes.
+   7. Test case: create a second team reusing a member already in a team  
+      Expected: Error listing conflicting member indexes.
+
+3. Deleting a team
+
+   1. Prerequisites: Teams listed via `listteams`, at least 1 team.
+   2. Test case: `deleteteam 1`  
+      Expected: First team is deleted, success message.
+   3. Test case: `deleteteam i` where i is 0 or larger than the teams list size
+      Expected: Error about invalid index.
+
+4. Adding a session to a team
+
+   1. Prerequisites: At least 1 team exists; note its index from `listteams`.
+   2. Test case: `addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
+      Expected: Success message showing session details added to the team.
+   3. Test case: `addsession i/1 sdt/2025-10-21 0900 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about invalid datetime (end before start).
+   4. Test case: `addsession i/999 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about invalid team index.
+   5. Test case: `addsession i/1 sdt/2099-10-21 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about datetime format.
+
+5. Deleting a session from a team
+
+   1. Prerequisites: Team at index `1` has at least one session.
+   2. Test case: `deletesession i/1 si/1`  
+      Expected: Success message and session removed.
+   3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
+      Expected: Error about invalid session index.
