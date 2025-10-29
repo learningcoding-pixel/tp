@@ -124,7 +124,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object) and `Team` objects (which are contained in a `UniqueTeamList` object).
+* stores the RelayCoach App data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object) and `Team` objects (which are contained in a `UniqueTeamList` object).
 * stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. (
 * also stores the currently 'selected' `Team` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Team>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -147,7 +147,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both RelayCoach App data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -194,7 +194,7 @@ Implemented commands:
 
 High-level logic and model interactions:
 - Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
-- `ModelManager` updates teams immutably: when adding or removing a session, it constructs a new `Team` instance with updated session sets and replaces the existing team in the address book.
+- `ModelManager` updates teams immutably: when adding or removing a session, it constructs a new `Team` instance with updated session sets and replaces the existing team in the RelayCoach App.
 
 Design considerations:
 - Team immutability avoids side-effects when editing nested collections (sessions, members).
@@ -213,33 +213,33 @@ This project displays a list of athletes by default but will display either athl
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current RelayCoach App state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous RelayCoach App state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone RelayCoach App state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial RelayCoach App state, and the `currentStatePointer` pointing to that single RelayCoach App state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th athlete in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th athlete in the RelayCoach App. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the RelayCoach App after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted RelayCoach App state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new athlete. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new athlete. The `add` command also calls `Model#commitAddressBook()`, causing another modified RelayCoach App state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the RelayCoach App state will not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the athlete was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the athlete was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous RelayCoach App state, and restores the RelayCoach App to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -265,19 +265,19 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the RelayCoach App to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest RelayCoach App state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the RelayCoach App, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all RelayCoach App states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -289,7 +289,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire RelayCoach App.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
 | `*`      | user                                                | delete a team's training session     | remove unwanted sessions                                                |
 | `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easiliy        |
-| `*`      | user with many athletes in the address book         | sort athletes by name                | locate an athlete easily                                                |
+| `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                |
 | `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
 
 *{More to be added}*
@@ -718,54 +718,10 @@ As the list grows, you need to quickly find specific athletes.
 
 With your athletes in place, you proceed to group them into teams.
 
-1. Listing teams
-
-   1. Test case: `listteams`  
-      Expected: All teams are shown. If none exist, shows an empty team list section.
-
-2. Creating a team of 4 athletes
-
-   1. Prerequisites: At least 4 athletes listed via `list`.
-   2. Test case: `team tn/Alpha i/1 2 3 4`  
-      Expected: Success message. Team `Alpha` appears in teams list with 4 members.
-   3. Test case: `team tn/Alpha i/1 2 3 4` (duplicate name)  
-      Expected: Error about duplicate team name.
-   4. Test case: `team tn/Beta i/1 2 3` (fewer than 4)  
-      Expected: Error about team size must be exactly 4.
-   5. Test case: `team tn/Gamma i/1 2 3 3` (duplicate index)  
-      Expected: Error about requiring 4 distinct members.
-   6. Test case: `team tn/Delta i/100 101 102 103` (invalid indexes)  
-      Expected: Error about invalid athlete indexes.
-   7. Test case: create a second team reusing a member already in a team  
-      Expected: Error listing conflicting member indexes.
-
-3. Deleting a team
-
-   1. Prerequisites: Teams listed via `listteams`, at least 1 team.
-   2. Test case: `deleteteam 1`  
-      Expected: First team is deleted, success message.
-   3. Test case: `deleteteam i` where i is 0 or larger than the teams list size
-      Expected: Error about invalid index.
-
-4. Adding a session to a team
-
-   1. Prerequisites: At least 1 team exists; note its index from `listteams`.
-   2. Test case: `addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
-      Expected: Success message showing session details added to the team.
-   3. Test case: `addsession i/1 sdt/2025-10-21 0900 edt/2025-10-21 0800 l/Track`  
-      Expected: Error about invalid datetime (end before start).
-   4. Test case: `addsession i/999 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
-      Expected: Error about invalid team index.
-   5. Test case: `addsession i/1 sdt/2099-10-21 edt/2025-10-21 0800 l/Track`  
-      Expected: Error about datetime format.
-
-5. Deleting a session from a team
-
-   1. Prerequisites: Team at index `1` has at least one session.
-   2. Test case: `deletesession i/1 si/1`  
-      Expected: Success message and session removed.
-   3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
-      Expected: Error about invalid session index.
+1. **Creating a team of 4 athletes**
+    1. Prerequisite: At least 4 athletes listed via `list`.
+    2. Test case: `team tn/Alpha i/1 2 3 4`
+        - **Expected:** Success message. Team "Alpha" appears in the teams list with 4 members.
 
 ---
 
@@ -898,7 +854,9 @@ Coaches can better see which athlete is committed or not.
 Sessions whose end date & time has passed will be deleted automatically.
 This will maintain a clutter-free and up-to-date session list for the teams.
 
-1. **Creating a team of 4 athletes**
-    1. Prerequisite: At least 4 athletes listed via `list`.
-    2. Test case: `team tn/Alpha i/1 2 3 4`
-        - **Expected:** Success message. Team "Alpha" appears in the teams list with 4 members.
+### **4. Indexed commands only work for the currently displayed list of athletes or teams**
+
+**Description:**  
+Indexed commands such as `edit`, `delete` and `find` should only work for the currently displayed list of athletes or teams.
+Using a team-related command on an athlete list (and vice versa) will result in an error message.
+This will prevent coaches from accidentally deleting or editing athletes or teams that are not displayed.
