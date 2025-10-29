@@ -446,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         2a1. RelayCoach informs the coach that at least one field must be specified.
         Use case ends.
 
-    3a. Invalid data format or business rule violation (e.g., negative height).
+    3a. Invalid data format (e.g., negative height).
         3a1. RelayCoach requests correction and indicates the offending fields.
         Use case ends.
 
