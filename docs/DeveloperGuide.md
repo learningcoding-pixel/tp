@@ -884,5 +884,5 @@ Coaches can better see which athlete is committed or not.
 ### **3. Auto deletion of sessions after the end date & time has passed**
 
 **Description:**  
-Sessions whose end date & time has passed will be deleted automatically.
+Sessions whose end date & time has passed will be deleted automatically. 
 This will maintain a clutter-free and up-to-date session list for the teams.
