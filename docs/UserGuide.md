@@ -159,12 +159,6 @@ find n/John (shows athlete named John if exists)
 delete 1 (deletes the athlete named John shown at index 1 of the find result)
 ```
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
 ### Adding a team: `team`
 
 Adds a new team with no sessions to the RelayCoach app.
@@ -183,37 +177,6 @@ Each team contains a list of 4 members, and a list of training sessions schedule
 
 Format: `listteams`
 
-### Adding Session: `addsession`
-
-Adds a session to the team in the address book. 
-
-Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
-
-* startDate must be earlier than endDate
-
-Examples:
-* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns 
-Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
-  ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
-* 
-### Locating teams: `findteam`
-
-Finds teams whose fields matches the provided keywords for that field.
-
-Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
-
-* The search is case-insensitive. e.g `star` will match `Star`
-* The order of the keywords does not matter. e.g. `Star Moon` will match `Moon Star`
-* Only the TeamName is searched
-* Partial words will be matched e.g. `Star` will match `StarTeam`
-* Full words will be matched e.g. `StarTeam` will match `StarTeam`
-* Teams partially matching at least one keyword will be returned (i.e. OR search). e.g. team will return StarTeam, MoonTeam
-
-Examples:
-* `findteam team` returns `StarTeam` and `MoonTeam`
-* `findteam star` returns `StarTeam`<br>
-  ![result for 'findteam star'](images/findteamstarResult.png)
-
 ### Deleting a team : `deleteteam`
 
 Deletes the specified team at a given index from the RelayCoach app.
@@ -224,6 +187,42 @@ Format: `deleteteam INDEX`
 
 Examples:
 * `listteams` followed by `deleteteam 1` deletes the 1st team in the teams list from the RelayCoach app.
+
+### Locating teams: `findteam`
+
+Finds teams whose fields matches the provided keywords for that field.
+
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+
+* The search is case-insensitive. e.g `starteam` will match `StarTeam`
+* The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
+* Only the TeamName is searched
+* Only Full words will be matched e.g. `Star` will not match `StarTeam`
+* Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
+
+Examples:
+* `findteam starteam` returns `StarTeam`
+* `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
+  ![result for 'findteam starteam'](images/findteamstarteamResult.png)
+
+### Adding Session: `addsession`
+
+Adds a session to the team in the address book.
+
+Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
+
+* startDate must be earlier than endDate
+
+Examples:
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns
+  Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
+  ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -271,6 +270,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**AddSession** | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
