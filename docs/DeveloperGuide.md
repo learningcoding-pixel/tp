@@ -170,7 +170,7 @@ When an athlete is deleted via `DeleteCommand`, the system also deletes any team
 
 #### Cascading updates on athlete edits
 
-When athlete information is updated, the athlete info in team will be updated as well.
+When athlete information is updated, the athlete information in the athlete's team will be update as well.
 
 ### Teams and Sessions
 
