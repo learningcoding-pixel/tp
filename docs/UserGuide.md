@@ -137,17 +137,16 @@ Finds teams whose fields matches the provided keywords for that field.
 
 Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
 
-* The search is case-insensitive. e.g `star` will match `Star`
-* The order of the keywords does not matter. e.g. `Star Moon` will match `Moon Star`
+* The search is case-insensitive. e.g `starteam` will match `StarTeam`
+* The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
 * Only the TeamName is searched
-* Partial words will be matched e.g. `Star` will match `StarTeam`
-* Full words will be matched e.g. `StarTeam` will match `StarTeam`
-* Teams partially matching at least one keyword will be returned (i.e. OR search). e.g. team will return StarTeam, MoonTeam
+* Only Full words will be matched e.g. `Star` will not match `StarTeam`
+* Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
 
 Examples:
-* `findteam team` returns `StarTeam` and `MoonTeam`
-* `findteam star` returns `StarTeam`<br>
-  ![result for 'findteam star'](images/findteamstarResult.png)
+* `findteam starteam` returns `StarTeam`
+* `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
+  ![result for 'findteam starteam'](images/findteamstarteamResult.png)
 
 ### Deleting a person : `delete`
 
