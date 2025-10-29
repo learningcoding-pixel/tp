@@ -13,8 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
+### AI Tools
+- **GitHub Copilot**: Used judiciously by the development team for assisting test case creation 
+  throughout the project. The tool helped in giving suggestions for unit tests, and ensuring comprehensive test coverage.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -871,6 +872,7 @@ Estimated manhours spent: 120 hours
 3. Created a relational system between athletes, teams, and training sessions
 4. Built advanced search that outperforms AB3's basic find functionality
 5. Maintained data integrity across multiple interconnected entities
+
 
 --------------------------------------------------------------------------------------------------------------------
 
