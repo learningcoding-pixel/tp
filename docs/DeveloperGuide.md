@@ -698,6 +698,99 @@ As the list grows, you need to quickly find specific athletes.
 
 With your athletes in place, you proceed to group them into teams.
 
+1. Listing teams
+
+   1. Test case: `listteams`  
+      Expected: All teams are shown. If none exist, shows an empty team list section.
+
+2. Creating a team of 4 athletes
+
+   1. Prerequisites: At least 4 athletes listed via `list`.
+   2. Test case: `team tn/Alpha i/1 2 3 4`  
+      Expected: Success message. Team `Alpha` appears in teams list with 4 members.
+   3. Test case: `team tn/Alpha i/1 2 3 4` (duplicate name)  
+      Expected: Error about duplicate team name.
+   4. Test case: `team tn/Beta i/1 2 3` (fewer than 4)  
+      Expected: Error about team size must be exactly 4.
+   5. Test case: `team tn/Gamma i/1 2 3 3` (duplicate index)  
+      Expected: Error about requiring 4 distinct members.
+   6. Test case: `team tn/Delta i/100 101 102 103` (invalid indexes)  
+      Expected: Error about invalid athlete indexes.
+   7. Test case: create a second team reusing a member already in a team  
+      Expected: Error listing conflicting member indexes.
+
+3. Deleting a team
+
+   1. Prerequisites: Teams listed via `listteams`, at least 1 team.
+   2. Test case: `deleteteam 1`  
+      Expected: First team is deleted, success message.
+   3. Test case: `deleteteam i` where i is 0 or larger than the teams list size
+      Expected: Error about invalid index.
+
+4. Adding a session to a team
+
+   1. Prerequisites: At least 1 team exists; note its index from `listteams`.
+   2. Test case: `addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
+      Expected: Success message showing session details added to the team.
+   3. Test case: `addsession i/1 sdt/2025-10-21 0900 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about invalid datetime (end before start).
+   4. Test case: `addsession i/999 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about invalid team index.
+   5. Test case: `addsession i/1 sdt/2099-10-21 edt/2025-10-21 0800 l/Track`  
+      Expected: Error about datetime format.
+
+5. Deleting a session from a team
+
+   1. Prerequisites: Team at index `1` has at least one session.
+   2. Test case: `deletesession i/1 si/1`  
+      Expected: Success message and session removed.
+   3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
+      Expected: Error about invalid session index.
+
+## **Appendix: Effort**
+
+### Difficulty level: Medium - High
+
+**Technical Challenges faced**
+
+1. Extended person model to support additional attributes:
+   1. Adding new attributes to the existing `Person` model in AB3 required careful modification of multiple classes 
+      to ensure data consistency and sufficient validation.
+2. Advanced search functionality: 
+   1. Implementing multi-criteria search (by name, school, role, tags...) 
+      required complex parsing and filtering logic, which was more challenging than simple single-criterion searches in AB3.
+2. Complex entity relationship management: 
+   1. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions), 
+      necessitating careful design to maintain data integrity and consistency.
+   2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams, 
+      which added complexity to the delete operations.
+
+### Effort distribution
+
+Estimated manhours spent: 120 hours
+
+**High-Complexity Tasks (40% of effort)**
+1. Designing the relational architecture between athletes, teams, and sessions 
+2. Implementing complex validation rules for team composition 
+3. Ensuring data integrity across interconnected entities
+
+**Medium-Complexity Tasks (35% of effort)**
+1. Extending existing AB3 components without breaking functionality 
+2. Implementing new field types with custom validation 
+3. Creating new command parsers and logic
+
+**Routine Implementation Tasks (25% of effort)**
+1. UI component updates 
+2. Additional test cases 
+3. Documentation updates
+
+### Technical Achievements
+1. Successfully extended AB3's Person model while maintaining all existing functionality 
+2. Implemented complex business rules for team formation (exactly 4 unique athletes)
+3. Created a relational system between athletes, teams, and training sessions 
+4. Built advanced search that outperforms AB3's basic find functionality 
+5. Maintained data integrity across multiple interconnected entities
+
 1. **Creating a team of 4 athletes**
     1. Prerequisite: At least 4 athletes listed via `list`.
     2. Test case: `team tn/Alpha i/1 2 3 4`
