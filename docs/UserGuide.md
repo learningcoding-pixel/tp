@@ -225,7 +225,7 @@ Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION
 * startDate must be earlier than endDate
 
 Examples:
-* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a team named `StarTeam` with start datetime: 21 September 2025 17:00, end datetime: 21 September 2025 18:00, and location: park
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a team named `StarTeam` with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 
 ### Deleting Session: `deletesession`
