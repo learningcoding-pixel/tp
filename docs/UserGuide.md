@@ -85,8 +85,8 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
-* `HEIGHT` is the height of the athlete in centimeters, only accepts positive integers.
-* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive integers.
+* `HEIGHT` is the height of the athlete in centimeters, only accepts positive numbers up to 1 decimal place, only accepts values between 50.0cm to 300.0cm inclusive.
+* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 120.0kg inclusive.
 
 <box type="tip" seamless>
 
@@ -199,7 +199,7 @@ Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
 
 * The search is case-insensitive. e.g `starteam` will match `StarTeam`
 * The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
-* Only the TeamName is searched
+* Only the team name is searched
 * Only Full words will be matched e.g. `Star` will not match `StarTeam`
 * Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
 
