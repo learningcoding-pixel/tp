@@ -705,7 +705,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Teams listed via `listteams`, at least 1 team.
    2. Test case: `deleteteam 1`  
       Expected: First team is deleted, success message.
-   3. Test case: `deleteteam 0` or a number > size  
+   3. Test case: `deleteteam i` where i is 0 or larger than the teams list size
       Expected: Error about invalid index.
 
 4. Adding a session to a team
@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Error about invalid datetime (end before start).
    4. Test case: `addsession i/999 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`  
       Expected: Error about invalid team index.
-   5. Test case: `addsession i/1 sdt/invalid edt/2025-10-21 0800 l/Track`  
+   5. Test case: `addsession i/1 sdt/2099-10-21 edt/2025-10-21 0800 l/Track`  
       Expected: Error about datetime format.
 
 5. Deleting a session from a team
@@ -725,5 +725,5 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Team at index `1` has at least one session.
    2. Test case: `deletesession i/1 si/1`  
       Expected: Success message and session removed.
-   3. Test case: `deletesession i/1 si/0` or index > sessions count  
+   3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
