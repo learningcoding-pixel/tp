@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         2b1. RelayCoach requests correction using the required format.
         Use case resumes from Step 3.
 
-    3a. Duplicate athlete detected (based on system’s duplicate definition, e.g., same Name + School).
+    3a. Duplicate athlete detected (same name and same DOB).
         3a1. RelayCoach informs the coach and rejects the addition.
         Use case ends or resumes from Step 2 after correction.
 
