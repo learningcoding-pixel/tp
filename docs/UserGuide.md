@@ -183,6 +183,19 @@ Each team contains a list of 4 members, and a list of training sessions schedule
 
 Format: `listteams`
 
+### Adding Session: `addsession`
+
+Adds a session to the team in the address book. 
+
+Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
+
+* startDate must be earlier than endDate
+
+Examples:
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns 
+Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
+  ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
+* 
 ### Locating teams: `findteam`
 
 Finds teams whose fields matches the provided keywords for that field.

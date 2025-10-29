@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
+
 
 
 /**
@@ -78,10 +78,9 @@ public class Session {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("Location", location)
-                .add("StartDate", startDate.format(formatter))
-                .add("EndDate", endDate.format(formatter))
-                .toString();
+        return String.format("Start Date & Time: %s, End Date & Time: %s, Location: %s",
+                startDate.format(formatter),
+                endDate.format(formatter),
+                location);
     }
 }
