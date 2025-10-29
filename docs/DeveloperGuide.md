@@ -740,6 +740,8 @@ Coaches can better see which team the athlete belongs to at a glance.
 ### **2. Show attendance for each athlete**
 
 **Description:**
+Implement attendance feature to track session attendance for each athlete.
+Coaches can mark or unmark session attendance for each athlete.
 Provide summary statistics such as attendance rate and missed sessions in the person list panel.
 Coaches can better see which athlete is committed or not.
 
