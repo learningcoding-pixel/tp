@@ -221,6 +221,16 @@ Examples:
   Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 
+### Deleting Session: `deletesession`
+
+* Deletes the specified session by index from the displayed team list.
+
+Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
+
+Examples:
+* `deletesession i/1 si/1` returns
+  Deleted session: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park From team: StarTeam
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
