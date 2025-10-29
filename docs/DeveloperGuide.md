@@ -754,33 +754,6 @@ With your athletes in place, you proceed to group them into teams.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
 
-
-## **Planned Enhancements**
-
-### **1. Show team information for each athlete**
-
-**Description:**  
-Enhance the person list panel to include details about the team each athlete belongs to. 
-Coaches can better see which team the athlete belongs to at a glance.
-
-### **2. Show attendance for each athlete**
-
-**Description:**
-Implement attendance feature to track session attendance for each athlete.
-Coaches can mark or unmark session attendance for each athlete.
-Provide summary statistics such as attendance rate and missed sessions in the person list panel.
-Coaches can better see which athlete is committed or not.
-
-### **3. Auto deletion of sessions after the end date & time has passed**
-
-**Description:**  
-Sessions whose end date & time has passed will be deleted automatically.
-This will maintain a clutter-free and up-to-date session list for the teams.
-
-1. **Creating a team of 4 athletes**
-    1. Prerequisite: At least 4 athletes listed via `list`.
-    2. Test case: `team tn/Alpha i/1 2 3 4`
-        - **Expected:** Success message. Team "Alpha" appears in the teams list with 4 members.
 ---
 
 ### 6. Adding sessions
@@ -886,3 +859,32 @@ Estimated manhours spent: 120 hours
 3. Created a relational system between athletes, teams, and training sessions
 4. Built advanced search that outperforms AB3's basic find functionality
 5. Maintained data integrity across multiple interconnected entities
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### **1. Show team information for each athlete**
+
+**Description:**  
+Enhance the person list panel to include details about the team each athlete belongs to.
+Coaches can better see which team the athlete belongs to at a glance.
+
+### **2. Show attendance for each athlete**
+
+**Description:**
+Implement attendance feature to track session attendance for each athlete.
+Coaches can mark or unmark session attendance for each athlete.
+Provide summary statistics such as attendance rate and missed sessions in the person list panel.
+Coaches can better see which athlete is committed or not.
+
+### **3. Auto deletion of sessions after the end date & time has passed**
+
+**Description:**  
+Sessions whose end date & time has passed will be deleted automatically.
+This will maintain a clutter-free and up-to-date session list for the teams.
+
+1. **Creating a team of 4 athletes**
+    1. Prerequisite: At least 4 athletes listed via `list`.
+    2. Test case: `team tn/Alpha i/1 2 3 4`
+        - **Expected:** Success message. Team "Alpha" appears in the teams list with 4 members.
