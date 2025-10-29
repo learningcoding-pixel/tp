@@ -168,6 +168,10 @@ When an athlete is deleted via `DeleteCommand`, the system also deletes any team
 - The `Model` exposes `getTeamOfPerson(Person)` to locate the team, and `deleteTeam(Team)` is invoked after `deletePerson(Person)` if applicable.
 - The `DeleteCommand` composes a combined success message for both deletions.
 
+#### Cascading updates on athlete edits
+
+When athlete information is updated, the athlete info in team will be updated as well.
+
 ### Teams and Sessions
 
 This project extends AB-3 with `Team` and `Session` domain entities and corresponding commands.
