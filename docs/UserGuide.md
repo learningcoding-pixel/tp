@@ -185,7 +185,7 @@ Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION
 
 Examples:
 * `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns 
-Added session to StarTeam: startDate: 21 September 2025 17:00, endDate: 21 September 2025 18:00, location: park
+Added session to StarTeam: Start Date & Time: 21 September 2025 17:00, End Date & Time: 21 September 2025 18:00, Location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 * 
 ### Exiting the program : `exit`
