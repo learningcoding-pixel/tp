@@ -179,7 +179,7 @@ Format: `listteams`
 
 Adds a session to the team in the address book. 
 
-Format: `addsession i/TEAM_INDEX std/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
+Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
 * startDate must be earlier than endDate
 
