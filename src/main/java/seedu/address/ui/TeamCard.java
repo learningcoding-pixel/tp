@@ -63,10 +63,7 @@ public class TeamCard extends UiPart<Region> {
         } else {
             AtomicInteger index = new AtomicInteger(1);
             team.getSessions().stream()
-                    .sorted(Comparator.comparing(
-                            Session::getStartDate,
-                            Comparator.nullsLast(Comparator.naturalOrder())
-                    ))
+                    .sorted(Session.SESSION_ORDER)
                     .forEach(session -> {
                         SessionCard smallCard = new SessionCard(session, index.getAndIncrement());
                         smallCard.getLocation().setVisible(true);
