@@ -728,7 +728,24 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
 
+
 ## **Planned Enhancements**
-1.  Show team information for each athlete.
-2.  Show attendance for each athlete.
-3. Auto deletion of sessions after the end date & time has completed.
+
+### **1. Show team information for each athlete**
+
+**Description:**  
+Enhance the person list panel to include details about the team each athlete belongs to. 
+Coaches can better see which team the athlete belongs to at a glance.
+
+### **2. Show attendance for each athlete**
+
+**Description:**
+Provide summary statistics such as attendance rate and missed sessions in the person list panel.
+Coaches can better see which athlete is committed or not.
+
+### **3. Auto deletion of sessions after the end date & time has passed**
+
+**Description:**  
+Sessions whose end date & time has passed will be deleted automatically.
+This will maintain a clutter-free and up-to-date session list for the teams.
+
