@@ -659,7 +659,11 @@ As a coach, you begin by launching the application for the first time and config
 
 Now, you want to populate your database with athletes.
 
-1. **Adding a new athlete**
+1. **Clear Current Sample Data**
+    1. Test case: `clear`
+      - **Expected:** All sample athletes/teams are removed so you can add your own data from a clean slate.
+
+2. **Adding a new athlete**
     1. Test case: `add n/Alice Tan d/2003-10-10 p/98765432 e/alicet@example.com a/Alice Street, Block 123, #01-011 s/Singapore School r/Captain h/180 w/75 t/Kneeinjury`
         - **Expected:** Success message confirming Alice Tan is added. She appears in the athlete list.
 
