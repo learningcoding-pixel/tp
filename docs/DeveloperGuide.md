@@ -606,7 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. The system should validate critical data formats (dates, indexes, required fields) before executing commands.
 9. The application should be able to run on standard laptops commonly used by coaches without requiring high-end hardware.
 10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
-11. Command syntax should follow consistent patterns across all features (e.g., n/ for name, index/ for indexes).
+
 
 
 *{More to be added}*
@@ -619,8 +619,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
 * **Athletes**: Secondary school relay race Athletes
-* **teams**: Teams are used to group Athletes. Each team only have 4 Athletes.
-* **sessions**: Sessions are used to track a Team's training time and location.
+* **teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
+* **sessions**: Sessions are added to Teams. Each Session has Start Date & Time, End Date & Time and Location.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -727,3 +727,8 @@ testers are expected to do more *exploratory* testing.
       Expected: Success message and session removed.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
+
+## **Planned Enhancements**
+1.  Show team information for each athlete.
+2.  Show attendance for each athlete.
+3. Auto deletion of sessions after the end date & time has completed.
