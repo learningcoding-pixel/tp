@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `TeamListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` (athlete) objects residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` (athlete) and `Team` objects residing in the `Model`.
 
 ### Logic component
 
@@ -118,21 +118,23 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object) and `Team` objects (which are contained in a `UniqueTeamList` object).
+* stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. (
+* also stores the currently 'selected' `Team` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Team>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+* toggles between displaying `Person`s and `Team`s in the UI when executing commands that affect either `Person`s or `Team`s (e.g. deleting teams display `Team`s, deleting athletes display `Person`s).
 
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` (athlete) needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
 
 </box>
 
@@ -335,16 +337,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                    |
 | `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list |
 | `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means          |
-| `* *`    | user managing multiple teams                        | group athletes by their teams        | keep track of who is in which team                                      |
+| `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                      |
 | `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list    |
-| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
 | `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
+| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
+| `*`      | user                                                | delete a team's training session     | remove unwanted sessions                                                |
+| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easiliy        |
 | `*`      | user with many athletes in the address book         | sort athletes by name                | locate an athlete easily                                                |
 | `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
-| `*`      | user                                                | add a new session                    | record down all sessions date time and location                         |
-| `*`      | user                                                | assign athletes to a session         | track down which athlete is supposed to attend a particular session     |
-| `*`      | user                                                | list down all upcoming sessions      | keep track of which sessions are upcoming and who is attending          |
-| `*`      | user                                                | delete a session                     | remove unwanted sessions                                                |
 
 *{More to be added}*
 
@@ -614,13 +614,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **standard laptops**: laptops that run on Mid-range CPU(Intel Core i5 or AMD Ryzen 5) with maximum of 8GB Ram
+* **Standard laptops**: laptops that run on Mid-range CPU(Intel Core i5 or AMD Ryzen 5) with maximum of 8GB Ram
 * **CLI**: Command-Line Interface
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
 * **Athletes**: Secondary school relay race Athletes
-* **teams**: Teams are used to group Athletes. Each team only have 4 Athletes.
-* **sessions**: Sessions are used to track a Team's training time and location.
+* **Teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
+* **Sessions**: Sessions are used to track a Team's training time and location.
 
 --------------------------------------------------------------------------------------------------------------------
 
