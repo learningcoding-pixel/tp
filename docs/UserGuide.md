@@ -31,7 +31,7 @@ RelayCoach is a **desktop app for managing athletes' contacts, optimized for use
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
