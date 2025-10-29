@@ -21,9 +21,9 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who satisfy all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all athletes who satisfy all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: (must have at least one) \n"
+            + "Parameters: (must have at least one) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ROLE + "ROLE] "
@@ -47,7 +47,15 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        if (model.isAddressBookEmpty()) {
+            return new CommandResult(Messages.MESSAGE_NO_ATHLETES_IN_LIST);
+        }
+        assert !model.getAddressBook().getPersonList().isEmpty() : "Address book is expected to be non-empty here.";
         model.updateFilteredPersonList(predicate);
+        int matchedSize = model.getFilteredPersonList().size();
+        if (matchedSize == 0) {
+            return new CommandResult(Messages.MESSAGE_NO_MATCHING_ATHLETES);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

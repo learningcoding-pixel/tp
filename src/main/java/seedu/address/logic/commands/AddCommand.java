@@ -25,17 +25,17 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_DOB + "DOB "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SCHOOL + "SCHOOL "
-            + PREFIX_ROLE + "ROLE "
-            + PREFIX_HEIGHT + "HEIGHT "
-            + PREFIX_WEIGHT + "WEIGHT "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_DOB + "DOB] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
             + PREFIX_ROLE + "Captain "
             + PREFIX_HEIGHT + "175 "
             + PREFIX_WEIGHT + "65 "
-            + PREFIX_TAG + "overseas"
+            + PREFIX_TAG + "overseas "
             + PREFIX_TAG + "KneePain";
 
     public static final String MESSAGE_SUCCESS = "New athlete added: %1$s";

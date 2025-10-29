@@ -91,28 +91,28 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all athletes : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all athletes in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing an athlete : `edit`
 
-Edits an existing person in the address book.
+Edits an existing athlete in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the athlete at the specified `INDEX`. The index refers to the index number shown in the displayed athlete list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the athlete will be removed i.e adding of tags is not cumulative.
+* You can remove all the athlete’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/John Doe t/` Edits the name of the 2nd athlete to be `John Doe` and clears all existing tags.
 
 ### Locating athletes by name, school, role or tag: `find`
 
@@ -130,6 +130,23 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
+
+### Locating teams: `findteam`
+
+Finds teams whose fields matches the provided keywords for that field.
+
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+
+* The search is case-insensitive. e.g `starteam` will match `StarTeam`
+* The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
+* Only the TeamName is searched
+* Only Full words will be matched e.g. `Star` will not match `StarTeam`
+* Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
+
+Examples:
+* `findteam starteam` returns `StarTeam`
+* `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
+  ![result for 'findteam starteam'](images/findteamstarteamResult.png)
 
 ### Deleting a person : `delete`
 
@@ -151,12 +168,52 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding a team: `team`
+
+Adds a new team with no sessions to the RelayCoach app.
+
+Format: `team tn/TEAM_NAME i/ATHLETE_INDEX ...` 
+
+**Tip:** Exactly 4 unique athlete IDs must be provided to form a team. Each athlete can only be part of exactly one team.
+
+Examples:
+* `team tn/StarTeam i/1 2 3 4` : Adds a new team named `StarTeam` with athletes at index 1,2,3,4 in the current athlete list as members.
+
 ### Listing all teams: `listteams`
 
 Shows a list of all teams in the RelayCoach app.
 Each team contains a list of 4 members, and a list of training sessions scheduled for the team.
 
 Format: `listteams`
+
+### Locating teams: `findteam`
+
+Finds teams whose fields matches the provided keywords for that field.
+
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+
+* The search is case-insensitive. e.g `star` will match `Star`
+* The order of the keywords does not matter. e.g. `Star Moon` will match `Moon Star`
+* Only the TeamName is searched
+* Partial words will be matched e.g. `Star` will match `StarTeam`
+* Full words will be matched e.g. `StarTeam` will match `StarTeam`
+* Teams partially matching at least one keyword will be returned (i.e. OR search). e.g. team will return StarTeam, MoonTeam
+
+Examples:
+* `findteam team` returns `StarTeam` and `MoonTeam`
+* `findteam star` returns `StarTeam`<br>
+  ![result for 'findteam star'](images/findteamstarResult.png)
+
+### Deleting a team : `deleteteam`
+
+Deletes the specified team at a given index from the RelayCoach app.
+
+**Tip:** Deleting a team deletes all sessions associated with that team as well.
+
+Format: `deleteteam INDEX`
+
+Examples:
+* `listteams` followed by `deleteteam 1` deletes the 1st team in the teams list from the RelayCoach app.
 
 ### Exiting the program : `exit`
 
@@ -208,5 +265,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTeam**   | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`
 **List**   | `list`
 **Help**   | `help`
