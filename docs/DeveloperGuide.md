@@ -738,12 +738,12 @@ testers are expected to do more *exploratory* testing.
    1. Adding new attributes to the existing `Person` model in AB3 required careful modification of multiple classes 
       to ensure data consistency and sufficient validation.
 2. Advanced search functionality: 
-   3. Implementing multi-criteria search (by name, school, role, tags...) 
+   1. Implementing multi-criteria search (by name, school, role, tags...) 
       required complex parsing and filtering logic, which was more challenging than simple single-criterion searches in AB3.
 2. Complex entity relationship management: 
-   3. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions), 
+   1. Whilst AB3 only deals with one entity type, RelayCoach manages multiple interconnected entities (Athletes, Teams, Sessions), 
       necessitating careful design to maintain data integrity and consistency.
-   4. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams, 
+   2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams, 
       which added complexity to the delete operations.
 
 ### Effort distribution
