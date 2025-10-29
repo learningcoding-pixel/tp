@@ -76,20 +76,26 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an athlete: `add`
 
-Adds a person to the address book.
+Adds an athlete to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
+
+* `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
+* `SCHOOL` is the school the athlete is affiliated with.
+* `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
+* `HEIGHT` is the height of the athlete in centimeters, only accepts positive integers.
+* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive integers.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** An athlete can have any number of tags (including 0).
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain`
+* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/NUS Temasek Hall s/NUS r/Runner h/160 w/50`
 
 ### Listing all athletes : `list`
 
@@ -131,36 +137,27 @@ Examples:
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
 
-### Locating teams: `findteam`
+### Deleting an athlete : `delete`
 
-Finds teams whose fields matches the provided keywords for that field.
-
-Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
-
-* The search is case-insensitive. e.g `starteam` will match `StarTeam`
-* The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
-* Only the TeamName is searched
-* Only Full words will be matched e.g. `Star` will not match `StarTeam`
-* Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
-
-Examples:
-* `findteam starteam` returns `StarTeam`
-* `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
-  ![result for 'findteam starteam'](images/findteamstarteamResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
+Deletes the specified athlete by index from the displayed athlete list.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the athlete at the specified `INDEX`.
+* The index refers to the index number shown in the displayed athlete list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If the deleted athlete was part of a team, that team will also be deleted automatically.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+```
+list (shows 3 athletes)
+delete 2 (shows 2 athletes after deleting the 2nd athlete)
+```
+and
+```
+find n/John (shows athlete named John if exists)
+delete 1 (deletes the athlete named John shown at index 1 of the find result)
+```
 
 ### Clearing all entries : `clear`
 
