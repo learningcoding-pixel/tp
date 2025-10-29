@@ -158,9 +158,6 @@ Format: `delete INDEX`
 
 Examples:
 * `list` returns a list of all athletes, followed by `delete 2` which deletes the 2nd athlete in the list.
-
-and
-
 * `find n/John` returns a list of athletes named John, followed by `delete 1` which deletes the 1st athlete in that list.
 
 ### Adding a team: `team`
