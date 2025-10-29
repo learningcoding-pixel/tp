@@ -31,7 +31,7 @@ RelayCoach is a **desktop app for managing athletes' contacts, optimized for use
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the RelayCoach app.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding an athlete: `add`
 
-Adds an athlete to the address book.
+Adds an athlete to the RelayCoach app.
 
 Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
 
@@ -99,13 +99,13 @@ Examples:
 
 ### Listing all athletes : `list`
 
-Shows a list of all athletes in the address book.
+Shows a list of all athletes in the RelayCoach app.
 
 Format: `list`
 
 ### Editing an athlete : `edit`
 
-Edits an existing athlete in the address book.
+Edits an existing athlete in the RelayCoach app.
 
 Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
 
@@ -120,7 +120,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/John Doe t/` Edits the name of the 2nd athlete to be `John Doe` and clears all existing tags.
 
-### Locating athletes by name, school, role or tag: `find`
+### Finding athletes by name, school, role or tag: `find`
 
 Finds athletes whose fields matches the provided keywords for that field.
 
@@ -139,7 +139,7 @@ Examples:
 
 ### Deleting an athlete : `delete`
 
-Deletes the specified athlete by index from the displayed athlete list.
+Deletes the specified athlete by index from the RelayCoach app.
 
 Format: `delete INDEX`
 
@@ -149,15 +149,8 @@ Format: `delete INDEX`
 * If the deleted athlete was part of a team, that team will also be deleted automatically.
 
 Examples:
-```
-list (shows 3 athletes)
-delete 2 (shows 2 athletes after deleting the 2nd athlete)
-```
-and
-```
-find n/John (shows athlete named John if exists)
-delete 1 (deletes the athlete named John shown at index 1 of the find result)
-```
+* `list` followed by `delete 2` deletes the second athlete in RelayCoach app.
+* `find n/John` followed by `delete 1` deletes the first athlete in the results of the `find` command. 
 
 ### Adding a team: `team`
 
@@ -210,7 +203,7 @@ Examples:
 
 ### Adding Session: `addsession`
 
-Adds a session to the team in the address book.
+Adds a session to the team in the RelayCoach app.
 
 Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
@@ -233,7 +226,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the RelayCoach app.
 
 Format: `clear`
 
