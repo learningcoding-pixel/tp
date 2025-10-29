@@ -157,15 +157,13 @@ Format: `delete INDEX`
 * If the deleted athlete was part of a team, that team will also be deleted automatically.
 
 Examples:
-```
-list (shows 3 athletes)
-delete 2 (shows 2 athletes after deleting the 2nd athlete)
-```
+`list` returns a list of all athletes, followed by
+`delete 2` which deletes the 2nd athlete in the list.
+
 and
-```
-find n/John (shows athlete named John if exists)
-delete 1 (deletes the athlete named John shown at index 1 of the find result)
-```
+
+`find n/John` returns a list of athletes named John, followed by
+`delete 1` which deletes the 1st athlete in that list.
 
 ### Adding a team: `team`
 
