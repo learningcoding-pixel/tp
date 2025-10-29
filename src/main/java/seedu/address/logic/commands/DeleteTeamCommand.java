@@ -39,7 +39,7 @@ public class DeleteTeamCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
+        assert targetIndex.getZeroBased() < lastShownList.size();
         Team teamToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTeam(teamToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_TEAM_SUCCESS, Messages.format(teamToDelete)),

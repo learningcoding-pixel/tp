@@ -140,6 +140,10 @@ public class ModelManager implements Model {
         addressBook.setTeam(target, editedTeam);
     }
 
+    public boolean isAddressBookEmpty() {
+        return addressBook.getPersonList().isEmpty();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
