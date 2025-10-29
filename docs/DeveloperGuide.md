@@ -606,7 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. The system should validate critical data formats (dates, indexes, required fields) before executing commands.
 9. The application should be able to run on standard laptops commonly used by coaches without requiring high-end hardware.
 10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
-11. Command syntax should follow consistent patterns across all features (e.g., n/ for name, index/ for indexes).
+
 
 
 *{More to be added}*
@@ -619,8 +619,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
 * **Athletes**: Secondary school relay race Athletes
-* **Teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
-* **Sessions**: Sessions are used to track a Team's training time and location.
+* **teams**: Teams are used to group Athletes. Each team can only have 4 Athletes.
+* **sessions**: Sessions are added to Teams. Each Session has Start Date & Time, End Date & Time and Location.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -747,6 +747,28 @@ With your athletes in place, you proceed to group them into teams.
    3. Test case: `deletesession i/1 si/x`: 'where x is 0 or larger than the sessions list size 
       Expected: Error about invalid session index.
 
+
+## **Planned Enhancements**
+
+### **1. Show team information for each athlete**
+
+**Description:**  
+Enhance the person list panel to include details about the team each athlete belongs to. 
+Coaches can better see which team the athlete belongs to at a glance.
+
+### **2. Show attendance for each athlete**
+
+**Description:**
+Implement attendance feature to track session attendance for each athlete.
+Coaches can mark or unmark session attendance for each athlete.
+Provide summary statistics such as attendance rate and missed sessions in the person list panel.
+Coaches can better see which athlete is committed or not.
+
+### **3. Auto deletion of sessions after the end date & time has passed**
+
+**Description:**  
+Sessions whose end date & time has passed will be deleted automatically.
+This will maintain a clutter-free and up-to-date session list for the teams.
 
 1. **Creating a team of 4 athletes**
     1. Prerequisite: At least 4 athletes listed via `list`.
