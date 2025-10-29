@@ -82,11 +82,16 @@ Adds an athlete to the address book.
 
 Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
 
+* `NAME` is the name of the athlete
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
+* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be between 3-100 digits long.
+* `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." after the "@" symbol.
+* `ADDRESS` is the address of the athlete.
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
 * `HEIGHT` is the height of the athlete in centimeters, only accepts positive integers.
 * `WEIGHT` is the weight of the athlete in kilograms, only accepts positive integers.
+* `TAG` is a tag associated with the athlete used to describe any additional information about the athlete.
 
 <box type="tip" seamless>
 
@@ -95,7 +100,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 Examples:
 * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain`
-* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/NUS Temasek Hall s/NUS r/Runner h/160 w/50`
+* `add n/Betsy Crowe d/1988-05-12 p/81234567 e/betsycrowe@example.com a/123, Bedok South Ave 2, #10-355 s/SMU r/Runner h/160.5 w/50.0`
 
 ### Listing all athletes : `list`
 
