@@ -615,7 +615,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. A coach should be able to learn the basic commands (add, list, delete) within 30 minutes of use.
 
 
-
 *{More to be added}*
 
 ### Glossary
@@ -630,7 +629,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **sessions**: Sessions are added to Teams. Each Session has Start Date & Time, End Date & Time and Location.
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## **Appendix: Instructions for manual testing**
 
