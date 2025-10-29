@@ -154,12 +154,14 @@ Format: `clear`
 
 ### Adding a team: `team`
 
-Adds a team with no sessions to the RelayCoach app.
+Adds a new team with no sessions to the RelayCoach app.
 
-Format: `team tn/TEAM_NAME i/ATHLETE_INDEX ...` (Exactly 4 unique athlete IDs must be provided)
+Format: `team tn/TEAM_NAME i/ATHLETE_INDEX ...` 
+
+**Tip:** Exactly 4 unique athlete IDs must be provided to form a team. Each athlete can only be part of exactly one team.
 
 Examples:
-* `team tn/StarTeam i/1 i/2 i/3 i/4` : Adds a team named `StarTeam` with athletes at index 1,2,3,4 in the current athlete list as members.
+* `team tn/StarTeam i/1 2 3 4` : Adds a new team named `StarTeam` with athletes at index 1,2,3,4 in the current athlete list as members.
 
 ### Listing all teams: `listteams`
 
@@ -189,6 +191,8 @@ Examples:
 ### Deleting a team : `deleteteam`
 
 Deletes the specified team at a given index from the RelayCoach app.
+
+**Tip:** Deleting a team deletes all sessions associated with that team as well.
 
 Format: `deleteteam INDEX`
 
