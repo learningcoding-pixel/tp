@@ -82,11 +82,16 @@ Adds an athlete to the address book.
 
 Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
 
+* `NAME` is the name of the athlete
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
+* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be between 3-100 digits long.
+* `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." after the "@" symbol.
+* `ADDRESS` is the address of the athlete.
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
 * `HEIGHT` is the height of the athlete in centimeters, only accepts positive integers.
 * `WEIGHT` is the weight of the athlete in kilograms, only accepts positive integers.
+* `TAG` is a tag associated with the athlete used to describe any additional information about the athlete.
 
 <box type="tip" seamless>
 
@@ -95,7 +100,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 Examples:
 * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/NUS r/Captain h/175 w/65 t/overseas t/KneePain`
-* `add n/Betsy Crowe d/1988-05-12 p/1234567 e/betsycrowe@example.com a/NUS Temasek Hall s/NUS r/Runner h/160 w/50`
+* `add n/Betsy Crowe d/1988-05-12 p/81234567 e/betsycrowe@example.com a/123, Bedok South Ave 2, #10-355 s/SMU r/Runner h/160.5 w/50.0`
 
 ### Listing all athletes : `list`
 
@@ -109,15 +114,18 @@ Edits an existing athlete in the address book.
 
 Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
 
-* Edits the athlete at the specified `INDEX`. The index refers to the index number shown in the displayed athlete list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the athlete at the specified `INDEX`. The index refers to the index number shown in the displayed athlete list. 
+  The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the athlete will be removed i.e adding of tags is not cumulative.
 * You can remove all the athlete’s tags by typing `t/` without
     specifying any tags after it.
+* Changes made to an athlete will automatically update in the team (if any) that include this athlete.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567`
+  and `johndoe@example.com` respectively.
 *  `edit 2 n/John Doe t/` Edits the name of the 2nd athlete to be `John Doe` and clears all existing tags.
 
 ### Locating athletes by name, school, role or tag: `find`
