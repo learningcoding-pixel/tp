@@ -199,6 +199,13 @@ Design considerations:
 - Team immutability avoids side-effects when editing nested collections (sessions, members).
 - Session indices are resolved against a deterministic ordering to ensure predictable deletion behavior.
 
+### Listing Athletes and Teams
+
+This project displays a list of athletes by default but will display either athletes or teams depending on the command being executed.
+- Any athlete-related commands (e.g. `add`, `delete`, `find`) are implemented to display athletes by default after execution.
+- Any team-related commands (e.g. `team`, `listteams`) are implemented to display teams by default after execution.
+- Each team displays its members in alphabetical order and its sessions in chronological order based on start datetime.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
