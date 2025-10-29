@@ -3,6 +3,7 @@ package seedu.address.model.team;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -19,8 +20,7 @@ public class TeamNameContainsKeywordsPredicate implements Predicate<Team> {
     @Override
     public boolean test(Team team) {
         return keywords.stream()
-                .anyMatch(keyword ->
-                        team.getName().fullTeamName.toLowerCase().contains(keyword.toLowerCase()));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(team.getName().fullTeamName, keyword));
     }
 
     @Override
