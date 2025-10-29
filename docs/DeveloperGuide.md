@@ -125,7 +125,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the RelayCoach App data i.e., all `Person` (athlete) objects (which are contained in a `UniquePersonList` object) and `Team` objects (which are contained in a `UniqueTeamList` object).
-* stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. (
+* stores the currently 'selected' `Person` (athlete) objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * also stores the currently 'selected' `Team` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Team>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
@@ -187,7 +187,7 @@ Key model classes:
 Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `l/` (location), `sdt/` (start), `edt/` (end).
 
 Implemented commands:
-- `team tn/TEAM_NAME i/IDX IDX IDX IDX` — create a team of 4 athletes.
+- `team tn/TEAM_NAME i/IDX1 IDX2 IDX3 IDX4` — create a team of 4 athletes.
     - Constraints: exactly 4 distinct valid athlete indexes; members cannot already belong to another team; team name must be unique.
 - `listteams` — list all teams.
 - `deleteteam INDEX` — delete a team by displayed index in the team list.
@@ -209,7 +209,7 @@ Design considerations:
 This project displays a list of athletes by default but will display either athletes or teams depending on the command being executed.
 - Any athlete-related commands (e.g. `add`, `delete`, `find`) are implemented to display athletes by default after execution.
 - Any team-related commands (e.g. `team`, `listteams`) are implemented to display teams by default after execution.
-- Each team displays its members in alphabetical order and its sessions in chronological order based on start datetime.
+- Each team displays its members in alphabetical order and its sessions in chronological order based on start datetime and end datetime.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -304,11 +304,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -352,8 +347,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                      |
 | `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list    |
 | `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
-| `*`      | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
-| `*`      | user                                                | delete a team's training session     | remove unwanted sessions                                                |
+| `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
+| `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                |
 | `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easiliy        |
 | `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                |
 | `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
@@ -663,7 +658,7 @@ Testers are expected to do more *exploratory* testing.
 
 ---
 
-### 1. Launch and Setup
+#### 1. Launch and Setup
 
 As a coach, you begin by launching the application for the first time and configuring your workspace.
 
@@ -679,7 +674,7 @@ As a coach, you begin by launching the application for the first time and config
 
 ---
 
-### 2. Adding Athletes
+#### 2. Adding Athletes
 
 Now, you want to populate your database with athletes.
 
@@ -693,7 +688,7 @@ Now, you want to populate your database with athletes.
 
 ---
 
-### 3. Edit Athlete
+#### 3. Edit Athlete
 
 After adding athletes, you may wish to update their details.
 
@@ -704,7 +699,7 @@ After adding athletes, you may wish to update their details.
 
 ---
 
-### 4. Find Athlete
+#### 4. Find Athlete
 
 As the list grows, you need to quickly find specific athletes.
 
@@ -718,7 +713,7 @@ As the list grows, you need to quickly find specific athletes.
 
 ---
 
-### 5. Add Team
+#### 5. Add Team
 
 With your athletes in place, you proceed to group them into teams.
 
@@ -729,7 +724,7 @@ With your athletes in place, you proceed to group them into teams.
 
 ---
 
-### 6. Adding sessions
+#### 6. Adding sessions
 
 You want to schedule training sessions for your teams.
 
@@ -740,7 +735,7 @@ You want to schedule training sessions for your teams.
 
 ---
 
-### 7. Deleting sessions
+#### 7. Deleting sessions
 
 Sometimes, you need to remove a session from a team's schedule.
 
@@ -751,7 +746,7 @@ Sometimes, you need to remove a session from a team's schedule.
 
 ---
 
-### 8. Delete Team
+#### 8. Delete Team
 
 You may need to remove teams as circumstances change.
 
@@ -766,7 +761,7 @@ You may need to remove teams as circumstances change.
 
 ---
 
-### 9. Deleting Athletes and Cascading Effects
+#### 9. Deleting Athletes and Cascading Effects
 
 Occasionally, an athlete leaves. You remove them and observe how the system updates related teams.
 
@@ -777,7 +772,7 @@ Occasionally, an athlete leaves. You remove them and observe how the system upda
 
 ---
 
-### 10. Saving and Reloading Data
+#### 10. Saving and Reloading Data
 
 You want to ensure your data persists between sessions.
 
