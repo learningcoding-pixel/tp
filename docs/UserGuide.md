@@ -181,7 +181,7 @@ Adds a session to the team in the address book.
 
 Format: `addsession i/Team INDEX std/ STARTDATE edt/ ENDDATE l/ LOCATION`
 
-* startDate must be earlier than enDate
+* startDate must be earlier than endDate
 
 Examples:
 * `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` returns 

@@ -83,6 +83,4 @@ public class Session {
                 endDate.format(formatter),
                 location);
     }
-
-
 }
