@@ -131,23 +131,6 @@ Examples:
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
 
-### Locating teams: `findteam`
-
-Finds teams whose fields matches the provided keywords for that field.
-
-Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
-
-* The search is case-insensitive. e.g `star` will match `Star`
-* The order of the keywords does not matter. e.g. `Star Moon` will match `Moon Star`
-* Only the TeamName is searched
-* Partial words will be matched e.g. `Star` will match `StarTeam`
-* Full words will be matched e.g. `StarTeam` will match `StarTeam`
-* Teams partially matching at least one keyword will be returned (i.e. OR search). e.g. team will return StarTeam, MoonTeam
-
-Examples:
-* `findteam team` returns `StarTeam` and `MoonTeam`
-* `findteam star` returns `StarTeam`<br>
-  ![result for 'findteam star'](images/findteamstarResult.png)
 
 ### Deleting a person : `delete`
 
@@ -169,12 +152,48 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding a team: `team`
+
+Adds a team with no sessions to the RelayCoach app.
+
+Format: `team tn/TEAM_NAME i/ATHLETE_INDEX ...` (Exactly 4 unique athlete IDs must be provided)
+
+Examples:
+* `team tn/StarTeam i/1 i/2 i/3 i/4` : Adds a team named `StarTeam` with athletes at index 1,2,3,4 in the current athlete list as members.
+
 ### Listing all teams: `listteams`
 
 Shows a list of all teams in the RelayCoach app.
 Each team contains a list of 4 members, and a list of training sessions scheduled for the team.
 
 Format: `listteams`
+
+### Locating teams: `findteam`
+
+Finds teams whose fields matches the provided keywords for that field.
+
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+
+* The search is case-insensitive. e.g `star` will match `Star`
+* The order of the keywords does not matter. e.g. `Star Moon` will match `Moon Star`
+* Only the TeamName is searched
+* Partial words will be matched e.g. `Star` will match `StarTeam`
+* Full words will be matched e.g. `StarTeam` will match `StarTeam`
+* Teams partially matching at least one keyword will be returned (i.e. OR search). e.g. team will return StarTeam, MoonTeam
+
+Examples:
+* `findteam team` returns `StarTeam` and `MoonTeam`
+* `findteam star` returns `StarTeam`<br>
+  ![result for 'findteam star'](images/findteamstarResult.png)
+
+### Deleting a team : `deleteteam`
+
+Deletes the specified team at a given index from the RelayCoach app.
+
+Format: `deleteteam INDEX`
+
+Examples:
+* `listteams` followed by `deleteteam 1` deletes the 1st team in the teams list from the RelayCoach app.
 
 ### Exiting the program : `exit`
 
