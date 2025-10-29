@@ -17,7 +17,6 @@ Class StatusBarFooter
 Class CommandBox
 Class TeamListPanel
 Class TeamCard
-Class SessionListPanel
 Class SessionCard
 }
 
@@ -37,14 +36,15 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down->  "1" TeamListPanel
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "0..1" HelpWindow
+PersonListPanel -[hidden]right-> TeamListPanel
+
+
 
 PersonListPanel -down-> "*" PersonCard
 TeamListPanel -down-> "*" TeamCard
-SessionListPanel -down-> "*" SessionCard
-
 TeamCard -down-> "*" PersonCard
 TeamCard -down-> "*" SessionCard
 
@@ -58,7 +58,6 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 TeamListPanel --|> UiPart
 TeamCard --|> UiPart
-SessionListPanel --|> UiPart
 SessionCard --|> UiPart
 
 PersonCard ..> Model
