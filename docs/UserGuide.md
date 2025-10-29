@@ -128,7 +128,7 @@ Examples:
   and `johndoe@example.com` respectively.
 *  `edit 2 n/John Doe t/` Edits the name of the 2nd athlete to be `John Doe` and clears all existing tags.
 
-### Locating athletes by name, school, role or tag: `find`
+### Finding athletes by name, school, role or tag: `find`
 
 Finds athletes whose fields matches the provided keywords for that field.
 
@@ -188,22 +188,11 @@ Each team contains a list of 4 members, and a list of training sessions schedule
 
 Format: `listteams`
 
-### Deleting a team : `deleteteam`
-
-Deletes the specified team at a given index from the RelayCoach app.
-
-**Tip:** Deleting a team deletes all sessions associated with that team as well.
-
-Format: `deleteteam INDEX`
-
-Examples:
-* `listteams` followed by `deleteteam 1` deletes the 1st team in the teams list from the RelayCoach app.
-
 ### Locating teams: `findteam`
 
-Finds teams whose fields matches the provided keywords for that field.
+Finds teams whose name matches the provided keywords.
 
-Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one field)
+Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one name keyword)
 
 * The search is case-insensitive. e.g `starteam` will match `StarTeam`
 * The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
@@ -215,6 +204,17 @@ Examples:
 * `findteam starteam` returns `StarTeam`
 * `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
   ![result for 'findteam starteam'](images/findteamstarteamResult.png)
+
+### Deleting a team : `deleteteam`
+
+Deletes the specified team at a given index from the RelayCoach app.
+
+**Tip:** Deleting a team deletes all sessions associated with that team as well.
+
+Format: `deleteteam INDEX`
+
+Examples:
+* `listteams` followed by `deleteteam 1` deletes the 1st team in the teams list from the RelayCoach app.
 
 ### Adding Session: `addsession`
 
