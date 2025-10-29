@@ -110,6 +110,14 @@ public class Team {
                 && otherTeam.getName().equals(getName());
     }
 
+    /**
+     * Returns true if this team already has the given session.
+     */
+    public boolean hasSession(Session otherSession) {
+        requireNonNull(otherSession);
+        return sessions.contains(otherSession);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, members, sessions);

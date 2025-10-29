@@ -25,6 +25,7 @@ public class AddSessionCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Added session to %1$s: %2$s";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team index provided is invalid.";
     public static final String MESSAGE_INVALID_DATES = "Start datetime must be earlier than end datetime.";
+    public static final String MESSAGE_DUPLICATE_INPUT = "Session already exists";
 
     private final Index teamIndex;
     private final Session session;
@@ -49,6 +50,11 @@ public class AddSessionCommand extends Command {
         }
 
         Team targetTeam = lastShownList.get(teamIndex.getZeroBased());
+
+        //Check if the same session already exists in the team
+        if (targetTeam.hasSession(session)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INPUT);
+        }
 
         model.addSessionToTeam(targetTeam, session);
 
