@@ -31,7 +31,7 @@ RelayCoach is a **desktop app for managing athletes' contacts, optimized for use
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian` : Adds a contact named `John Doe` to the RelayCoach app.
+   * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured` : Adds a contact named `John Doe` to the RelayCoach app.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -99,8 +99,8 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 </box>
 
 Examples:
-* `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian`
-* `add n/Betsy Crowe d/1988-05-12 p/81234567 e/betsycrowe@example.com a/123, Bedok South Ave 2, #10-355 s/SMU r/Runner h/160.5 w/50.0`
+* `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured`
+* `add n/Betsy Crowe d/1988-05-12 p/81234567 e/betsyc@gmail.com a/123, Yishun Ave 2, #10-355 s/SMU r/Runner h/160.5 w/50.0`
 
 ### Listing all athletes : `list`
 
