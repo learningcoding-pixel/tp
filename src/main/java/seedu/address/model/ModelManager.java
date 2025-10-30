@@ -100,6 +100,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasIdenticalPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasIdenticalPerson(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
