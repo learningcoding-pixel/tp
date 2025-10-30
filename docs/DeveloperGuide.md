@@ -161,6 +161,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Cascading operations between Athletes and Teams
+
 #### Cascading deletions on athlete removal
 
 When an athlete is deleted via `DeleteCommand`, the system also deletes any team that includes that athlete. Rationale:
@@ -786,7 +788,7 @@ You want to ensure your data persists between sessions.
 
 ## **Appendix: Effort**
 
-### Difficulty level: Medium - High
+#### Difficulty level: Medium - High
 
 **Technical Challenges faced**
 
@@ -802,7 +804,7 @@ You want to ensure your data persists between sessions.
     2. Ensured data integrity during deletions: Deleting an athlete required cascading deletions of associated teams,
        which added complexity to the delete operations.
 
-### Effort distribution
+#### Effort distribution
 
 Estimated manhours spent: 120 hours
 
@@ -821,7 +823,7 @@ Estimated manhours spent: 120 hours
 2. Additional test cases
 3. Documentation updates
 
-### Technical Achievements
+#### Technical Achievements
 1. Successfully extended AB3's Person model while maintaining all existing functionality
 2. Implemented complex business rules for team formation (exactly 4 unique athletes)
 3. Created a relational system between athletes, teams, and training sessions
@@ -833,13 +835,13 @@ Estimated manhours spent: 120 hours
 
 ## **Appendix: Planned Enhancements**
 
-### **1. Show team information for each athlete**
+#### **1. Show team information for each athlete**
 
 **Description:**  
 Enhance the person list panel to include details about the team each athlete belongs to.
 Coaches can better see which team the athlete belongs to at a glance.
 
-### **2. Show attendance for each athlete**
+#### **2. Show attendance for each athlete**
 
 **Description:**
 Implement attendance feature to track session attendance for each athlete.
@@ -847,13 +849,13 @@ Coaches can mark or unmark session attendance for each athlete.
 Provide summary statistics such as attendance rate and missed sessions in the person list panel.
 Coaches can better see which athlete is committed or not.
 
-### **3. Auto deletion of sessions after the end date & time has passed**
+#### **3. Auto deletion of sessions after the end date & time has passed**
 
 **Description:**  
 Sessions whose end date & time has passed will be deleted automatically.
 This will maintain a clutter-free and up-to-date session list for the teams.
 
-### **4. Indexed commands only work for the currently displayed list of athletes or teams**
+#### **4. Indexed commands only work for the currently displayed list of athletes or teams**
 
 **Description:**  
 Indexed commands such as `edit`, `delete` and `find` should only work for the currently displayed list of athletes or teams.
