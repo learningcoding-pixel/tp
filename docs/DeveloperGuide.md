@@ -161,6 +161,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Cascading operations between Athletes and Teams
+
 #### Cascading deletions on athlete removal
 
 When an athlete is deleted via `DeleteCommand`, the system also deletes any team that includes that athlete. Rationale:
