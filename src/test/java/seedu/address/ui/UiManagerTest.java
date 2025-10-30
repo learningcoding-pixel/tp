@@ -26,12 +26,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
 /**
- * Headless sanity tests for {@link MainWindow}.
- *
- * These tests verify that MainWindow can be constructed with a stub Logic,
- * that its inner parts can be filled, and that list toggling methods run without exceptions.
+ * Headless sanity tests for {@link UiManager}.
  */
-public class MainWindowTest {
+public class UiManagerTest {
 
     @BeforeAll
     public static void initJavaFx() {
@@ -39,37 +36,14 @@ public class MainWindowTest {
     }
 
     @Test
-    public void constructAndFillInnerParts_doesNotThrow() throws Exception {
+    public void start_constructsAndShowsMainWindow_doesNotThrow() throws Exception {
         runOnFxThread(() -> {
             Stage stage = new Stage(StageStyle.UNDECORATED);
             stage.setScene(new Scene(new javafx.scene.layout.StackPane()));
             stage.show();
 
-            Logic logic = new LogicStub();
-            MainWindow window = new MainWindow(stage, logic);
-
-            assertDoesNotThrow(window::fillInnerParts);
-
-            assertDoesNotThrow(window::showTeamList);
-            assertDoesNotThrow(window::showPersonList);
-
-            stage.hide();
-        });
-    }
-
-    @Test
-    public void toggleTeamAndPersonList_doesNotThrow() throws Exception {
-        runOnFxThread(() -> {
-            Stage stage = new Stage(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(new javafx.scene.layout.StackPane()));
-            stage.show();
-
-            Logic logic = new LogicStub();
-            MainWindow window = new MainWindow(stage, logic);
-            window.fillInnerParts();
-
-            assertDoesNotThrow(window::showTeamList);
-            assertDoesNotThrow(window::showPersonList);
+            UiManager ui = new UiManager(new LogicStub());
+            assertDoesNotThrow(() -> ui.start(stage));
 
             stage.hide();
         });
@@ -89,6 +63,7 @@ public class MainWindowTest {
         }
     }
 
+    /** Minimal Logic stub providing the data UiManager/MainWindow expect. */
     private static class LogicStub implements Logic {
         @Override public CommandResult execute(String commandText) throws CommandException, ParseException {
             return new CommandResult("stub", false, false, false);
@@ -114,6 +89,7 @@ public class MainWindowTest {
         @Override public GuiSettings getGuiSettings() {
             return new GuiSettings(800, 600, 0, 0);
         }
-        @Override public void setGuiSettings(GuiSettings guiSettings) {}
+
+        @Override public void setGuiSettings(GuiSettings guiSettings) { }
     }
 }

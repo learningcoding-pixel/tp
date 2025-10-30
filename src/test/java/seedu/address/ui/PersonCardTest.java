@@ -20,7 +20,6 @@ public class PersonCardTest {
 
     @BeforeAll
     public static void initJavaFx() {
-        // Ensure JavaFX toolkit is initialised so we can construct UiPart subclasses safely
         new JFXPanel();
     }
 
@@ -31,11 +30,9 @@ public class PersonCardTest {
 
         PersonCard card = new PersonCard(person, displayedIndex);
 
-        // Basic smoke checks on key labels
         assertEquals(displayedIndex + ". ", card.getId().getText());
         assertEquals(person.getName().fullName, card.getName().getText());
 
-        // Ensure other exposed nodes are present (avoid asserting exact text to decouple from defaults)
         assertNotNull(card.getDob());
         assertNotNull(card.getPhone());
         assertNotNull(card.getEmail());

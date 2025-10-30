@@ -22,12 +22,12 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class TeamCardTest {
 
+    private static final int DISPLAYED_INDEX = 1;
+
     @BeforeAll
     public static void initJavaFx() {
         new JFXPanel();
     }
-
-    private static final int DISPLAYED_INDEX = 1;
 
     @Test
     public void equals() {
