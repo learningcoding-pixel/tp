@@ -342,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                             | I want to …​                         | So that I can…​                                                         |
 |----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
 | `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                                                | add a new athlete                    |                                                                         |
+| `* * *`  | user                                                | add a new athlete                    | keep track of my athletes                                               |
 | `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                    |
 | `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list |
 | `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means          |
@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
 | `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
 | `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                |
-| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easiliy        |
+| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easily         |
 | `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                |
 | `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
 
