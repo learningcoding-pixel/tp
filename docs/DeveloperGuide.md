@@ -163,7 +163,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Duplicate Athletes, Teams, and Sessions
 The system prevents duplicate athletes, teams, and sessions using the following mechanisms:
-- `UniquePersonList` and `UniqueTeamList` enforce uniqueness of `Person` and `Team` objects, while `Set` of `session` objects is used to ensure that sessions are unique.
+- `UniquePersonList` and `UniqueTeamList` enforce uniqueness of `Person` and `Team` objects, while `Set` of `Session` objects is used to ensure that sessions are unique.
 - `Person` objects are duplicates if they have the same `Name` and `DOB`.
 - `Team` objects are duplicates if they have the same `TeamName`.
 - `Session` objects are duplicates if they have the same `Location`, `startDate`, and `endDate`.
@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Missing or invalid required details (e.g., empty Name, invalid Role value).
 
   * 3a1. RelayCoach requests correction of details, indicating what is missing/invalid.
-  * 3aCoach updates information.
+  * 3a2. Coach updates information.
 
     Use case resumes from Step 3.
 
@@ -397,8 +397,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3c. Duplicate athlete detected (same name and same DOB).
 
   * 3c1. RelayCoach informs the coach and rejects the addition.
+  * 3c2. Coach updates information.
 
-    Use case ends or resumes from Step 2 after correction.
+    Use case resumes from Step 3.
 
 ---
 
@@ -440,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. RelayCoach prompts for correction.
   * 2a2. Coach corrects filter usage.
 
-    Use case ends.
+    Use case resumes from Step 2.
 
 * 3a. No athletes found.
 
@@ -467,20 +468,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Invalid athlete index.
 
   * 3a1. RelayCoach prompts for a valid index.
+  * 3a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3b. No fields provided to edit.
 
   * 3b1. RelayCoach informs the coach that at least one field must be specified.
+  * 3b2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3c. Invalid data format (e.g., negative height).
 
   * 3c1. RelayCoach requests correction and indicates the offending fields.
+  * 3c2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3d. No actual changes detected (new values same as existing).
 
@@ -494,6 +498,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+* 4a. If the athlete belonged to a team, RelayCoach edits the athlete's information in the team.
+
+    Use case resumes from Step 5.
+
 ---
 
 **Use case: Delete Athlete (with cascading team deletions)**
@@ -501,20 +509,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Coach selects an athlete to delete by displayed index.
-2. RelayCoach verifies the selection.
+2. RelayCoach validates the selection.
 3. RelayCoach removes the athlete’s record.
-4. If the athlete belonged to a team, RelayCoach also deletes that team.
-5. RelayCoach confirms all deletions in a success message.
+4. RelayCoach confirms all deletions in a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Selection invalid (e.g., index out of bounds).
+* 2a. Selection invalid (e.g., index out of bounds).
 
-  * 1a1. RelayCoach prompts for correction.
+  * 2a1. RelayCoach prompts for correction.
+  * 2a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
+
+* 3a. If the athlete belonged to a team, RelayCoach also deletes that team.
+    
+    Use case resumes from Step 4.
 
 ---
 
@@ -547,33 +559,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Fewer/more than 4 indexes provided.
 
   * 3a1. RelayCoach rejects team creation and informs coach.
+  * 3a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3b. Invalid athlete index provided.
 
   * 3b1. RelayCoach notifies coach that the index does not match any athlete.
+  * 3b2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3c. Duplicate athlete index detected.
 
   * 3c1. RelayCoach rejects team creation due to duplicate members.
+  * 3c2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3d. Athlete already belongs to another team.
 
   * 3d1. RelayCoach informs coach that the athlete is already in an existing team.
+  * 3d2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3e. Missing or invalid details provided.
 
-    * 3a1 RelayCoach requests correction of team name or indexes.
-    * 3a2. Coach updates information.
+    * 3e1 RelayCoach requests correction of team name or indexes.
+    * 3e2. Coach updates information.
 
-      Use case resumes from Step 3.
+    Use case resumes from Step 3.
 
 ---
 
@@ -606,8 +622,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Selection invalid (e.g., index out of bounds).
 
   * 3a1. RelayCoach prompts for correction.
+  * 3a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 ---
 
@@ -628,26 +645,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Missing required details.
 
   * 3a1. RelayCoach notifies coach of missing details.
+  * 3a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3b. Invalid date/time format provided.
 
   * 3b1. RelayCoach requests correction using required format `yyyy-MM-dd HHmm`.
+  * 3b2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3c. Invalid team index.
 
   * 3c1. RelayCoach informs coach the team does not exist.
+  * 3c2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3d. Duplicate session detected (same team, same start date/time, same end date/time).
 
   * 3d1. RelayCoach rejects scheduling and notifies coach of the duplicate session.
+  * 3d2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 ---
 
@@ -668,14 +689,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. Invalid team index.
 
   * 3a1. RelayCoach prompts for a valid team index.
+  * 3a2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 * 3b. Invalid session index (e.g., out of bounds).
 
   * 3b1. RelayCoach prompts for a valid session index.
+  * 3b2. Coach updates information.
 
-    Use case ends.
+    Use case resumes from Step 3.
 
 ---
 
