@@ -205,6 +205,7 @@ public class AddTeamCommandTest {
                 .toString();
         assertEquals(expected, command.toString());
     }
+
     /**
      * A default model stub that have all of the methods failing.
      */

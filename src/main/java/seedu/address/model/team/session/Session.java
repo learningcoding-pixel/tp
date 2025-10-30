@@ -6,8 +6,6 @@ import java.util.Comparator;
 import java.util.Objects;
 
 
-
-
 /**
  * Represents a Team's session in the RelayCoach app.
  * Guarantees: immutable
