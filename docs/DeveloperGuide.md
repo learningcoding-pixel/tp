@@ -498,6 +498,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+* 4a. If the athlete belonged to a team, RelayCoach edits the athlete's information in the team.
+
+    Use case resumes from Step 5.
+
 ---
 
 **Use case: Delete Athlete (with cascading team deletions)**
@@ -505,21 +509,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Coach selects an athlete to delete by displayed index.
-2. RelayCoach verifies the selection.
+2. RelayCoach validates the selection.
 3. RelayCoach removes the athlete’s record.
-4. If the athlete belonged to a team, RelayCoach also deletes that team.
-5. RelayCoach confirms all deletions in a success message.
+4. RelayCoach confirms all deletions in a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Selection invalid (e.g., index out of bounds).
+* 2a. Selection invalid (e.g., index out of bounds).
 
-  * 1a1. RelayCoach prompts for correction.
-  * 1a2. Coach updates information.
+  * 2a1. RelayCoach prompts for correction.
+  * 2a2. Coach updates information.
 
-    Use case resumes from Step 2.
+    Use case resumes from Step 3.
+
+* 3a. If the athlete belonged to a team, RelayCoach also deletes that team.
+    
+    Use case resumes from Step 4.
 
 ---
 
