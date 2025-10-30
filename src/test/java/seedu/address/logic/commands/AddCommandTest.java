@@ -156,7 +156,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isAddressBookEmpty() {
+        public boolean isPersonListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isTeamListEmpty() {
             throw new AssertionError("This method should not be called.");
         }
 
