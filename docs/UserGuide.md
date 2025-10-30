@@ -85,7 +85,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 * `NAME` is the name of the athlete
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
 * `PHONE` is the phone number of the athlete. It must contain only numeric characters and be between 3-100 digits long.
-* `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." after the "@" symbol.
+* `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." anywhere after the "@" symbol.
 * `ADDRESS` is the address of the athlete.
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
@@ -190,7 +190,7 @@ Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one name keywo
 * The search is case-insensitive. e.g `starteam` will match `StarTeam`
 * The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
 * Only the team name is searched
-* Only Full words will be matched e.g. `Star` will not match `StarTeam`
+* Only full words will be matched e.g. `Star` will not match `StarTeam`
 * Teams matching at least one keyword will be returned (i.e. OR search). e.g. `Starteam MoonTeam` will return `StarTeam`, `MoonTeam`
 
 Examples:
@@ -200,7 +200,7 @@ Examples:
 
 ### Deleting a team : `deleteteam`
 
-Deletes the specified team at a given index from the RelayCoach app.
+Deletes the specified team at a given index from the displayed team list.
 
 **Tip:** Deleting a team deletes all sessions associated with that team as well.
 
@@ -211,7 +211,7 @@ Examples:
 
 ### Adding Session: `addsession`
 
-Adds a session to the team in the RelayCoach app.
+Adds a session to the team at a specified index from the displayed team list.
 
 Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
@@ -223,7 +223,7 @@ Examples:
 
 ### Deleting Session: `deletesession`
 
-* Deletes the specified session by index from the displayed team list.
+* Deletes the session at a specified session index from the team at a specified team index in the displayed team list.
 
 Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
 
