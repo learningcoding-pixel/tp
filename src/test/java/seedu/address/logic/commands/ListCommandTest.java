@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,6 +26,12 @@ public class ListCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
+    @Test
+    public void execute_emptyAddressBook_showsNoAthletesMessage() {
+        Model emptyModel = new ModelManager();
+        assertCommandSuccess(new ListCommand(), emptyModel,
+                Messages.MESSAGE_NO_ATHLETES_IN_LIST, emptyModel);
+    }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
@@ -36,4 +43,5 @@ public class ListCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
 }

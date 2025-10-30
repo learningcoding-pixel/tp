@@ -24,6 +24,7 @@ public class Messages {
     public static final String MESSAGE_TEAMS_LISTED_OVERVIEW = "%1$d team(s) listed!";
     public static final String MESSAGE_NO_ATHLETES_IN_LIST = "No athletes added yet!";
     public static final String MESSAGE_NO_MATCHING_ATHLETES = "The keywords does not seem to match any athletes.";
+    public static final String MESSAGE_NO_TEAMS_IN_LIST = "No teams added yet!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

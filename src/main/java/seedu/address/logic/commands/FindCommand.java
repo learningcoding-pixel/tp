@@ -47,7 +47,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (model.isAddressBookEmpty()) {
+        if (model.isPersonListEmpty()) {
             return new CommandResult(Messages.MESSAGE_NO_ATHLETES_IN_LIST);
         }
         assert !model.getAddressBook().getPersonList().isEmpty() : "Address book is expected to be non-empty here.";

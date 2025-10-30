@@ -93,9 +93,14 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Returns true if the address book is empty.
+     * Returns true if the person list is empty.
      */
-    boolean isAddressBookEmpty();
+    boolean isPersonListEmpty();
+
+    /**
+     * Returns true if the team list is empty.
+     */
+    boolean isTeamListEmpty();
 
     /**
      * Returns an unmodifiable view of the filtered person list
