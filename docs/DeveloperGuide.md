@@ -504,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Delete Athlete (with cascading team deletions)**
+**Use case: Delete Athlete**
 
 **MSS**
 
@@ -586,8 +586,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3e. Missing or invalid details provided.
 
-    * 3e1 RelayCoach requests correction of team name or indexes.
-    * 3e2. Coach updates information.
+  * 3e1. RelayCoach requests correction of team name or indexes.
+  * 3e2. Coach updates information.
 
     Use case resumes from Step 3.
 
@@ -602,6 +602,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. RelayCoach displays the teams, their members, and sessions (if any).
 
     Use case ends.
+
+* 2a. No teams found.
+
+    * 2a1. RelayCoach informs the coach that no teams are stored.
+
+      Use case ends.
 
 ---
 
@@ -663,7 +669,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from Step 3.
 
-* 3d. Duplicate session detected (same team, same start date/time, same end date/time).
+* 3d. Duplicate session detected (same location, same start date/time, same end date/time).
 
   * 3d1. RelayCoach rejects scheduling and notifies coach of the duplicate session.
   * 3d2. Coach updates information.
