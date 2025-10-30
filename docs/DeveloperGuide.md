@@ -196,7 +196,7 @@ Implemented commands:
 - `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
     - Constraints: team index must be valid; `end` must not be before `start`; location and datetimes must satisfy format and validation rules.
 - `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
-    - Notes: sessions are ordered by start datetime (`Session.SESSION_ORDER`) when interpreting `SESSION_INDEX`.
+    - Notes: When interpreting `SESSION_INDEX`, sessions are ordered by start datetime, and if identical, by end datetime, as defined in `Session.SESSION_ORDER`.
 
 High-level logic and model interactions:
 - Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
@@ -746,7 +746,7 @@ After adding athletes, you may wish to update their details.
 
 1. **Editing an athlete's information**
     1. Prerequisite: At least one athlete exists.
-    2. Test case: `edit 1 r/Sprinter t/Captain`
+    2. Test case: `edit 1 r/Sprinter t/Vegetarian`
         - **Expected:** Success message. Athlete at index 1 now has updated role and tag.
 
 ---
@@ -755,13 +755,13 @@ After adding athletes, you may wish to update their details.
 
 As the list grows, you need to quickly find specific athletes.
 
-1. **Finding athletes by name**
+1. **Finding athletes by name only**
     1. Test case: `find n/Alice`
         - **Expected:** Only athletes with "Alice" in their name are listed.
 
-2. **Filtering by tag or role**
-    1. Test case: `find t/Sprinter`
-        - **Expected:** Only athletes tagged as "Sprinter" are shown.
+2. **Filtering by combining either name, tag, role or school**
+    1. Test case: `find r/Sprinter t/Vegetarian s/XX School`
+        - **Expected:** Only athletes with role "Sprinter", tag "Vegetarian", and school "XX School" are listed.
 
 ---
 
@@ -792,9 +792,9 @@ You want to schedule training sessions for your teams.
 Sometimes, you need to remove a session from a team's schedule.
 
 1. **Deleting a session from a team**
-    1. Prerequisite: Team at index `1` has at least one session.
+    1. Prerequisites: At least one team exists; note its index from `listteams`, and that team has at least one session.
     2. Test case: `deletesession i/1 si/1`
-        - **Expected:** Success message and session is removed.
+        - **Expected:** Success message and session is removed from that team.
 
 ---
 
