@@ -685,8 +685,7 @@ Now, you want to populate your database with athletes.
       - **Expected:** All sample athletes/teams are removed so you can add your own data from a clean slate.
 
 2. **Adding a new athlete**
-    1. Test case: <br>
-   `add n/Alice Tan d/2003-10-10 p/98765432 e/alicet@gmail.com a/Alice St, Blk 123, #01-011 s/XX School r/Captain h/180 w/75 t/Injury`
+    1. Test case: <br> `add n/Alice Tan d/2003-10-10 p/98765432 e/alicet@gmail.com a/6 Haji Lane s/XX School r/Captain h/180 w/75 t/Injury`
         - **Expected:** Success message confirming Alice Tan is added. She appears in the athlete list. 
 ---
 
