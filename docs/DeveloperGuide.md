@@ -770,7 +770,7 @@ Occasionally, an athlete leaves. You remove them and observe how the system upda
 1. **Deleting an athlete while all athletes are shown**
     1. Prerequisite: List all athletes using the `list` command. Multiple athletes are present.
     2. Test case: `delete 1`
-        - **Expected:** First athlete is deleted from the list. If the athlete belonged to a team, that team is also deleted. Success message lists all deletions. Timestamp in the status bar is updated.
+        - **Expected:** First athlete is deleted from the list. If the athlete belonged to a team, that team is also deleted. Success message lists all deletions.
 
 ---
 
@@ -780,7 +780,7 @@ You want to ensure your data persists between sessions.
 
 1. **Saving and restoring data**
     1. Add or modify athletes, teams, or sessions.
-    2. Close the application.
+    2. Close the application using `exit`.
     3. Re-launch the application.
         - **Expected:** All changes made in the previous session are preserved.
 
