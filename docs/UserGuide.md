@@ -117,7 +117,7 @@ Format: `list`
 
 Edits an existing athlete in the RelayCoach app.
 
-Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`
 
 * Edits the athlete at the specified `INDEX`. The index refers to the index number shown in the displayed athlete list. 
   The index **must be a positive integer** 1, 2, 3, …​
