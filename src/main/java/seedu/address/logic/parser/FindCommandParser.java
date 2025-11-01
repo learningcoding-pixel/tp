@@ -14,11 +14,15 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.person.School;
 import seedu.address.model.person.SchoolContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -37,21 +41,58 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCHOOL, PREFIX_ROLE, PREFIX_TAG);
 
         // Create predicates for each field if the prefix is present and non-empty
-        Optional<Predicate<Person>> namePredicate = argMultimap.getValue(PREFIX_NAME)
-                .filter(s -> !s.isBlank())
-                .map(value -> new NameContainsKeywordsPredicate(Arrays.asList(value.trim().split("\\s+"))));
-
-        Optional<Predicate<Person>> schoolPredicate = argMultimap.getValue(PREFIX_SCHOOL)
-                .filter(s -> !s.isBlank())
-                .map(value -> new SchoolContainsKeywordsPredicate(Arrays.asList(value.trim().split("\\s+"))));
-
-        Optional<Predicate<Person>> rolePredicate = argMultimap.getValue(PREFIX_ROLE)
-                .filter(s -> !s.isBlank())
-                .map(value -> new RoleContainsKeywordsPredicate(Arrays.asList(value.trim().split("\\s+"))));
-
-        Optional<Predicate<Person>> tagPredicate = argMultimap.getValue(PREFIX_TAG)
-                .filter(s -> !s.isBlank())
-                .map(value -> new TagContainsKeywordsPredicate(Arrays.asList(value.trim().split("\\s+"))));
+        Optional<Predicate<Person>> namePredicate = Optional.empty();
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            String value = argMultimap.getValue(PREFIX_NAME).get();
+            if (!value.isBlank()) {
+                List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
+                for (String keyword : keywords) {
+                    if (!Name.isValidName(keyword)) {
+                        throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                namePredicate = Optional.of(new NameContainsKeywordsPredicate(keywords));
+            }
+        }
+        Optional<Predicate<Person>> schoolPredicate = Optional.empty();
+        if (argMultimap.getValue(PREFIX_SCHOOL).isPresent()) {
+            String value = argMultimap.getValue(PREFIX_SCHOOL).get();
+            if (!value.isBlank()) {
+                List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
+                for (String keyword : keywords) {
+                    if (!School.isValidSchool(keyword)) {
+                        throw new ParseException(School.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                schoolPredicate = Optional.of(new SchoolContainsKeywordsPredicate(keywords));
+            }
+        }
+        Optional<Predicate<Person>> rolePredicate = Optional.empty();
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            String value = argMultimap.getValue(PREFIX_ROLE).get();
+            if (!value.isBlank()) {
+                List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
+                for (String keyword : keywords) {
+                    if (!Role.isValidRole(keyword)) {
+                        throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                rolePredicate = Optional.of(new RoleContainsKeywordsPredicate(keywords));
+            }
+        }
+        Optional<Predicate<Person>> tagPredicate = Optional.empty();
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            String value = argMultimap.getValue(PREFIX_TAG).get();
+            if (!value.isBlank()) {
+                List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
+                for (String keyword : keywords) {
+                    if (!Tag.isValidTagName(keyword)) {
+                        throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                tagPredicate = Optional.of(new TagContainsKeywordsPredicate(keywords));
+            }
+        }
 
         List<Predicate<Person>> predicates = new ArrayList<>();
         namePredicate.ifPresent(predicates::add);
