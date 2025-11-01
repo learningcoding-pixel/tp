@@ -159,7 +159,9 @@ Format: `delete INDEX`
 * Deletes the athlete at the specified `INDEX`.
 * The index refers to the index number shown in the displayed athlete list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If the deleted athlete was part of a team, that team will also be deleted automatically.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> If the deleted athlete was part of a team, that team will also be deleted automatically.
+</div>
 
 Examples:
 * `list` returns a list of all athletes, followed by `delete 2` which deletes the 2nd athlete in the list.
@@ -207,7 +209,9 @@ Examples:
 
 Deletes the specified team at a given index from the displayed team list.
 
-**Tip:** Deleting a team deletes all sessions associated with that team as well.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Deleting a team deletes all sessions associated with that team as well.
+</div>
 
 Format: `deleteteam INDEX`
 
