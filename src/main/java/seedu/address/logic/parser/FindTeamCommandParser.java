@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.parseTeamName;
 
 import java.util.Arrays;
 
@@ -28,9 +29,7 @@ public class FindTeamCommandParser implements Parser<FindTeamCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         for (String keyword : nameKeywords) {
-            if (TeamName.isValidName(keyword)) {
-                throw new ParseException(TeamName.MESSAGE_CONSTRAINTS);
-            }
+            TeamName name = parseTeamName(keyword); // validate team name
         }
 
         return new FindTeamCommand(new TeamNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
