@@ -753,15 +753,16 @@ Testers are expected to do more *exploratory* testing.
 
 As a coach, you begin by launching the application for the first time and configuring your workspace.
 
-1. **Initial launch**
-    1. Download the jar file and copy it into an empty folder.
-    2. Double-click the jar file.<br>
-       **Expected:** The GUI opens with a set of sample athletes. The window size may not be optimal.
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. **Saving window preferences**
-    1. Resize the window to your preferred size and move it to a different location. Close the window.
-    2. Re-launch the app by double-clicking the jar file.<br>
-       **Expected:** The most recent window size and location are retained.
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103-F13-1/tp/releases/tag/v1.5).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your RelayCoach app.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar relaycoach.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
 ---
 
