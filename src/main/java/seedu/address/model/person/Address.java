@@ -9,13 +9,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final int ADDRESS_MAXIMUM_LENGTH = 255;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Addresses may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
+            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ).\n"
+            + "It must not be blank and must be at most " + ADDRESS_MAXIMUM_LENGTH + " characters.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*
      * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * and the total length must be between 1 and 255 characters.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX =
+            "^(?=\\S)(?=.*\\S)[\\p{L}\\p{M}0-9 .,'\\-&/#();]{1," + ADDRESS_MAXIMUM_LENGTH + "}$";
 
     public final String value;
 

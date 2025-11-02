@@ -22,7 +22,7 @@ public class Weight {
     public Weight(String weight) {
         requireNonNull(weight);
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
-        this.value = weight;
+        this.value = String.format("%.1f", Float.parseFloat(weight)); //ensure only 1 decimal place
     }
 
     /**

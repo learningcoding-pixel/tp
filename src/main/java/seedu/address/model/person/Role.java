@@ -5,13 +5,16 @@ package seedu.address.model.person;
  * Guarantees: immutable}
  */
 public class Role {
-    public static final String MESSAGE_CONSTRAINTS = "Role must be a valid role";
-
+    public static final int ROLE_MAXIMUM_LENGTH = 150;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Roles can only contain letters, numbers, spaces, hyphens (-), slashes (/), plus signs (+), "
+            + "underscores (_), parentheses (), and apostrophes (').\n" + "Must be 1–" + ROLE_MAXIMUM_LENGTH
+            + " characters long.\n" + "Refer to the User Guide for full details on slash (/) usage.";
     /*
      * The first character of the role must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^(?=.*\\S)[A-Za-z0-9 \\-/_+()']{1," + ROLE_MAXIMUM_LENGTH + "}$";
 
     public final String value;
 

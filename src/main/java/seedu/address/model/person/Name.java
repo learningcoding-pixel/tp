@@ -9,14 +9,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int NAME_MAXIMUM_LENGTH = 80;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names can only contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), "
+            + "commas (,), and parentheses ( ).\n" + "Must be 1–" + NAME_MAXIMUM_LENGTH + " characters long.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Name can only contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), commas (,),
+     * and parentheses (). It must not be blank and must be at most 80 characters long.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^(?=.*\\S)[\\p{L}\\p{M} .',()/-]{1," + NAME_MAXIMUM_LENGTH + "}$";
 
     public final String fullName;
 
@@ -56,12 +59,12 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullName.toLowerCase().hashCode();
     }
 
 }

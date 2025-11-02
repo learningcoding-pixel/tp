@@ -10,9 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Height {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Height should be a positive number between 50 and 300, and may include up to one decimal place.\n"
-                    + "Examples: 170, 165.5, 182.0";
-
+            "Heights should be a positive number between 50 and 300 cm, and may include up to one decimal place.";
     /*
      * The height must be:
      * - A number between 50 and 300 (inclusive)
@@ -32,7 +30,7 @@ public class Height {
     public Height(String height) {
         requireNonNull(height);
         checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
-        value = height;
+        this.value = String.format("%.1f", Float.parseFloat(height)); //ensure only 1 decimal place
     }
 
     /**

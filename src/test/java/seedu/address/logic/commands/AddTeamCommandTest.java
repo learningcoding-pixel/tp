@@ -70,10 +70,10 @@ public class AddTeamCommandTest {
     public void execute_validInputs_addSuccessful() throws Exception {
         // Prepare model with 4 persons and no teams
         ModelStubAcceptingTeamAdded model = new ModelStubAcceptingTeamAdded();
-        Person p1 = new PersonBuilder().withName("A1").build();
-        Person p2 = new PersonBuilder().withName("A2").build();
-        Person p3 = new PersonBuilder().withName("A3").build();
-        Person p4 = new PersonBuilder().withName("A4").build();
+        Person p1 = new PersonBuilder().withName("A").build();
+        Person p2 = new PersonBuilder().withName("B").build();
+        Person p3 = new PersonBuilder().withName("C").build();
+        Person p4 = new PersonBuilder().withName("D").build();
         model.addPersonsToFilteredList(p1, p2, p3, p4);
 
         TeamName name = new TeamName("Alpha");
@@ -100,10 +100,10 @@ public class AddTeamCommandTest {
         TeamName name = new TeamName("Alpha");
         ModelStubWithExistingTeamName model = new ModelStubWithExistingTeamName(name);
 
-        Person p1 = new PersonBuilder().withName("A1").build();
-        Person p2 = new PersonBuilder().withName("A2").build();
-        Person p3 = new PersonBuilder().withName("A3").build();
-        Person p4 = new PersonBuilder().withName("A4").build();
+        Person p1 = new PersonBuilder().withName("A").build();
+        Person p2 = new PersonBuilder().withName("B").build();
+        Person p3 = new PersonBuilder().withName("C").build();
+        Person p4 = new PersonBuilder().withName("D").build();
         model.addPersonsToFilteredList(p1, p2, p3, p4);
 
         Set<Index> memberIndexes = Set.of(Index.fromOneBased(1), Index.fromOneBased(2),
@@ -117,7 +117,7 @@ public class AddTeamCommandTest {
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         ModelStubAcceptingTeamAdded model = new ModelStubAcceptingTeamAdded();
-        Person p1 = new PersonBuilder().withName("A1").build();
+        Person p1 = new PersonBuilder().withName("A").build();
         model.addPersonsToFilteredList(p1);
 
         TeamName name = new TeamName("Alpha");
@@ -133,9 +133,9 @@ public class AddTeamCommandTest {
     @Test
     public void execute_invalidTeamSize_throwsCommandException() {
         ModelStubAcceptingTeamAdded model = new ModelStubAcceptingTeamAdded();
-        Person p1 = new PersonBuilder().withName("A1").build();
-        Person p2 = new PersonBuilder().withName("A2").build();
-        Person p3 = new PersonBuilder().withName("A3").build();
+        Person p1 = new PersonBuilder().withName("A").build();
+        Person p2 = new PersonBuilder().withName("B").build();
+        Person p3 = new PersonBuilder().withName("C").build();
         model.addPersonsToFilteredList(p1, p2, p3);
 
         TeamName name = new TeamName("Alpha");
@@ -150,9 +150,9 @@ public class AddTeamCommandTest {
     public void execute_memberAlreadyInTeam_throwsCommandException() {
         ModelStubWithMemberAlreadyInTeam model = new ModelStubWithMemberAlreadyInTeam();
         Person p1 = new PersonBuilder().withName("ExistingMember").build();
-        Person p2 = new PersonBuilder().withName("A2").build();
-        Person p3 = new PersonBuilder().withName("A3").build();
-        Person p4 = new PersonBuilder().withName("A4").build();
+        Person p2 = new PersonBuilder().withName("A").build();
+        Person p3 = new PersonBuilder().withName("B").build();
+        Person p4 = new PersonBuilder().withName("C").build();
         model.addPersonsToFilteredList(p1, p2, p3, p4);
         model.seedTeamWithMembers(Set.of(p1)); // existing team with p1
 
@@ -419,11 +419,24 @@ public class AddTeamCommandTest {
 
         void seedTeamWithMembers(Set<Person> members) {
             Set<Person> four = new HashSet<>(members);
-            int counter = 1;
+            String counter = "A";
             while (four.size() < Team.TEAM_SIZE) {
-                four.add(new PersonBuilder().withName("Pad" + counter++).build());
+                four.add(new PersonBuilder().withName("Pad" + counter).build());
+                counter = nextAlpha(counter);
             }
             existingTeams.add(new Team(new TeamName("Existing"), four));
+        }
+
+        private static String nextAlpha(String s) {
+            char[] a = s.toCharArray();
+            for (int i = a.length - 1; i >= 0; i--) {
+                if (a[i] < 'Z') {
+                    a[i]++;
+                    return new String(a);
+                }
+                a[i] = 'A';
+            }
+            return "A" + new String(a);
         }
 
         @Override

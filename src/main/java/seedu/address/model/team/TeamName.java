@@ -8,15 +8,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class TeamName {
-
+    public static final int TEAM_NAME_MAX_LENGTH = 80;
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-
+            "Team names can only contain letters, numbers, spaces, hyphens (-), apostrophes ('), "
+            + "periods (.), and parentheses ( ).\n"
+            + "They must not be blank and must be 1–" + TEAM_NAME_MAX_LENGTH + " characters long.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX =
+            "^(?=.*\\S)[\\p{L}\\p{M}0-9 .'-()]{1," + TEAM_NAME_MAX_LENGTH + "}$";
 
     public final String fullTeamName;
 
@@ -56,7 +58,7 @@ public class TeamName {
         }
 
         TeamName otherTeamName = (TeamName) other;
-        return fullTeamName.equals(otherTeamName.fullTeamName);
+        return fullTeamName.equalsIgnoreCase(otherTeamName.fullTeamName);
     }
 
     @Override
