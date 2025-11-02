@@ -36,7 +36,7 @@ public class PhoneTest {
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("9312")); // exactly 4 numbers
-        assertTrue(Phone.isValidPhone("12345678901234567"));// exactly 17 numbers
+        assertTrue(Phone.isValidPhone("12345678901234567")); // exactly 17 numbers
     }
 
     @Test
