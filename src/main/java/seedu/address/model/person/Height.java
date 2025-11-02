@@ -32,7 +32,7 @@ public class Height {
     public Height(String height) {
         requireNonNull(height);
         checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
-        this.value = String.format("%.1f", Float.parseFloat(height));
+        this.value = String.format("%.1f", Float.parseFloat(height)); //ensure only 1 decimal place
     }
 
     /**
