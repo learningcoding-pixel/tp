@@ -5,6 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseName;
+import static seedu.address.logic.parser.ParserUtil.parseRole;
+import static seedu.address.logic.parser.ParserUtil.parseSchool;
+import static seedu.address.logic.parser.ParserUtil.parseTag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,9 +51,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (!value.isBlank()) {
                 List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
                 for (String keyword : keywords) {
-                    if (!Name.isValidName(keyword)) {
-                        throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-                    }
+                    Name name = parseName(keyword); // validate name
                 }
                 namePredicate = Optional.of(new NameContainsKeywordsPredicate(keywords));
             }
@@ -60,9 +62,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (!value.isBlank()) {
                 List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
                 for (String keyword : keywords) {
-                    if (!School.isValidSchool(keyword)) {
-                        throw new ParseException(School.MESSAGE_CONSTRAINTS);
-                    }
+                    School school = parseSchool(keyword); // validate school
                 }
                 schoolPredicate = Optional.of(new SchoolContainsKeywordsPredicate(keywords));
             }
@@ -73,9 +73,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (!value.isBlank()) {
                 List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
                 for (String keyword : keywords) {
-                    if (!Role.isValidRole(keyword)) {
-                        throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-                    }
+                    Role role = parseRole(keyword); // validate role
                 }
                 rolePredicate = Optional.of(new RoleContainsKeywordsPredicate(keywords));
             }
@@ -86,9 +84,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (!value.isBlank()) {
                 List<String> keywords = Arrays.asList(value.trim().split("\\s+"));
                 for (String keyword : keywords) {
-                    if (!Tag.isValidTagName(keyword)) {
-                        throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-                    }
+                    Tag tag = parseTag(keyword); // validate tag
                 }
                 tagPredicate = Optional.of(new TagContainsKeywordsPredicate(keywords));
             }
