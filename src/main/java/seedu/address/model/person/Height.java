@@ -32,7 +32,7 @@ public class Height {
     public Height(String height) {
         requireNonNull(height);
         checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
-        value = height;
+        this.value = String.format("%.1f", Float.parseFloat(height));
     }
 
     /**
