@@ -43,8 +43,8 @@ public class TeamCard extends UiPart<Region> {
                     PersonCard smallCard = new PersonCard(person, -1);
                     smallCard.getId().setVisible(false);
                     smallCard.getDob().setVisible(true);
-                    smallCard.getPhone().setVisible(false);
-                    smallCard.getEmail().setVisible(false);
+                    smallCard.getPhone().setVisible(true);
+                    smallCard.getEmail().setVisible(true);
                     smallCard.getAddress().setVisible(false);
                     smallCard.getSchool().setVisible(true);
                     smallCard.getRole().setVisible(true);

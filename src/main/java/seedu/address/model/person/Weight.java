@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
     public static final String MESSAGE_CONSTRAINTS =
-            "Weight must be a positive number between 25 and 120 kg (inclusive), and may have up to one decimal place.";
+            "Weight must be a positive number between 25 and 200 kg (inclusive), and may have up to one decimal place.";
     public static final String VALIDATION_REGEX =
-            "^(?:2[5-9](?:\\.\\d)?|[3-9]\\d(?:\\.\\d)?|1[01]\\d(?:\\.\\d)?|120(?:\\.0)?)$";
+            "^(?:2[5-9](?:\\.\\d)?|[3-9]\\d(?:\\.\\d)?|1[01]\\d(?:\\.\\d)?|200(?:\\.0)?)$";
     public final String value;
 
     /**
@@ -22,7 +22,7 @@ public class Weight {
     public Weight(String weight) {
         requireNonNull(weight);
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
-        this.value = weight;
+        this.value = String.format("%.1f", Float.parseFloat(weight)); //ensure only 1 decimal place
     }
 
     /**

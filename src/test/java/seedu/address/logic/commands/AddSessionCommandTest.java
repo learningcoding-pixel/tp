@@ -122,10 +122,10 @@ public class AddSessionCommandTest {
     private static Team makeTeam(String name) {
         TeamName tn = new TeamName(name);
         Set<Person> members = new HashSet<>();
-        members.add(new PersonBuilder().withName("A1").build());
-        members.add(new PersonBuilder().withName("A2").build());
-        members.add(new PersonBuilder().withName("A3").build());
-        members.add(new PersonBuilder().withName("A4").build());
+        members.add(new PersonBuilder().withName("A").build());
+        members.add(new PersonBuilder().withName("B").build());
+        members.add(new PersonBuilder().withName("C").build());
+        members.add(new PersonBuilder().withName("D").build());
         return new Team(tn, members);
     }
 
@@ -297,10 +297,10 @@ public class AddSessionCommandTest {
 
         private static Set<Person> fourMembers() {
             Set<Person> m = new HashSet<>();
-            m.add(new PersonBuilder().withName("D1").build());
-            m.add(new PersonBuilder().withName("D2").build());
-            m.add(new PersonBuilder().withName("D3").build());
-            m.add(new PersonBuilder().withName("D4").build());
+            m.add(new PersonBuilder().withName("A").build());
+            m.add(new PersonBuilder().withName("B").build());
+            m.add(new PersonBuilder().withName("C").build());
+            m.add(new PersonBuilder().withName("D").build());
             return m;
         }
 

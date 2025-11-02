@@ -18,7 +18,7 @@ RelayCoach is a **desktop app for managing athletes' contacts, optimized for use
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103-F13-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your RelayCoach app.
 
@@ -84,13 +84,13 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 * `NAME` is the name of the athlete
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
-* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be between 3-100 digits long.
+* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be 4-17 digits long (inclusive).
 * `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." anywhere after the "@" symbol.
 * `ADDRESS` is the address of the athlete.
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
 * `HEIGHT` is the height of the athlete in centimeters, only accepts positive numbers up to 1 decimal place, only accepts values between 50.0cm to 300.0cm inclusive.
-* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 120.0kg inclusive.
+* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 200.0kg inclusive.
 * `TAG` is a tag associated with the athlete used to describe any additional information about the athlete.
 
 <box type="tip" seamless>
@@ -117,7 +117,7 @@ Format: `list`
 
 Edits an existing athlete in the RelayCoach app.
 
-Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SCHOOL] [r/ROLE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`
 
 * Edits the athlete at the specified `INDEX`. The index refers to the index number shown in the displayed athlete list. 
   The index **must be a positive integer** 1, 2, 3, …​
@@ -126,7 +126,9 @@ Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROL
 * When editing tags, the existing tags of the athlete will be removed i.e adding of tags is not cumulative.
 * You can remove all the athlete’s tags by typing `t/` without
     specifying any tags after it.
-* Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567`
@@ -159,7 +161,9 @@ Format: `delete INDEX`
 * Deletes the athlete at the specified `INDEX`.
 * The index refers to the index number shown in the displayed athlete list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If the deleted athlete was part of a team, that team will also be deleted automatically.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> If the deleted athlete was part of a team, that team will also be deleted automatically.
+</div>
 
 Examples:
 * `list` returns a list of all athletes, followed by `delete 2` which deletes the 2nd athlete in the list.
@@ -207,7 +211,9 @@ Examples:
 
 Deletes the specified team at a given index from the displayed team list.
 
-**Tip:** Deleting a team deletes all sessions associated with that team as well.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Deleting a team deletes all sessions associated with that team as well.
+</div>
 
 Format: `deleteteam INDEX`
 
@@ -249,17 +255,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+RelayCoach data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+RelayCoach data are saved automatically as a JSON file `[JAR file location]/data/relaycoach.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, RelayCoach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause RelayCoach to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -267,7 +273,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RelayCoach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -280,18 +286,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                                                 |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action            | Format, Examples                                                                                                                                                                                                                |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**           | `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​` <br> e.g., `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian` |
-| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`                                                                            |
-| **Clear**         | `clear`                                                                                                                                                                                                                          |
-| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                              |
-| **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                                |
-| **DeleteTeam**    | `deleteteam INDEX` <br> e.g., `deleteteam 2`                                                                                                                                                                                     |
-| **Edit**          | `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROLE], [h/HEIGHT], [w/WEIGHT], [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                             |
-| **Find**          | `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]`<br> e.g., `find n/John Jack s/NUS`                                                                                                                                                   |
-| **FindTeam**      | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`                                                                                                                                                         |
-| **Help**          | `help`                                                                                                                                                                                                                           |
-| **List**          | `list`                                                                                                                                                                                                                           |
-| **ListTeams**     | `listteams`                                                                                                                                                                                                                      |
-| **Team**          | `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` <br> e.g., `team tn/StarTeam i/1 2 3 4`                                                                                                    |
+| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`                                                                           |
+| **Clear**         | `clear`                                                                                                                                                                                                                         |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                             |
+| **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                               |
+| **DeleteTeam**    | `deleteteam INDEX` <br> e.g., `deleteteam 2`                                                                                                                                                                                    |
+| **Edit**          | `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SCHOOL] [r/ROLE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
+| **Find**          | `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]`<br> e.g., `find n/John Jack s/NUS`                                                                                                                                                  |
+| **FindTeam**      | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`                                                                                                                                                        |
+| **Help**          | `help`                                                                                                                                                                                                                          |
+| **List**          | `list`                                                                                                                                                                                                                          |
+| **ListTeams**     | `listteams`                                                                                                                                                                                                                     |
+| **Team**          | `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` <br> e.g., `team tn/StarTeam i/1 2 3 4`                                                                                                   |

@@ -259,7 +259,7 @@ Step 4. The user now decides that adding the athlete was a mistake, and decides 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial RelayCoach App state, then there are no previous RelayCoach App states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -282,7 +282,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest RelayCoach App state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest RelayCoach App state, then there are no undone RelayCoach App states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
@@ -344,21 +344,22 @@ coaches manage athletes and teams from different schools faster than a typical m
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                         |
-|----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                                                | add a new athlete                    | keep track of my athletes                                               |
-| `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                    |
-| `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list |
-| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means          |
-| `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                      |
-| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list    |
-| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
-| `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
-| `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                |
-| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easily         |
-| `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                |
-| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
+| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                                     |
+|----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                              |
+| `* * *`  | user                                                | clear the app entirely               | reset the state of the app and remove unwanted data                                 |
+| `* * *`  | user                                                | add a new athlete                    | keep track of my athletes                                                           |
+| `* * *`  | user                                                | delete a athlete                     | remove athletes, their associated team, and their information that I no longer need |
+| `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list             |
+| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means                      |
+| `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                                  |
+| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list                |
+| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                                  |
+| `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                              |
+| `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                            |
+| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easily                     |
+| `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                            |
+| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                              |
 
 ### Use cases
 
@@ -753,15 +754,16 @@ Testers are expected to do more *exploratory* testing.
 
 As a coach, you begin by launching the application for the first time and configuring your workspace.
 
-1. **Initial launch**
-    1. Download the jar file and copy it into an empty folder.
-    2. Double-click the jar file.<br>
-       **Expected:** The GUI opens with a set of sample athletes. The window size may not be optimal.
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. **Saving window preferences**
-    1. Resize the window to your preferred size and move it to a different location. Close the window.
-    2. Re-launch the app by double-clicking the jar file.<br>
-       **Expected:** The most recent window size and location are retained.
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103-F13-1/tp/releases/tag/v1.5).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your RelayCoach app.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar relaycoach.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
 ---
 
@@ -947,5 +949,7 @@ This will maintain a clutter-free and up-to-date session list for the teams.
 
 **Description:**  
 Indexed commands such as `edit`, `delete` and `find` should only work for the currently displayed list of athletes or teams.
+For example, `addsession i/1 ...` will only work if the currently displayed list is a team list.
+Similarly, `delete 1` will only work if the currently displayed list is an athlete list.
 Using a team-related command on an athlete list (and vice versa) will result in an error message.
 This will prevent coaches from accidentally deleting or editing athletes or teams that are not displayed.
