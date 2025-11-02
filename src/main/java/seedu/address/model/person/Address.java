@@ -12,8 +12,9 @@ public class Address {
     public static final int ADDRESS_MAXIMUM_LENGTH = 255;
     public static final String MESSAGE_CONSTRAINTS =
             "Addresses may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
-            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ). "
-            + "It must not be blank and must be at most " + ADDRESS_MAXIMUM_LENGTH + " characters.";
+            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ).\n"
+            + "It must not be blank and must be at most " + ADDRESS_MAXIMUM_LENGTH + " characters.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*
      * The first character of the address must not be a whitespace,

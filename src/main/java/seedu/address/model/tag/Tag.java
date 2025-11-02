@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
     public static final int TAG_MAXIMUM_LENGTH = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Tag names can only contain letters, numbers, hyphens (-), slashes (/), plus signs (+), "
-            + "underscores (_), parentheses (), and apostrophes ('). "
-            + "They must not contain spaces and be 1–" + TAG_MAXIMUM_LENGTH + " characters long.";
+            "Tags can only contain letters, numbers, hyphens (-), slashes (/), plus signs (+), "
+            + "underscores (_), parentheses (), and apostrophes (').\n"
+            + "They must not contain spaces and be 1–" + TAG_MAXIMUM_LENGTH + " characters long.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9\\-/+_()']{1," + TAG_MAXIMUM_LENGTH + "}$";
 
     public final String tagName;

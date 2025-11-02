@@ -12,12 +12,12 @@ public class Name {
     public static final int NAME_MAXIMUM_LENGTH = 80;
     public static final String MESSAGE_CONSTRAINTS =
             "Names can only contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), "
-            + "commas (,), and parentheses ( ). Must be 1–" + NAME_MAXIMUM_LENGTH + " characters long. "
-            + "Refer to User Guide for full usage details.";
+            + "commas (,), and parentheses ( ).\n" + "Must be 1–" + NAME_MAXIMUM_LENGTH + " characters long.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Name can only contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), commas (,),
+     * and parentheses (). It must not be blank and must be at most 80 characters long.
      */
     public static final String VALIDATION_REGEX = "^(?=.*\\S)[\\p{L}\\p{M} .',()/-]{1," + NAME_MAXIMUM_LENGTH + "}$";
 

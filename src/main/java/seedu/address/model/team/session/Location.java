@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Location {
     public static final int LOCATION_MAXIMUM_LENGTH = 255;
     public static final String MESSAGE_CONSTRAINTS =
-            "Addresses may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
-            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ). "
-            + "It must not be blank and must be at most " + LOCATION_MAXIMUM_LENGTH + " characters.";
+            "Locations may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
+            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ).\n"
+            + "It must not be blank and must be at most " + LOCATION_MAXIMUM_LENGTH + " characters.\n"
+            + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*
      * The first character of the address must not be a whitespace,

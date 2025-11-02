@@ -7,8 +7,8 @@ package seedu.address.model.person;
 public class School {
     public static final int SCHOOL_MAXIMUM_LENGTH = 200;
     public static final String MESSAGE_CONSTRAINTS =
-            "School name can only contain letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), "
-            + "parentheses ( ), commas (,), and periods (.). Must be 1–" + SCHOOL_MAXIMUM_LENGTH + " characters long.";
+            "School names can only contain letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), "
+            + "parentheses ( ), commas (,), and periods (.).\nMust be 1–" + SCHOOL_MAXIMUM_LENGTH + " characters long.";
 
     /*
      * The first character of the school must not be a whitespace,

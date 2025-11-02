@@ -11,7 +11,7 @@ public class TeamName {
     public static final int TEAM_NAME_MAX_LENGTH = 80;
     public static final String MESSAGE_CONSTRAINTS =
             "Team names can only contain letters, numbers, spaces, hyphens (-), apostrophes ('), "
-            + "periods (.), and parentheses ( ). "
+            + "periods (.), and parentheses ( ).\n"
             + "They must not be blank and must be 1–" + TEAM_NAME_MAX_LENGTH + " characters long.";
     /*
      * The first character of the address must not be a whitespace,
