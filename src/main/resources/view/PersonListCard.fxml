@@ -21,9 +21,9 @@
             </padding>
 
             <!-- Name and ID -->
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label" />
-                <Label fx:id="name" styleClass="cell_big_label" style="-fx-font-weight: bold;" />
+            <HBox spacing="2" alignment="CENTER_LEFT">
+                <Label fx:id="id" styleClass="cell_big_label" style="-fx-alignment: center-left;" />
+                <Label fx:id="name" styleClass="cell_big_label" style="-fx-font-weight: bold; -fx-alignment: center-left;" HBox.hgrow="ALWAYS"/>
             </HBox>
 
             <!-- Tags -->
