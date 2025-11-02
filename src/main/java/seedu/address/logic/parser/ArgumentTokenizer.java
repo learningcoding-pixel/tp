@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
  *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
@@ -23,8 +25,11 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
-        String maskedArgs = argsString.replaceAll("(?<=\\[[^]]*)/", "\uE000");
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
+        if (argsString.contains("<") ^ argsString.contains(">")) {
+            throw new ParseException("Unmatched brackets in name. Use <> format.");
+        }
+        String maskedArgs = argsString.replaceAll("(?<=<[^>]*)/", "\uE000");
         List<PrefixPosition> positions = findAllPrefixPositions(maskedArgs, prefixes);
         return extractArguments(maskedArgs, positions);
     }
@@ -122,7 +127,7 @@ public class ArgumentTokenizer {
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-        return value.trim().replace("\uE000","/").replaceAll("[\\[\\]]","")
+        return value.trim().replace("\uE000","/").replaceAll("[<>]", "")
                 .replaceAll("\\s+"," ");
     }
 
