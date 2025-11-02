@@ -344,21 +344,22 @@ coaches manage athletes and teams from different schools faster than a typical m
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                         |
-|----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                  |
-| `* * *`  | user                                                | add a new athlete                    | keep track of my athletes                                               |
-| `* * *`  | user                                                | delete a athlete                     | remove entries that I no longer need                                    |
-| `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list |
-| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means          |
-| `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                      |
-| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list    |
-| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                      |
-| `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                  |
-| `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                |
-| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easily         |
-| `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                |
-| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                  |
+| Priority | As a …​                                             | I want to …​                         | So that I can…​                                                                     |
+|----------|-----------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | new user                                            | see usage instructions               | refer to instructions when I forget how to use the App                              |
+| `* * *`  | user                                                | clear the app entirely               | reset the state of the app and remove unwanted data                                 |
+| `* * *`  | user                                                | add a new athlete                    | keep track of my athletes                                                           |
+| `* * *`  | user                                                | delete a athlete                     | remove athletes, their associated team, and their information that I no longer need |
+| `* * *`  | user                                                | find an athlete by name              | locate details of athletes without having to go through the entire list             |
+| `* *`    | user with lots of athletes to keep track of         | find athletes by school, role or tag | locate details of athletes that I wish to find via these means                      |
+| `* *`    | user managing multiple teams                        | group 4 athletes by their teams      | keep track of who is in which team                                                  |
+| `* *`    | user                                                | find a team by name                  | locate details of teams without having to go through the entire list                |
+| `* *`    | user                                                | delete a team                        | remove teams that I no longer need                                                  |
+| `* *`    | user with multiple teams' training to keep track of | add a team's training sessions       | keep track of team's training sessions                                              |
+| `* *`    | user                                                | delete a team's training session     | remove unwanted sessions                                                            |
+| `* *`    | user                                                | list all teams with their sessions   | see who is in which team and when and where sessions are easily                     |
+| `*`      | user with many athletes in the RelayCoach App       | sort athletes by name                | locate an athlete easily                                                            |
+| `*`      | user needing to keep track of athletes' progress    | record attendance for athletes       | monitor his / her progress in training                                              |
 
 ### Use cases
 
@@ -948,5 +949,7 @@ This will maintain a clutter-free and up-to-date session list for the teams.
 
 **Description:**  
 Indexed commands such as `edit`, `delete` and `find` should only work for the currently displayed list of athletes or teams.
+For example, `addsession i/1 ...` will only work if the currently displayed list is a team list.
+Similarly, `delete 1` will only work if the currently displayed list is an athlete list.
 Using a team-related command on an athlete list (and vice versa) will result in an error message.
 This will prevent coaches from accidentally deleting or editing athletes or teams that are not displayed.
