@@ -84,7 +84,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 
 * `NAME` is the name of the athlete
 * `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
-* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be between 3-100 digits long.
+* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be 4-17 digits long (inclusive).
 * `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." anywhere after the "@" symbol.
 * `ADDRESS` is the address of the athlete.
 * `SCHOOL` is the school the athlete is affiliated with.
