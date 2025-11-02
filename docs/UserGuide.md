@@ -126,7 +126,9 @@ Format: `edit INDEX [n/NAME], [d/DOB], [p/PHONE], [e/EMAIL], [a/ADDRESS], [r/ROL
 * When editing tags, the existing tags of the athlete will be removed i.e adding of tags is not cumulative.
 * You can remove all the athlete’s tags by typing `t/` without
     specifying any tags after it.
-* Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567`
