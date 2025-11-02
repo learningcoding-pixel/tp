@@ -90,7 +90,7 @@ Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/W
 * `SCHOOL` is the school the athlete is affiliated with.
 * `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
 * `HEIGHT` is the height of the athlete in centimeters, only accepts positive numbers up to 1 decimal place, only accepts values between 50.0cm to 300.0cm inclusive.
-* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 120.0kg inclusive.
+* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 200.0kg inclusive.
 * `TAG` is a tag associated with the athlete used to describe any additional information about the athlete.
 
 <box type="tip" seamless>
