@@ -126,7 +126,9 @@ Format: `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SCHOOL] 
 * When editing tags, the existing tags of the athlete will be removed i.e adding of tags is not cumulative.
 * You can remove all the athlete’s tags by typing `t/` without
     specifying any tags after it.
-* Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Changes made to an athlete will automatically update in the team (if any) that include this athlete.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st athlete to be `91234567`
@@ -159,7 +161,9 @@ Format: `delete INDEX`
 * Deletes the athlete at the specified `INDEX`.
 * The index refers to the index number shown in the displayed athlete list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If the deleted athlete was part of a team, that team will also be deleted automatically.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> If the deleted athlete was part of a team, that team will also be deleted automatically.
+</div>
 
 Examples:
 * `list` returns a list of all athletes, followed by `delete 2` which deletes the 2nd athlete in the list.
@@ -207,7 +211,9 @@ Examples:
 
 Deletes the specified team at a given index from the displayed team list.
 
-**Tip:** Deleting a team deletes all sessions associated with that team as well.
+<div style="background-color: #ffcccc; border-left: 6px solid red; padding: 10px; border-radius: 4px;">
+<b>Warning:</b> Deleting a team deletes all sessions associated with that team as well.
+</div>
 
 Format: `deleteteam INDEX`
 
