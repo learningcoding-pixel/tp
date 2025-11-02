@@ -58,7 +58,7 @@ public class TeamName {
         }
 
         TeamName otherTeamName = (TeamName) other;
-        return fullTeamName.equals(otherTeamName.fullTeamName);
+        return fullTeamName.equalsIgnoreCase(otherTeamName.fullTeamName);
     }
 
     @Override

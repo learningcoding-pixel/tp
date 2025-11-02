@@ -55,7 +55,7 @@ public class Location {
         }
 
         Location otherLocation = (Location) other;
-        return value.equals(otherLocation.value);
+        return value.equalsIgnoreCase(otherLocation.value);
     }
 
     @Override
