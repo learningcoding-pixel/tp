@@ -11,7 +11,7 @@ public class Height {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Height should be a positive number between 50 and 300, and may include up to one decimal place.\n"
-                    + "Examples: 170, 165.5, 182.0";
+            + "Examples: 170, 165.5, 182.0";
 
     /*
      * The height must be:

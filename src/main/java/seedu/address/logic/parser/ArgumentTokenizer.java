@@ -29,7 +29,8 @@ public class ArgumentTokenizer {
         if (argsString.contains("<") ^ argsString.contains(">")) {
             throw new ParseException("Unmatched brackets in name. Use <> format.");
         }
-        String maskedArgs = argsString.replaceAll("(?<=<[^>]*)/", "\uE000"); //replace forward slash with unicode character
+        //replace forward slash with unicode character
+        String maskedArgs = argsString.replaceAll("(?<=<[^>]*)/", "\uE000");
         List<PrefixPosition> positions = findAllPrefixPositions(maskedArgs, prefixes);
         return extractArguments(maskedArgs, positions);
     }
@@ -127,9 +128,9 @@ public class ArgumentTokenizer {
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-        return value.trim().replace("\uE000","/") //replace unicode character with forward slash
+        return value.trim().replace("\uE000", "/") //replace unicode character with forward slash
                 .replaceAll("[<>]", "") //remove brackets
-                .replaceAll("\\s+"," "); //remove whitespace between prefix and value
+                .replaceAll("\\s+", " "); //remove whitespace between prefix and value
     }
 
     /**

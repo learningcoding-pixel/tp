@@ -5,15 +5,17 @@ package seedu.address.model.person;
  * Guarantees: immutable}
  */
 public class School {
+    public static final int SCHOOL_MAXIMUM_LENGTH = 200;
     public static final String MESSAGE_CONSTRAINTS =
-            "School name can only contain letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes (')," +
-            "parentheses ( ), commas (,), and periods (.).";
+            "School name can only contain letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), "
+            + "parentheses ( ), commas (,), and periods (.). Must be 1–" + SCHOOL_MAXIMUM_LENGTH + " characters long.";
 
     /*
      * The first character of the school must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{L}\\p{M}0-9 .,'\\-&()]+$";
+    public static final String VALIDATION_REGEX =
+            "^(?=.*\\S)[\\p{L}\\p{M}0-9 .,'\\-&()]{1," + SCHOOL_MAXIMUM_LENGTH + "}$";
 
     public final String value;
 

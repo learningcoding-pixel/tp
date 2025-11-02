@@ -8,11 +8,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
+    public static final int TAG_MAXIMUM_LENGTH = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "Tag names can contain letters, numbers, and the characters -, /, +, _. "
-            + "They must start and end with a letter or number, and contain no spaces.";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9](?:[A-Za-z0-9\\-/_+]*[A-Za-z0-9])?$";
+            "Tag names can only contain letters, numbers, hyphens (-), slashes (/), plus signs (+), "
+            + "underscores (_), parentheses (), and apostrophes ('). "
+            + "They must not contain spaces and be 1–" + TAG_MAXIMUM_LENGTH + " characters long.";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9\\-/+_()']{1," + TAG_MAXIMUM_LENGTH + "}$";
 
     public final String tagName;
 

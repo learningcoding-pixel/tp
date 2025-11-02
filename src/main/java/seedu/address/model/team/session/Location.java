@@ -8,15 +8,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable}
  */
 public class Location {
-
+    public static final int LOCATION_MAXIMUM_LENGTH = 255;
     public static final String MESSAGE_CONSTRAINTS =
-            "Location should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Addresses may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
+            + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ). "
+            + "It must not be blank and must be at most " + LOCATION_MAXIMUM_LENGTH + " characters.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX =
+            "^(?=\\S)(?=.*\\S)[\\p{L}\\p{M}0-9 .,'\\-&/#();]{1," + LOCATION_MAXIMUM_LENGTH + "}$";
 
     public final String value;
 
