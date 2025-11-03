@@ -210,7 +210,7 @@ Implemented commands:
 
 #### Session overlap and duplicates policy
 
-- **Overlap rule**: Two sessions overlap iff `startA < endB` **and** `startB < endA`. If overlapping, the command is rejected with the message "Session overlaps with an existing session for this team."
+- **Overlap rule**: Two sessions overlap if and only if `startA < endB` **and** `startB < endA`. If overlapping, the command is rejected with the message "Session overlaps with an existing session for this team."
 - **Back-to-back allowed**: `endA == startB` (or `endB == startA`) is **permitted** and will not be treated as overlap.
 - **Duplicate rule**: A duplicate session is the stricter case where `start`, `end`, and `location` are identical (location compared case-insensitively). Duplicates are rejected with the duplicate session message.
 - **Resolution order**: During `addsession`, the system first checks *duplicate*, then *overlap*, to provide the most specific feedback.
