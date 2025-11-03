@@ -977,3 +977,12 @@ For example, `addsession i/1 ...` will only work if the currently displayed list
 Similarly, `delete 1` will only work if the currently displayed list is an athlete list.
 Using a team-related command on an athlete list (and vice versa) will result in an error message.
 This will prevent coaches from accidentally deleting or editing athletes or teams that are not displayed.
+
+#### **5. Clearer error messages and recovery when data file load fails when launching the app** 
+
+**Description:**
+If the application fails to load the saved data file and the result is a wiped/empty dataset, show a clear, specific error dialog explaining:
+- that the app could not read the data file,
+- whether the file was corrupt, malformed, missing required fields, or the fields had invalid data, etc.,
+- that the current displayed data in the app is empty because the load failed,
+- steps the user can take (restore from backup, locate last autosave, or re-import a CSV/JSON).
