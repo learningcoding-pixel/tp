@@ -29,15 +29,15 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list`: Lists all athletes.
 
-   * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured` : Adds a contact named `John Doe` to the RelayCoach app.
+   * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured`: Adds a contact named `John Doe` to the RelayCoach app.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3`: Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear`: Deletes all data in the RelayCoach app.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -45,22 +45,22 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
 
 ## Features
 
-| **Parameter** | **Represents**                                                            | **Constraints**                                                                                                                                                                                                                                                                                                          |
-|---|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME` | The name of the athlete                                                   | Must not be blank (only whitespaces). Can contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), commas (,), and parentheses ( ). Must be 1–80 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                    |
-| `DOB` | The date of birth of the athlete                 | Must be a valid calendar date in `YYYY-MM-DD` format. Must not be blank (only whitespaces). Must not be a future date.                                                                                                                                                                                                   |
-| `PHONE` | The phone number of the athlete                                           | Must not be blank (only whitespaces). Only numbers allowed. Must be 4–17 digits long.                                                                                                                                                                                                                                    |
-| `EMAIL` | The email address of the athlete                                          | Must not be blank (only whitespaces). Must follow `local-part@domain`. `local-part`: alphanumeric + allowed special characters (cannot start/end with special character). `domain`: labels separated by periods, each starting/ending alphanumeric, optional hyphens. Must be 2–255 characters long.      |
-| `ADDRESS` | The address of the athlete                                                | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;​), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage. |
-| `SCHOOL` | The school of the athlete                             | Must not be blank (only whitespaces). Letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), parentheses ( ), commas, periods (.). Must be 1–200 characters long.                                                                                                                                       |
-| `ROLE` | The role of the athlete                                                   | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). Must be 1–150 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                         |
-| `HEIGHT` | The height of the athlete in centimeters                                  | Must not be blank (only whitespaces). Positive number 50–300 cm, up to one decimal place.                                                                                                                                                                                                                                |
-| `WEIGHT` | The weight of the athlete in kilograms                                    | Must not be blank (only whitespaces). Positive number 25–200 kg, up to one decimal place.                                                                                                                                                                                                                                |
-| `TAG` | A tag describing additional information about the athlete                 | **May be blank**, but if provided: letters, numbers, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). No spaces. Must be 1–100 characters long.                                                                                                                                     |
-| `INDEX` / `ATHLETE_INDEX` / `TEAM_INDEX` | The index referring to the entry shown in the displayed athlete/team list | Must not be blank (only whitespaces). Positive integer (1, 2, 3, …).                                                                                                                                                                                                                                                     |
-| `TEAM_NAME` | A team's name in the address book                                         | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), apostrophes ('), periods (.), parentheses ( ). Must be 1–80 characters long.                                                                                                                                                                |
-| `STARTDATETIME` / `ENDDATETIME` | Session start/end date and time                                           | Must be a valid calendar date/time in `YYYY-MM-DD HHmm`. Must not be blank (only whitespaces).                                                                                                                                                                                                                           |
-| `LOCATION` | Represents a session's location                                           | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;​), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage. |
+| **Parameter** | **Represents**                                                           | **Constraints**                                                                                                                                                                                                                                                                                                                                           |
+|---|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME` | The name of the athlete                                                  | Must not be blank (only whitespaces). Can contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), commas (,), and parentheses ( ). Must be 1–80 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                                                     |
+| `DOB` | The date of birth of the athlete                                         | Must be a valid calendar date in `YYYY-MM-DD` format. Must not be blank (only whitespaces). Must not be a future date.                                                                                                                                                                                                                                    |
+| `PHONE` | The phone number of the athlete                                          | Must not be blank (only whitespaces). Only numbers allowed. Must be 4–17 digits long.                                                                                                                                                                                                                                                                     |
+| `EMAIL` | The email address of the athlete                                         | Must not be blank (only whitespaces). Must follow `local-part@domain`. `local-part`: alphanumeric + allowed special characters: plus (+), underscores (_), periods (.), hyphens (-) (cannot start/end with special character). `domain`: labels separated by periods, each starting/ending alphanumeric, optional hyphens. Must be 2–255 characters long. |
+| `ADDRESS` | The address of the athlete                                               | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;​), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                |
+| `SCHOOL` | The school of the athlete                                                | Must not be blank (only whitespaces). Letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), parentheses ( ), commas, periods (.). Must be 1–200 characters long.                                                                                                                                                                        |
+| `ROLE` | The role of the athlete                                                  | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). Must be 1–150 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                                                          |
+| `HEIGHT` | The height of the athlete in centimeters                                 | Must not be blank (only whitespaces). Positive number 50–300 cm, up to one decimal place.                                                                                                                                                                                                                                                                 |
+| `WEIGHT` | The weight of the athlete in kilograms                                   | Must not be blank (only whitespaces). Positive number 25–200 kg, up to one decimal place.                                                                                                                                                                                                                                                                 |
+| `TAG` | A tag describing additional information about the athlete                | **May be blank**, but if provided: letters, numbers, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). No spaces. Must be 1–100 characters long.                                                                                                                                                                      |
+| `INDEX` / `ATHLETE_INDEX` / `TEAM_INDEX` | The index referring to the entry shown in the displayed athlete/team list | Must not be blank (only whitespaces). Positive integer (1, 2, 3, …).                                                                                                                                                                                                                                                                                      |
+| `TEAM_NAME` | The name of the team                                                     | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), apostrophes ('), periods (.), parentheses ( ). Must be 1–80 characters long.                                                                                                                                                                                                 |
+| `STARTDATETIME` / `ENDDATETIME` | Session start/end date and time                                          | Must be a valid calendar date/time in `YYYY-MM-DD HHmm`. Must not be blank (only whitespaces).                                                                                                                                                                                                                                                            |
+| `LOCATION` | Represents a session's location                                          | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;​), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                |
 
 
 <box type="info" seamless>
@@ -104,7 +104,7 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -133,13 +133,13 @@ Examples:
 * `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured`
 * `add n/Betsy Crowe d/1988-05-12 p/81234567 e/betsyc@gmail.com a/123, Yishun Ave 2, #10-355 s/SMU r/Runner h/160.5 w/50.0`
 
-### Listing all athletes : `list`
+### Listing all athletes: `list`
 
 Shows a list of all athletes in the RelayCoach app.
 
 Format: `list`
 
-### Editing an athlete : `edit`
+### Editing an athlete: `edit`
 
 Edits an existing athlete in the RelayCoach app.
 
@@ -163,7 +163,7 @@ Examples:
 
 ### Finding athletes by name, school, role or tag: `find`
 
-Finds athletes whose fields matches the provided keywords for that field.
+Finds athletes whose fields match the provided keywords for that field.
 
 Format: `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]` (must provide at least one field)
 
@@ -178,7 +178,7 @@ Examples:
 * `find n/john jack s/NUS` returns `John Doe`, `Jack Doe`, both with School: NUS<br>
   ![result for 'find n/john jack s/NUS'](images/findJohnJackNUSResult.png)
 
-### Deleting an athlete : `delete`
+### Deleting an athlete: `delete`
 
 Deletes the specified athlete by index from the displayed athlete list.
 
@@ -207,7 +207,7 @@ Format: `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATH
 </box>
 
 Examples:
-* `team tn/StarTeam i/1 2 3 4` : Adds a new team named `StarTeam` with athletes at indexes 1, 2, 3, 4 in the displayed athlete list as members.
+* `team tn/StarTeam i/1 2 3 4`: Adds a new team named `StarTeam` with athletes at indexes 1, 2, 3, 4 in the displayed athlete list as members.
 
 ### Listing all teams: `listteams`
 
@@ -233,7 +233,7 @@ Examples:
 * `findteam starteam moonteam` returns `StarTeam` , `MoonTeam`<br>
   ![result for 'findteam starteam'](images/findteamstarteamResult.png)
 
-### Deleting a team : `deleteteam`
+### Deleting a team: `deleteteam`
 
 Deletes the specified team at a given index from the displayed team list.
 
@@ -250,14 +250,14 @@ Examples:
 
 Adds a session to the team at a specified index from the displayed team list.
 
-Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
+Format: `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`
 
 * `startDateTime` must be earlier than `endDateTime`.
 * **No overlapping sessions** are allowed for the same team. Two sessions overlap if `startA < endB` **and** `startB < endA`. **Back‑to‑back is allowed** (i.e. `endA == startB`).
 * Exact duplicates (same start, end, and location ignoring case) are rejected.
 
 Examples:
-* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a team named `StarTeam` with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a session to the team at index 1 (`StarTeam`) with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 * `addsession i/1 sdt/ 2025-09-21 1800 edt/ 2025-09-21 1900 l/park` is **allowed** (back‑to‑back with the previous session), while `addsession i/1 sdt/ 2025-09-21 1759 edt/ 2025-09-21 1830 l/park` will be **rejected** because it overlaps.
 
@@ -270,13 +270,13 @@ Format: `deletesession i/TEAM_INDEX si/SESSION_INDEX`
 Examples:
 * `deletesession i/1 si/1` deletes the 1st session from the team at index 1
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the RelayCoach app.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -315,18 +315,18 @@ Furthermore, certain edits can cause RelayCoach to behave in unexpected ways (e.
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                                                |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action            | Format, Examples                                                                                                                                                                                                                 |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**           | `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​` <br> e.g., `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian` |
-| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`. No overlapping sessions are allowed; back‑to‑back is allowed.           |
-| **Clear**         | `clear`                                                                                                                                                                                                                         |
-| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                             |
-| **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                               |
-| **DeleteTeam**    | `deleteteam INDEX` <br> e.g., `deleteteam 2`                                                                                                                                                                                    |
-| **Edit**          | `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SCHOOL] [r/ROLE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
-| **Find**          | `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]`<br> e.g., `find n/John Jack s/NUS`                                                                                                                                                  |
-| **FindTeam**      | `findteam KEYWORD [MORE_KEYWORDS]`<br> e.g., `findteam starteam sunteam`                                                                                                                                                        |
-| **Help**          | `help`                                                                                                                                                                                                                          |
-| **List**          | `list`                                                                                                                                                                                                                          |
-| **ListTeams**     | `listteams`                                                                                                                                                                                                                     |
-| **Team**          | `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` <br> e.g., `team tn/StarTeam i/1 2 3 4`                                                                                                   |
+| **AddSession**    | `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`. No overlapping sessions are allowed; back‑to‑back is allowed.                |
+| **Clear**         | `clear`                                                                                                                                                                                                                          |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                              |
+| **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                                |
+| **DeleteTeam**    | `deleteteam INDEX` <br> e.g., `deleteteam 2`                                                                                                                                                                                     |
+| **Edit**          | `edit INDEX [n/NAME] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SCHOOL] [r/ROLE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                          |
+| **Find**          | `find [n/NAME] [s/SCHOOL] [r/ROLE] [t/TAG]`<br> e.g., `find n/John Jack s/NUS`                                                                                                                                                   |
+| **FindTeam**      | `findteam TEAM_NAME [MORE_TEAM_NAMES]`<br> e.g., `findteam starteam sunteam`                                                                                                                                                     |
+| **Help**          | `help`                                                                                                                                                                                                                           |
+| **List**          | `list`                                                                                                                                                                                                                           |
+| **ListTeams**     | `listteams`                                                                                                                                                                                                                      |
+| **Team**          | `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` <br> e.g., `team tn/StarTeam i/1 2 3 4`                                                                                                    |
