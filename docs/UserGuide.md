@@ -216,7 +216,7 @@ Each team contains a list of 4 members, and a list of training sessions schedule
 
 Format: `listteams`
 
-### Locating teams: `findteam`
+### Finding teams: `findteam`
 
 Finds teams whose name matches the provided keywords.
 
