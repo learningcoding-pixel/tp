@@ -999,3 +999,15 @@ This will help prevent accidental data loss. This is especially so for `delete` 
 **Description:**  
 Implement horizontal scrolling in the person list panel and team list panel to accommodate wide content for different screen sizes.
 This will ensure that all information is accessible without truncation, especially for long fields like emails and addresses.
+
+#### **8. Edit Team**
+
+**Description:**  
+Implement an `editteam` command to allow coaches to modify existing teams.
+Coaches can change the team name or update the team members by swapping out athletes with new ones.
+
+#### **9. Edit Session**
+
+**Description:**  
+Implement an `editsession` command to allow coaches to modify existing training sessions for teams.
+Coaches can change session details such as start date & time, end date & time, and location.
