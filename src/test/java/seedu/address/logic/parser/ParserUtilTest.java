@@ -326,6 +326,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parse_invalidCalendarDateRejected() {
+        String userInput = " i/1 sdt/2025-02-30 0700 edt/2025-02-30 0800 l/Track";
+        AddSessionCommandParser parser = new AddSessionCommandParser();
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }

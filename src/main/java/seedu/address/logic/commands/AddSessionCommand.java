@@ -53,7 +53,7 @@ public class AddSessionCommand extends Command {
         Team targetTeam = lastShownList.get(teamIndex.getZeroBased());
 
         for (Session existing : targetTeam.getSessions()) {
-            if (isSameSession(existing, session)) {
+            if (session.equals(existing)) {
                 throw new CommandException(MESSAGE_DUPLICATE_INPUT);
             }
             if (sessionsOverlap(existing, session)) {
@@ -75,13 +75,6 @@ public class AddSessionCommand extends Command {
     private static boolean sessionsOverlap(Session a, Session b) {
         return a.getStartDate().isBefore(b.getEndDate())
                 && b.getStartDate().isBefore(a.getEndDate());
-    }
-
-    /** Returns true if both sessions have identical start, end, and location (case-insensitive). */
-    private static boolean isSameSession(Session a, Session b) {
-        return a.getStartDate().equals(b.getStartDate())
-                && a.getEndDate().equals(b.getEndDate())
-                && a.getLocation().toString().equalsIgnoreCase(b.getLocation().toString());
     }
 
     @Override
