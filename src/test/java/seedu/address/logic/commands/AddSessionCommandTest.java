@@ -84,7 +84,6 @@ public class AddSessionCommandTest {
 
     @Test
     public void execute_duplicateSession_throwsCommandException() {
-        // Team test double that claims it already has the session
         Team team = new TeamDoubleWithSession("Alpha");
         ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
         model.setFilteredTeams(List.of(team));
@@ -94,6 +93,22 @@ public class AddSessionCommandTest {
 
         CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
         assertEquals(AddSessionCommand.MESSAGE_DUPLICATE_INPUT, ex.getMessage());
+    }
+
+    @Test
+    public void execute_overlappingSession_throwsCommandException() {
+        // Team test double that contains an existing session that will overlap
+        Team team = new TeamDoubleWithExistingSession("Alpha",
+                makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
+        ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
+        model.setFilteredTeams(List.of(team));
+
+        // New session overlaps (0730–0830), but is not identical
+        Session overlapping = makeSession("2025-10-21 0730", "2025-10-21 0830", "Track");
+        AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), overlapping);
+
+        CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
+        assertEquals(AddSessionCommand.MESSAGE_OVERLAPPING_SESSION, ex.getMessage());
     }
 
     @Test
@@ -283,6 +298,42 @@ public class AddSessionCommandTest {
         @Override
         public void addSessionToTeam(Team target, Session session) {
             addedTo.add(session);
+        }
+    }
+
+    /**
+     * Test-double Team that exposes one existing session via getSessions() to trigger overlap detection,
+     * while returning false for hasSession() unless the session is identical.
+     */
+    private static class TeamDoubleWithExistingSession extends Team {
+        private final java.util.Set<Session> sessions = new java.util.HashSet<>();
+
+        TeamDoubleWithExistingSession(String name, Session existing) {
+            super(new TeamName(name), fourMembers());
+            sessions.add(existing);
+        }
+
+        private static Set<Person> fourMembers() {
+            Set<Person> m = new HashSet<>();
+            m.add(new PersonBuilder().withName("A").build());
+            m.add(new PersonBuilder().withName("B").build());
+            m.add(new PersonBuilder().withName("C").build());
+            m.add(new PersonBuilder().withName("D").build());
+            return m;
+        }
+
+        @Override
+        public java.util.Set<Session> getSessions() {
+            return sessions;
+        }
+
+        @Override
+        public boolean hasSession(Session s) {
+            // Treat as duplicate only if identical (start, end, location)
+            return sessions.stream().anyMatch(existing ->
+                    existing.getStartDate().equals(s.getStartDate())
+                            && existing.getEndDate().equals(s.getEndDate())
+                            && existing.getLocation().toString().equalsIgnoreCase(s.getLocation().toString()));
         }
     }
 

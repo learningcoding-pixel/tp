@@ -236,7 +236,7 @@ Examples:
 
 * Deletes the session at a specified session index from the team at a specified team index in the displayed team list.
 
-Format: `delete i/TEAM_INDEX si/SESSION_INDEX`
+Format: `deletesession i/TEAM_INDEX si/SESSION_INDEX`
 
 Examples:
 * `deletesession i/1 si/1` deletes the 1st session from the team at index 1
