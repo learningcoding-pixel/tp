@@ -987,3 +987,9 @@ If the application fails to load the saved data file and the result is a wiped/e
 - whether the file was corrupt, malformed, missing required fields, or the fields had invalid data, etc.,
 - that the current displayed data in the app is empty because the load failed,
 - steps the user can take (restore from backup, locate last autosave, or re-import a CSV/JSON).
+
+#### **6. Confirmation prompt for destructive commands**
+
+**Description:**  
+Before executing destructive commands like `clear`, `deleteteam`, or `delete`, prompt the user for confirmation.
+This will help prevent accidental data loss. This is especially so for `delete` command, which may cascade delete teams if the athlete being deleted belongs to a team.
