@@ -110,7 +110,7 @@ public class AddSessionCommandTest {
     }
 
     @Test
-    public void execute_identicalSessionInList_throwsDuplicate_fromLoop() {
+    public void execute_identicalSessionInList_throwsDuplicateFromLoop() {
         Session existing = makeSession("2025-10-21 0700", "2025-10-21 0800", "Track");
         Team team = new TeamDoubleWithExistingSessionNoHas("Alpha", existing);
         ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
@@ -124,7 +124,7 @@ public class AddSessionCommandTest {
     }
 
     @Test
-    public void execute_backToBackSessions_success_noOverlap() throws Exception {
+    public void execute_backToBackSessions_successNoOverlap() throws Exception {
         Team team = new TeamDoubleWithExistingSession("Alpha",
                 makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
         ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
@@ -134,13 +134,14 @@ public class AddSessionCommandTest {
         AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), backToBack);
 
         CommandResult result = cmd.execute(model);
-        String expectedMessage = String.format(AddSessionCommand.MESSAGE_SUCCESS, team.getName().toString(), backToBack);
+        String expectedMessage = String.format(AddSessionCommand.MESSAGE_SUCCESS,
+                team.getName().toString(), backToBack);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertTrue(model.addedTo.contains(backToBack));
     }
 
     @Test
-    public void execute_sameTimeDifferentLocation_throwsOverlap_notDuplicate() {
+    public void execute_sameTimeDifferentLocation_throwsOverlapNotDuplicate() {
         Team team = new TeamDoubleWithExistingSession("Alpha",
                 makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
         ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
