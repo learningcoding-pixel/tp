@@ -22,7 +22,11 @@
 
             <!-- Name and ID -->
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label" style="-fx-alignment: center-left;" minWidth="20" />
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
                 <Label fx:id="name" styleClass="cell_big_label" style="-fx-font-weight: bold; -fx-alignment: center-left;" HBox.hgrow="ALWAYS"/>
             </HBox>
 
