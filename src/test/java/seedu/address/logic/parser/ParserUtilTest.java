@@ -316,7 +316,6 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_invalidFormat_throwsParseException() {
-        // Contains a colon in minutes, which ParserUtil rejects (expects HHmm)
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-10-21 07:00"));
     }
 
