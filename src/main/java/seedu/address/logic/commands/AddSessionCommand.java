@@ -26,6 +26,7 @@ public class AddSessionCommand extends Command {
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team index provided is invalid.";
     public static final String MESSAGE_INVALID_DATES = "Start datetime must be earlier than end datetime.";
     public static final String MESSAGE_DUPLICATE_INPUT = "Session already exists";
+    public static final String MESSAGE_OVERLAPPING_SESSION = "Session overlaps with an existing session for this team.";
 
     private final Index teamIndex;
     private final Session session;
@@ -51,15 +52,26 @@ public class AddSessionCommand extends Command {
 
         Team targetTeam = lastShownList.get(teamIndex.getZeroBased());
 
-        //Check if the same session already exists in the team
         if (targetTeam.hasSession(session)) {
             throw new CommandException(MESSAGE_DUPLICATE_INPUT);
+        }
+
+        for (Session existing : targetTeam.getSessions()) {
+            if (sessionsOverlap(existing, session)) {
+                throw new CommandException(MESSAGE_OVERLAPPING_SESSION);
+            }
         }
 
         model.addSessionToTeam(targetTeam, session);
 
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS, targetTeam.getName().toString(), session.toString()), false, false, true);
+    }
+
+    /** Returns true if two sessions overlap in time. Allows back-to-back sessions (end == start). */
+    private static boolean sessionsOverlap(Session a, Session b) {
+        return a.getStartDate().isBefore(b.getEndDate())
+                && b.getStartDate().isBefore(a.getEndDate());
     }
 
     @Override
