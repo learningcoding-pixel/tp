@@ -993,3 +993,9 @@ If the application fails to load the saved data file and the result is a wiped/e
 **Description:**  
 Before executing destructive commands like `clear`, `deleteteam`, or `delete`, prompt the user for confirmation.
 This will help prevent accidental data loss. This is especially so for `delete` command, which may cascade delete teams if the athlete being deleted belongs to a team.
+
+#### **7. Horizontal scrolling for wide content**
+
+**Description:**  
+Implement horizontal scrolling in the person list panel and team list panel to accommodate wide content for different screen sizes.
+This will ensure that all information is accessible without truncation, especially for long fields like emails and addresses.
