@@ -973,7 +973,8 @@ This will maintain a clutter-free and up-to-date session list for the teams.
 
 **Description:**  
 Indexed commands such as `edit`, `delete` and `find` should only work for the currently displayed list of athletes or teams.
-For example, `addsession i/1 ...` will only work if the currently displayed list is a team list.
-Similarly, `delete 1` will only work if the currently displayed list is an athlete list.
 Using a team-related command on an athlete list (and vice versa) will result in an error message.
 This will prevent coaches from accidentally deleting or editing athletes or teams that are not displayed.
+- For example, `addsession i/1 ...` will only work if the currently displayed list is a team list.
+- Similarly, `delete 1` will only work if the currently displayed list is an athlete list.
+- `team` command will only work if the currently displayed list is an athlete list. 
