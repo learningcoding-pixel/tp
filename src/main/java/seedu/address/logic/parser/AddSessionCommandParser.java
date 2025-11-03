@@ -57,6 +57,6 @@ public class AddSessionCommandParser implements Parser<AddSessionCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix ->
-                argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap.getValue(prefix).get().isEmpty());
+                argumentMultimap.getValue(prefix).isPresent());
     }
 }
