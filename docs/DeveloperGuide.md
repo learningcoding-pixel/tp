@@ -773,7 +773,7 @@ As a coach, you begin by launching the application for the first time and config
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103-F13-1/tp/releases/tag/v1.5).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103-F13-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your RelayCoach app.
 
