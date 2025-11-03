@@ -206,6 +206,11 @@ Format: `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATH
 **Tip:** Exactly 4 unique athlete IDs must be provided to form a team. Each athlete can only be part of exactly one team.
 </box>
 
+<box type="tip" seamless>
+
+**Tip:** Team names must be unique, and must be case-insensitive. e.g. `StarTeam` and `starteam` are considered the same.
+</box>
+
 Examples:
 * `team tn/StarTeam i/1 2 3 4`: Adds a new team named `StarTeam` with athletes at indexes 1, 2, 3, 4 in the displayed athlete list as members.
 
@@ -253,8 +258,12 @@ Adds a session to the team at a specified index from the displayed team list.
 Format: `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`
 
 * `startDateTime` must be earlier than `endDateTime`.
-* **No overlapping sessions** are allowed for the same team. Two sessions overlap if `startA < endB` **and** `startB < endA`. **Back‑to‑back is allowed** (i.e. `endA == startB`).
-* Exact duplicates (same start, end, and location ignoring case) are rejected.
+* **No overlapping sessions** are allowed for the same team. Two sessions overlap if `startDateTimeA < endDateTimeB` **and** `startDateTimeB < endDateTimeA`. **Back‑to‑back is allowed** (i.e. `endDateTimeA == startDateTimeB`).
+
+<box type="tip" seamless>
+
+**Tip:** Duplicate sessions are not allowed in RelayCoach. Two sessions are considered duplicates if they have the same `startDateTime`, `endDateTime`, and `location` ignoring case.
+</box>
 
 Examples:
 * `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a session to the team at index 1 (`StarTeam`) with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
@@ -301,7 +310,7 @@ Furthermore, certain edits can cause RelayCoach to behave in unexpected ways (e.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RelayCoach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -318,7 +327,7 @@ Furthermore, certain edits can cause RelayCoach to behave in unexpected ways (e.
 | Action            | Format, Examples                                                                                                                                                                                                                 |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**           | `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​` <br> e.g., `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian` |
-| **AddSession**    | `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`. No overlapping sessions are allowed; back‑to‑back is allowed.                |
+| **AddSession**    | `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`.                                                                              |
 | **Clear**         | `clear`                                                                                                                                                                                                                          |
 | **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                              |
 | **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                                |

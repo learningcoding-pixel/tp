@@ -168,8 +168,8 @@ The system prevents duplicate athletes, teams, and sessions using the following 
 - `UniquePersonList` and `UniqueTeamList` enforce uniqueness of `Person` and `Team` objects, while `Set` of `Session` objects is used to ensure that sessions are unique.
 - `Person` objects are duplicates if they have the same `Name` and `DOB`.
 - `Team` objects are duplicates if they have the same `TeamName`.
-- `Session` objects are duplicates if they have the same `Location`, `startDate`, and `endDate`.
-- Overlapping sessions (even if not duplicates) are disallowed during scheduling; see *Session overlap and duplicates policy*.
+- `Session` objects are duplicates if they have the same `Location`, `startDateTime`, and `endDateTime`.
+- Overlapping sessions (even if not duplicates) are disallowed during scheduling; see [Session overlap and duplicates policy](#session-overlap-and-duplicates-policy).
 
 ### Cascading operations between Athletes and Teams
 
@@ -189,31 +189,23 @@ When athlete information is updated, the athlete information in the athlete's te
 This project extends AB-3 with `Team` and `Session` domain entities and corresponding commands.
 
 - Teams are groups of exactly 4 distinct athletes (`Person`).
-- Sessions represent training events with a location and start/end datetimes, attached to teams.
+- Sessions represent training events with a location and start/end dateTimes, attached to teams.
 
 Key model classes:
 - `seedu.address.model.team.Team` (holds `TeamName`, members, sessions)
-- `seedu.address.model.team.session.Session` (holds `Location`, `startDate`, `endDate`)
+- `seedu.address.model.team.session.Session` (holds `Location`, `startDateTime`, `endDateTime`)
 - `seedu.address.model.team.UniqueTeamList` (manages uniqueness and storage of teams)
 
-Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `l/` (location), `sdt/` (start), `edt/` (end).
+Relevant CLI prefixes (see `CliSyntax`): `tn/` (team name), `i/` (index), `si/` (session index), `l/` (location), `sdt/` (start date and time), `edt/` (end date and time).
 
 Implemented commands:
-- `team tn/TEAM_NAME i/IDX1 IDX2 IDX3 IDX4` — create a team of 4 athletes.
+- `team tn/TEAM_NAME i/ATHLETE_INDEX_1 ATHLETE_INDEX_2 ATHLETE_INDEX_3 ATHLETE_INDEX_4` — create a team of 4 athletes.
     - Constraints: exactly 4 distinct valid athlete indexes; members cannot already belong to another team; team name must be unique.
 - `listteams` — list all teams.
 - `deleteteam INDEX` — delete a team by displayed index in the team list.
-- `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
-    - Constraints: team index must be valid; `end` must be after `start`; location and datetimes must satisfy format and validation rules; **sessions must not overlap with any existing session in the same team** (defined as `startA < endB` and `startB < endA`). **Back-to-back is allowed** (`endA == startB`).
+- `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION` — add a session to a team.
 - `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
-    - Notes: When interpreting `SESSION_INDEX`, sessions are ordered by start datetime, and if identical, by end datetime, as defined in `Session.SESSION_ORDER`.
-
-#### Session overlap and duplicates policy
-
-- **Overlap rule**: Two sessions overlap if and only if `startA < endB` **and** `startB < endA`. If overlapping, the command is rejected with the message "Session overlaps with an existing session for this team."
-- **Back-to-back allowed**: `endA == startB` (or `endB == startA`) is **permitted** and will not be treated as overlap.
-- **Duplicate rule**: A duplicate session is the stricter case where `start`, `end`, and `location` are identical (location compared case-insensitively). Duplicates are rejected with the duplicate session message.
-- **Resolution order**: During `addsession`, the system first checks *duplicate*, then *overlap*, to provide the most specific feedback.
+    - Notes: When interpreting `SESSION_INDEX`, sessions are ordered by `startDateTime`, and if identical, by `endDateTime`, and if also identical, by `location` in lexicographical order as defined in `Session.SESSION_ORDER`.
 
 High-level logic and model interactions:
 - Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
@@ -223,12 +215,19 @@ Design considerations:
 - Team immutability avoids side-effects when editing nested collections (sessions, members).
 - Session indices are resolved against a deterministic ordering to ensure predictable deletion behavior.
 
+#### Session overlap and duplicates policy
+
+- **Overlap rule**: Two sessions overlap if and only if `startDateTimeA < endDateTimeB` **and** `startDateTimeB < endDateTimeA`. If overlapping, the command is rejected with the message "Session overlaps with an existing session for this team."
+- **Back-to-back allowed**: `endDateTimeA == startDateTimeB` (or `endDateTimeB == startDateTimeA`) is **permitted** and will not be treated as overlap.
+- **Duplicate rule**: A duplicate session is the stricter case where `startDateTime`, `endDateTime`, and `location` are identical (location compared case-insensitively). Duplicates are rejected with the duplicate session message.
+- **Resolution order**: During `addsession`, the system first checks *duplicate*, then *overlap*, to provide the most specific feedback.
+
 ### Listing Athletes and Teams
 
 This project displays a list of athletes by default but will display either athletes or teams depending on the command being executed.
 - Any athlete-related commands (e.g. `add`, `delete`, `find`) are implemented to display athletes by default after execution.
 - Any team-related commands (e.g. `team`, `listteams`) are implemented to display teams by default after execution.
-- Each team displays its members in alphabetical order and its sessions in chronological order based on start datetime and end datetime.
+- Each team displays its members in lexicographical order and its sessions in chronological order based on `startDateTime`, `endDateTime`, and `location`.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -688,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3e. Overlapping session detected (time window intersects an existing session for the same team).
 
-  * 3e1. RelayCoach rejects scheduling and notifies coach that the session overlaps an existing session. Back-to-back (`end == start`) is allowed.
+  * 3e1. RelayCoach rejects scheduling and notifies coach that the session overlaps an existing session.
   * 3e2. Coach updates information.
 
     Use case resumes from Step 3.
@@ -745,7 +744,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command-Line Interface
 * **GUI**: Graphical User Interface
 * **MSS**: Main Success Scenario
-* **Athletes**: Secondary school relay race athletes
+* **Athletes**: Relay race school athletes
 * **Teams**: Teams are used to group athletes. Each team can only have 4 athletes.
 * **Sessions**: Sessions are added to teams. Each session has start date & time, end date & time and location.
 
