@@ -20,7 +20,7 @@ public class Email {
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any."
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
             + "    - be at most " + EMAIL_MAXIMUM_LENGTH + " characters.\n"
             + "Email must not be blank (only whitespaces).";
     // alphanumeric and special characters
