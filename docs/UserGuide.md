@@ -6,7 +6,7 @@
 
 # RelayCoach User Guide
 
-RelayCoach is a **desktop app for managing athletes' contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RelayCoach can get your athletes management tasks done faster than traditional GUI apps.
+RelayCoach is a **desktop app designed for coaches to manage their athletes' contacts and training schedules**, optimized for use via a Command Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, RelayCoach helps coaches complete athlete management tasks faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
