@@ -97,18 +97,74 @@ public class AddSessionCommandTest {
 
     @Test
     public void execute_overlappingSession_throwsCommandException() {
-        // Team test double that contains an existing session that will overlap
         Team team = new TeamDoubleWithExistingSession("Alpha",
                 makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
         ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
         model.setFilteredTeams(List.of(team));
 
-        // New session overlaps (0730–0830), but is not identical
         Session overlapping = makeSession("2025-10-21 0730", "2025-10-21 0830", "Track");
         AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), overlapping);
 
         CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
         assertEquals(AddSessionCommand.MESSAGE_OVERLAPPING_SESSION, ex.getMessage());
+    }
+
+    @Test
+    public void execute_identicalSessionInList_throwsDuplicate_fromLoop() {
+        Session existing = makeSession("2025-10-21 0700", "2025-10-21 0800", "Track");
+        Team team = new TeamDoubleWithExistingSessionNoHas("Alpha", existing);
+        ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
+        model.setFilteredTeams(List.of(team));
+
+        Session identical = makeSession("2025-10-21 0700", "2025-10-21 0800", "tRaCk");
+        AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), identical);
+
+        CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
+        assertEquals(AddSessionCommand.MESSAGE_DUPLICATE_INPUT, ex.getMessage());
+    }
+
+    @Test
+    public void execute_backToBackSessions_success_noOverlap() throws Exception {
+        Team team = new TeamDoubleWithExistingSession("Alpha",
+                makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
+        ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
+        model.setFilteredTeams(List.of(team));
+
+        Session backToBack = makeSession("2025-10-21 0800", "2025-10-21 0900", "Track");
+        AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), backToBack);
+
+        CommandResult result = cmd.execute(model);
+        String expectedMessage = String.format(AddSessionCommand.MESSAGE_SUCCESS, team.getName().toString(), backToBack);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertTrue(model.addedTo.contains(backToBack));
+    }
+
+    @Test
+    public void execute_sameTimeDifferentLocation_throwsOverlap_notDuplicate() {
+        Team team = new TeamDoubleWithExistingSession("Alpha",
+                makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
+        ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
+        model.setFilteredTeams(List.of(team));
+
+        Session sameTimeDifferentLoc = makeSession("2025-10-21 0700", "2025-10-21 0800", "Gym");
+        AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), sameTimeDifferentLoc);
+
+        CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
+        assertEquals(AddSessionCommand.MESSAGE_OVERLAPPING_SESSION, ex.getMessage());
+    }
+
+    @Test
+    public void execute_sameTimeSameLocationDifferentCase_throwsDuplicate() {
+        Team team = new TeamDoubleWithExistingSession("Alpha",
+                makeSession("2025-10-21 0700", "2025-10-21 0800", "Track"));
+        ModelStubAcceptingSessionAdded model = new ModelStubAcceptingSessionAdded();
+        model.setFilteredTeams(List.of(team));
+
+        Session sameTimeSameLocDifferentCase = makeSession("2025-10-21 0700", "2025-10-21 0800", "tRaCk");
+        AddSessionCommand cmd = new AddSessionCommand(Index.fromOneBased(1), sameTimeSameLocDifferentCase);
+
+        CommandException ex = assertThrows(CommandException.class, () -> cmd.execute(model));
+        assertEquals(AddSessionCommand.MESSAGE_DUPLICATE_INPUT, ex.getMessage());
     }
 
     @Test
@@ -334,6 +390,38 @@ public class AddSessionCommandTest {
                     existing.getStartDate().equals(s.getStartDate())
                             && existing.getEndDate().equals(s.getEndDate())
                             && existing.getLocation().toString().equalsIgnoreCase(s.getLocation().toString()));
+        }
+    }
+
+    /**
+     * Team double that exposes an existing session via getSessions(), but always returns false for hasSession().
+     * This allows us to assert the duplicate detection originates from the loop's isSameSession() check.
+     */
+    private static class TeamDoubleWithExistingSessionNoHas extends Team {
+        private final java.util.Set<Session> sessions = new java.util.HashSet<>();
+
+        TeamDoubleWithExistingSessionNoHas(String name, Session existing) {
+            super(new TeamName(name), fourMembers());
+            sessions.add(existing);
+        }
+
+        private static Set<Person> fourMembers() {
+            Set<Person> m = new HashSet<>();
+            m.add(new PersonBuilder().withName("A").build());
+            m.add(new PersonBuilder().withName("B").build());
+            m.add(new PersonBuilder().withName("C").build());
+            m.add(new PersonBuilder().withName("D").build());
+            return m;
+        }
+
+        @Override
+        public java.util.Set<Session> getSessions() {
+            return sessions;
+        }
+
+        @Override
+        public boolean hasSession(Session s) {
+            return false; // Force the command to rely on the loop's duplicate/overlap checks
         }
     }
 
