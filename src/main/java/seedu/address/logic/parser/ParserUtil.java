@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -262,14 +263,12 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dateTime} is invalid.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
-        requireNonNull(dateTime);
-        String trimmedDateTime = dateTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm")
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
-            return LocalDateTime.parse(trimmedDateTime, formatter);
+            return LocalDateTime.parse(dateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date/time format. Please use 'yyyy-MM-dd HHmm' "
-                    + "format (e.g. 2025-10-21 07:00).");
+            throw new ParseException("Invalid date/time format");
         }
     }
 }

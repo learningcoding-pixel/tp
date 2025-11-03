@@ -167,6 +167,7 @@ The system prevents duplicate athletes, teams, and sessions using the following 
 - `Person` objects are duplicates if they have the same `Name` and `DOB`.
 - `Team` objects are duplicates if they have the same `TeamName`.
 - `Session` objects are duplicates if they have the same `Location`, `startDate`, and `endDate`.
+- Overlapping sessions (even if not duplicates) are disallowed during scheduling; see *Session overlap and duplicates policy*.
 
 ### Cascading operations between Athletes and Teams
 
@@ -201,9 +202,16 @@ Implemented commands:
 - `listteams` — list all teams.
 - `deleteteam INDEX` — delete a team by displayed index in the team list.
 - `addsession i/TEAM_INDEX sdt/YYYY-MM-DD HHmm edt/YYYY-MM-DD HHmm l/LOCATION` — add a session to a team.
-    - Constraints: team index must be valid; `end` must not be before `start`; location and datetimes must satisfy format and validation rules.
+    - Constraints: team index must be valid; `end` must be after `start`; location and datetimes must satisfy format and validation rules; **sessions must not overlap with any existing session in the same team** (defined as `startA < endB` and `startB < endA`). **Back-to-back is allowed** (`endA == startB`).
 - `deletesession i/TEAM_INDEX si/SESSION_INDEX` — delete a session from a team.
     - Notes: When interpreting `SESSION_INDEX`, sessions are ordered by start datetime, and if identical, by end datetime, as defined in `Session.SESSION_ORDER`.
+
+#### Session overlap and duplicates policy
+
+- **Overlap rule**: Two sessions overlap iff `startA < endB` **and** `startB < endA`. If overlapping, the command is rejected with the message "Session overlaps with an existing session for this team."
+- **Back-to-back allowed**: `endA == startB` (or `endB == startA`) is **permitted** and will not be treated as overlap.
+- **Duplicate rule**: A duplicate session is the stricter case where `start`, `end`, and `location` are identical (location compared case-insensitively). Duplicates are rejected with the duplicate session message.
+- **Resolution order**: During `addsession`, the system first checks *duplicate*, then *overlap*, to provide the most specific feedback.
 
 High-level logic and model interactions:
 - Commands are parsed in `AddressBookParser` and delegated to specific parsers (`AddTeamCommandParser`, `AddSessionCommandParser`, etc.).
@@ -379,7 +387,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
 
 * 3a. Missing or invalid required details (e.g., empty Name, invalid Role value).
 
@@ -677,6 +684,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from Step 3.
 
+* 3e. Overlapping session detected (time window intersects an existing session for the same team).
+
+  * 3e1. RelayCoach rejects scheduling and notifies coach that the session overlaps an existing session. Back-to-back (`end == start`) is allowed.
+  * 3e2. Coach updates information.
+
+    Use case resumes from Step 3.
+
 ---
 
 **Use case: Delete Session from Team**
@@ -824,6 +838,14 @@ You want to schedule training sessions for your teams.
     1. Prerequisite: At least one team exists; note its index from `listteams`.
     2. Test case: `addsession i/1 sdt/2025-10-21 0700 edt/2025-10-21 0800 l/Track`
         - **Expected:** Success message showing session details added to the team.
+
+3. **Adding a back-to-back session (allowed)**
+    1. Test case: `addsession i/1 sdt/2025-10-21 0800 edt/2025-10-21 0900 l/Track`
+       - **Expected:** Success message (no overlap because previous session ends at 0800).
+
+4. **Adding an overlapping session (rejected)**
+    1. Test case: `addsession i/1 sdt/2025-10-21 0759 edt/2025-10-21 0830 l/Track`
+       - **Expected:** Error message stating the session overlaps with an existing session.
 
 ---
 

@@ -316,7 +316,6 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_invalidFormat_throwsParseException() {
-        // Contains a colon in minutes, which ParserUtil rejects (expects HHmm)
         assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2025-10-21 07:00"));
     }
 
@@ -324,6 +323,13 @@ public class ParserUtilTest {
     public void parseDateTime_valid_returnsLocalDateTime() throws Exception {
         LocalDateTime expected = LocalDateTime.of(2025, 10, 21, 7, 0);
         assertEquals(expected, ParserUtil.parseDateTime("2025-10-21 0700"));
+    }
+
+    @Test
+    public void parse_invalidCalendarDateRejected() {
+        String userInput = " i/1 sdt/2025-02-30 0700 edt/2025-02-30 0800 l/Track";
+        AddSessionCommandParser parser = new AddSessionCommandParser();
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
