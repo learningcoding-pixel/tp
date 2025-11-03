@@ -13,7 +13,7 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS =
             "Addresses may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
             + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ).\n"
-            + "It must not be blank and must be at most " + ADDRESS_MAXIMUM_LENGTH + " characters.\n"
+            + "It must not be blank (only whitespaces) and must be at most " + ADDRESS_MAXIMUM_LENGTH + " characters.\n"
             + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*

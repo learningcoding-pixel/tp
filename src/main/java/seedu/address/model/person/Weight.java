@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Weight {
     public static final String MESSAGE_CONSTRAINTS =
-            "Weight must be a positive number between 25 and 200 kg (inclusive), and may have up to one decimal place.";
+            "Weight must be a positive number between 25 and 200 kg (inclusive), and may have up to one decimal place."
+            + "\nWeight must not be blank (only whitespaces).";
     public static final String VALIDATION_REGEX =
             "^(?:2[5-9](?:\\.\\d)?|[3-9]\\d(?:\\.\\d)?|1[01]\\d(?:\\.\\d)?|200(?:\\.0)?)$";
     public final String value;

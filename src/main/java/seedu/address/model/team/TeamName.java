@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a team's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class TeamName {
@@ -12,13 +12,13 @@ public class TeamName {
     public static final String MESSAGE_CONSTRAINTS =
             "Team names can only contain letters, numbers, spaces, hyphens (-), apostrophes ('), "
             + "periods (.), and parentheses ( ).\n"
-            + "They must not be blank and must be 1–" + TEAM_NAME_MAX_LENGTH + " characters long.";
+            + "They must not be blank(only whitespaces) and must be 1–" + TEAM_NAME_MAX_LENGTH + " characters long.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX =
-            "^(?=.*\\S)[\\p{L}\\p{M}0-9 .'-()]{1," + TEAM_NAME_MAX_LENGTH + "}$";
+            "^(?=.*\\S)[-\\p{L}\\p{M}0-9 .'()]{1," + TEAM_NAME_MAX_LENGTH + "}$";
 
     public final String fullTeamName;
 

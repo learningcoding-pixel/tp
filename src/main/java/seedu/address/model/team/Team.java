@@ -11,7 +11,7 @@ import seedu.address.model.team.session.Session;
 
 /**
  * Represents a Team in the RelayCoach app.
- * Guarantees: members size is always 4, details are present and not null, field values are validated, immutable.
+ * Guarantees: member size is always 4, details are present and not null, field values are validated, immutable.
  */
 public class Team {
 

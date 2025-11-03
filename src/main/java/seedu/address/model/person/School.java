@@ -8,7 +8,8 @@ public class School {
     public static final int SCHOOL_MAXIMUM_LENGTH = 200;
     public static final String MESSAGE_CONSTRAINTS =
             "School names can only contain letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), "
-            + "parentheses ( ), commas (,), and periods (.).\nMust be 1–" + SCHOOL_MAXIMUM_LENGTH + " characters long.";
+            + "parentheses ( ), commas (,), and periods (.).\nMust be 1–" + SCHOOL_MAXIMUM_LENGTH + " characters long."
+            + "\nSchool name must not be blank (only whitespaces).";
 
     /*
      * The first character of the school must not be a whitespace,
