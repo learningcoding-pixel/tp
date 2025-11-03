@@ -268,8 +268,8 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(dateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date/time format.\n" +
-                    "Must be a valid calendar date in the format YYYY-MM-DD HHmm "
+            throw new ParseException("Invalid date/time format.\n"
+                    + "Must be a valid calendar date in the format YYYY-MM-DD HHmm "
                     + "and must not be blank (only whitespaces)");
         }
     }
