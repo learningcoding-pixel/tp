@@ -229,11 +229,14 @@ Adds a session to the team at a specified index from the displayed team list.
 
 Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
-* startDate must be earlier than endDate
+* `startDate` must be earlier than `endDate`.
+* **No overlapping sessions** are allowed for the same team. Two sessions overlap if `startA < endB` **and** `startB < endA`. **Back‑to‑back is allowed** (i.e. `endA == startB`).
+* Exact duplicates (same start, end, and location ignoring case) are rejected.
 
 Examples:
 * `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a team named `StarTeam` with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
+* `addsession i/1 sdt/ 2025-09-21 1800 edt/ 2025-09-21 1900 l/park` is **allowed** (back‑to‑back with the previous session), while `addsession i/1 sdt/ 2025-09-21 1759 edt/ 2025-09-21 1830 l/park` will be **rejected** because it overlaps.
 
 ### Deleting Session: `deletesession`
 
@@ -292,7 +295,7 @@ Furthermore, certain edits can cause RelayCoach to behave in unexpected ways (e.
 | Action            | Format, Examples                                                                                                                                                                                                                |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**           | `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​` <br> e.g., `add n/John Doe d/1990-01-01 p/98765432 e/johnd@example.com a/6 Haji Lane s/NUS r/Captain h/175 w/65 t/Injured t/Vegetarian` |
-| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`                                                                           |
+| **AddSession**    | `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`<br> e.g., `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park`. No overlapping sessions are allowed; back‑to‑back is allowed.           |
 | **Clear**         | `clear`                                                                                                                                                                                                                         |
 | **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                             |
 | **DeleteSession** | `deletesession i/TEAM_INDEX si/SESSION_INDEX` <br> e.g., `deletesession i/1 si/2`                                                                                                                                               |
