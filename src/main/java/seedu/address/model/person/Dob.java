@@ -15,7 +15,7 @@ public class Dob {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date of Birth must be a valid calendar date in the format YYYY-MM-DD.\n"
-                    + "Must not be blank, and must not be a future date.";
+                    + "Must not be blank (only whitespaces), and must not be a future date.";
 
     private static final DateTimeFormatter DOB_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd")
             .withResolverStyle(ResolverStyle.STRICT);

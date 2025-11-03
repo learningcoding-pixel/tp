@@ -45,14 +45,32 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
 
 ## Features
 
+| **Parameter** | **Represents**                                                            | **Constraints**                                                                                                                                                                                                                                                                                                          |
+|---|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME` | The name of the athlete                                                   | Must not be blank (only whitespaces). Can contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), commas (,), and parentheses ( ). Must be 1–80 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                    |
+| `DOB` | The date of birth of the athlete                 | Must be a valid calendar date in `YYYY-MM-DD` format. Must not be blank (only whitespaces). Must not be a future date.                                                                                                                                                                                                   |
+| `PHONE` | The phone number of the athlete                                           | Must not be blank (only whitespaces). Only numbers allowed. Must be 4–17 digits long.                                                                                                                                                                                                                                    |
+| `EMAIL` | The email address of the athlete                                          | Must not be blank (only whitespaces). Must follow `local-part@domain`. `local-part`: alphanumeric + allowed special characters (cannot start/end with special character). `domain`: labels separated by periods, each starting/ending alphanumeric, optional hyphens. Must be 2–255 characters long.      |
+| `ADDRESS` | The address of the athlete                                                | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage. |
+| `SCHOOL` | The school of the athlete                             | Must not be blank (only whitespaces). Letters, numbers, spaces, ampersands (&), hyphens (-), apostrophes ('), parentheses ( ), commas, periods (.). Must be 1–200 characters long.                                                                                                                                       |
+| `ROLE` | The role of the athlete                                                   | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). Must be 1–150 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage.                                         |
+| `HEIGHT` | The height of the athlete in centimeters                                  | Must not be blank (only whitespaces). Positive number 50–300 cm, up to one decimal place.                                                                                                                                                                                                                                |
+| `WEIGHT` | The weight of the athlete in kilograms                                    | Must not be blank (only whitespaces). Positive number 25–200 kg, up to one decimal place.                                                                                                                                                                                                                                |
+| `TAG` | A tag describing additional information about the athlete                 | **May be blank**, but if provided: letters, numbers, hyphens (-), slashes (/), plus (+), underscores (_), parentheses (), apostrophes ('). No spaces. Must be 1–100 characters long.                                                                                                                                     |
+| `INDEX` / `ATHLETE_INDEX` / `TEAM_INDEX` | The index referring to the entry shown in the displayed athlete/team list | Must not be blank (only whitespaces). Positive integer (1, 2, 3, …).                                                                                                                                                                                                                                                     |
+| `TEAM_NAME` | A team's name in the address book                                         | Must not be blank (only whitespaces). Letters, numbers, spaces, hyphens (-), apostrophes ('), periods (.), parentheses ( ). Must be 1–80 characters long.                                                                                                                                                                |
+| `STARTDATETIME` / `ENDDATETIME` | Session start/end date and time                                           | Must be a valid calendar date/time in `YYYY-MM-DD HHmm`. Must not be blank (only whitespaces).                                                                                                                                                                                                                           |
+| `LOCATION` | Represents a session's location                                           | Must not be blank (only whitespaces). Letters, numbers, spaces, commas (,), periods (.), hyphens (-), apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), parentheses ( ). Must be 1–255 characters long. Refer to [Notes about the command format](#notes-about-the-command-format) for slash usage. |
+
+
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+### Notes about the command format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* In the User Guide, items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -66,6 +84,22 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
 
 * Missing required prefixes or including additional/invalid prefixes will result in an invalid command error prompt.<br>
   e.g. `add John Doe p/98765432` (missing `n/`) or `add n/John Doe x/extra` (invalid prefix) will both be rejected.
+
+* **Slash usage** - Literal input prefix escape using angle brackets `< >`:<br>
+  - If your input contains text that resembles a prefix (e.g. `n/`, `s/`) **immediately after a whitespace**, wrap it in angle brackets to treat it as literal input rather than a command prefix.<br>
+    - Example:
+    `edit 1 n/John <s/o> Doe` → Name becomes `John s/o Doe`<br>
+  - Angle brackets are removed during processing, letting you safely include slashes in text fields.
+
+  - If the slash is **not** part of a prefix after whitespace, no angle bracket wrapping is required:<br>
+    - Example: `edit 1 n/John abcdef/ Doe` → Name becomes `John abcdef/ Doe`
+
+  - **Important:** Angle brackets must be properly closed — lone `<` or `>` will not be accepted.
+
+  - **Why this exists:** RelayCoach uses prefixes like `n/` and `s/` to identify fields.  
+    - Without angle brackets, `edit 1 n/John s/o Doe` would be interpreted as:
+      - `n/John` → Name = `John`
+      - `s/o Doe` → School = `o Doe`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -84,17 +118,6 @@ Format: `help`
 Adds an athlete to the RelayCoach app.
 
 Format: `add n/NAME d/DOB p/PHONE e/EMAIL a/ADDRESS s/SCHOOL r/ROLE h/HEIGHT w/WEIGHT [t/TAG]…​`
-
-* `NAME` is the name of the athlete
-* `DOB` is the date of birth of the athlete in `YYYY-MM-DD` format.
-* `PHONE` is the phone number of the athlete. It must contain only numeric characters and be 4-17 digits long (inclusive).
-* `EMAIL` is the email address of the athlete. It must contain exactly one "@" symbol and at least one "." anywhere after the "@" symbol.
-* `ADDRESS` is the address of the athlete.
-* `SCHOOL` is the school the athlete is affiliated with.
-* `ROLE` is the role or position of the athlete in the team, only accepts alphanumeric characters and spaces.
-* `HEIGHT` is the height of the athlete in centimeters, only accepts positive numbers up to 1 decimal place, only accepts values between 50.0cm to 300.0cm inclusive.
-* `WEIGHT` is the weight of the athlete in kilograms, only accepts positive numbers up to 1 decimal place, only accepts values between 25.0kg to 200.0kg inclusive.
-* `TAG` is a tag associated with the athlete used to describe any additional information about the athlete.
 
 <box type="tip" seamless>
 
@@ -197,7 +220,7 @@ Format: `listteams`
 
 Finds teams whose name matches the provided keywords.
 
-Format: `findteam KEYWORD [MORE_KEYWORDS]` (must provide at least one name keyword)
+Format: `findteam TEAM_NAME [MORE_TEAM_NAMES]` (must provide at least one name keyword)
 
 * The search is case-insensitive. e.g `starteam` will match `StarTeam`
 * The order of the keywords does not matter. e.g. `StarTeam MoonTeam` will match `MoonTeam StarTeam`
@@ -229,7 +252,7 @@ Adds a session to the team at a specified index from the displayed team list.
 
 Format: `addsession i/TEAM_INDEX sdt/ STARTDATETIME edt/ ENDDATETIME l/ LOCATION`
 
-* `startDate` must be earlier than `endDate`.
+* `startDateTime` must be earlier than `endDateTime`.
 * **No overlapping sessions** are allowed for the same team. Two sessions overlap if `startA < endB` **and** `startB < endA`. **Back‑to‑back is allowed** (i.e. `endA == startB`).
 * Exact duplicates (same start, end, and location ignoring case) are rejected.
 

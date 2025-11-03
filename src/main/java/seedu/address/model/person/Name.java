@@ -13,6 +13,7 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             "Names can only contain letters, spaces, hyphens (-), apostrophes ('), periods (.), slashes (/), "
             + "commas (,), and parentheses ( ).\n" + "Must be 1–" + NAME_MAXIMUM_LENGTH + " characters long.\n"
+            + "Names should not be blank (only whitespaces).\n"
             + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*

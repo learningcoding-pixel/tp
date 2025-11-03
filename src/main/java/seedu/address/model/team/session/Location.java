@@ -13,6 +13,7 @@ public class Location {
             "Locations may contain letters, numbers, spaces, commas (,), periods (.), hyphens (-), "
             + "apostrophes ('), slashes (/), ampersands (&), hash (#), semicolons (;), and parentheses ( ).\n"
             + "It must not be blank and must be at most " + LOCATION_MAXIMUM_LENGTH + " characters.\n"
+            + "Locations should not be blank (only whitespaces).\n"
             + "Refer to the User Guide for full details on slash (/) usage.";
 
     /*

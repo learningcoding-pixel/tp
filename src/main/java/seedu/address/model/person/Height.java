@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Height {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Heights should be a positive number between 50 and 300 cm, and may include up to one decimal place.";
+            "Heights should be a positive number between 50 and 300 cm, and may include up to one decimal place."
+            + "\nHeight must not be blank (only whitespaces).";
     /*
      * The height must be:
      * - A number between 50 and 300 (inclusive)
