@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Add Athlete**
+**Use case: UC01 - Add Athlete**
 
 **MSS**
 
@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: List Athletes**
+**Use case: UC02 - List Athletes**
 
 **MSS**
 
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Find Athletes**
+**Use case: UC03 - Find Athletes**
 
 **MSS**
 
@@ -460,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Edit Athlete**
+**Use case: UC04 - Edit Athlete**
 
 **MSS**
 
@@ -513,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Delete Athlete**
+**Use case: UC05 - Delete Athlete**
 
 **MSS**
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Clear Data**
+**Use case: UC06 - Clear Data**
 
 **MSS**
 
@@ -551,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Create Team**
+**Use case: UC07 - Create Team**
 
 **MSS**
 
@@ -602,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: List Teams**
+**Use case: UC08 - List Teams**
 
 **MSS**
 
@@ -620,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Delete Team**
+**Use case: UC09 - Delete Team**
 
 **MSS**
 
@@ -643,7 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Add Session to Team**
+**Use case: UC10 - Add Session to Team**
 
 **MSS**
 
@@ -694,7 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Delete Session from Team**
+**Use case: UC11 - Delete Session from Team**
 
 **MSS**
 
