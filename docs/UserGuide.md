@@ -83,9 +83,15 @@ RelayCoach is a **desktop app designed for coaches to manage their relay athlete
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Missing required prefixes or including additional/invalid prefixes will result in an invalid command error prompt.<br>
-  e.g. `add John Doe p/98765432` (missing `n/`) or `add n/John Doe x/extra` (invalid prefix) will both be rejected.
+  e.g. `add John Doe p/98765432…​` (missing `n/`)
 
-* **Slash usage** - Literal input prefix escape using angle brackets `< >`:<br>
+* Invalid prefixes will result in an invalid command error prompt, but will be considered as input for parameters allowing slash usage.<br>
+  - Invalid Example (since prefix `x/` is not recognised and `p/` does not accept slashes):<br>
+    e.g. `add n/John Doe p/98765432 x/invalidprefix…​`
+  - Valid Example (since prefix `x/` is not recognised but `n/` accepts slashes):<br>
+    e.g. `add n/John Doe x/invalidprefix p/98765432…​` → Name becomes `John Doe x/invalidprefix`
+
+* Slash usage - Literal input prefix escape using angle brackets `< >`:<br>
   - If your input contains text that resembles a prefix (e.g. `n/`, `s/`) **immediately after a whitespace**, wrap it in angle brackets to treat it as literal input rather than a command prefix.<br>
     - Example:
     `edit 1 n/John <s/o> Doe` → Name becomes `John s/o Doe`<br>
@@ -266,7 +272,7 @@ Format: `addsession i/TEAM_INDEX sdt/STARTDATETIME edt/ENDDATETIME l/LOCATION`
 </box>
 
 Examples:
-* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a session to the team at index 1 (`StarTeam`) with start date & time: 21 September 2025 17:00, end date & time: 21 September 2025 18:00, and location: park
+* `addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park` adds a session to the team at index 1 (`StarTeam`) with `startDateTime`: 21 September 2025 17:00, `endDateTime`: 21 September 2025 18:00, and `location`: park
   ![result for 'addsession i/1 sdt/ 2025-09-21 1700 edt/ 2025-09-21 1800 l/park'](images/addsessionResult.png)
 * `addsession i/1 sdt/ 2025-09-21 1800 edt/ 2025-09-21 1900 l/park` is **allowed** (back‑to‑back with the previous session), while `addsession i/1 sdt/ 2025-09-21 1759 edt/ 2025-09-21 1830 l/park` will be **rejected** because it overlaps.
 
